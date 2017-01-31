@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+   
+}
+
+#header {
+    text-align: center;
+    margin: 0px;
+  float: left;
+}
+
+
+
+#notification{
+    float: left;
+    height: 50px;
+    text-align: center;
+    margin: 20px 0px 0px 150px;
+}
+#maingame{
+    margin: 25px;
+}
+
+#ingamecontain{
+    margin: auto;
+    border: solid 2px black;
+    width: 675px;
+    height: 210px;
+}
+.ingame{
+    float: left;
+    margin: 15px;
+    height: 175px;
+    width: 175px;
+    border: solid 3px black;
+}
+
+#chat{
+    clear: both;
+    margin: auto;
+    border: solid 1px black;
+    width: 600px;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#chatinput{
+    height: 30px;
+    width: 600px;
+    border: solid 1px black;
+    margin: auto;
+}
+
+#message{
+    width: 520px;
+}
+
+.boldname{
+    font-weight: bolder;
+    font-size: 14px;
+
+}
+.chatpara{
+    clear: both;
+    margin: 0;
+    padding: 3px;
+}
+.momentstamp{
+    margin-right: 5px;
+    margin-top: 5px;
+    float: right;
+    font-size: 10px;
+}
+.mainmessager{
+    font-size: 14px;
+}
+.playertwo{
+    color: green;
+}
+
+.playerone{
+    color: blue;
+}
