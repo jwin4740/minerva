@@ -20,3 +20,11 @@ const squares = {
 };
 
 var bool = { false : 0, true : 1 };
+
+var filesBoard = [boardSquareNumber];
+var ranksBoard = [boardSquareNumber];
+
+// function that takes in a given file and rank, and returns the square coordinate
+function getCoordinateFromFileRank (file, rank){
+	return ( (21 + file) + (rank * 10) );
+}
