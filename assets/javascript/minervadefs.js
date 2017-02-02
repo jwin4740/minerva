@@ -13,6 +13,7 @@ const ranks =  { rank_1:0, rank_2:1, rank_3:2, rank_4:3,
 	
 const colors = { white : 0, black : 1, both : 2 };
 
+const castleBit = {wKingside : 1, wQueenside : 2, bKingside : 4, bQueenside : 8}
 const squares = {
   A1:21, B1:22, C1:23, D1:24, E1:25, F1:26, G1:27, H1:28,  
   A8:91, B8:92, C8:93, D8:94, E8:95, F8:96, G8:97, H8:98, 
@@ -28,3 +29,17 @@ var ranksBoard = [boardSquareNumber];
 function getCoordinateFromFileRank (file, rank){
 	return ( (21 + file) + (rank * 10) );
 }
+
+var pieceBig = [ bool.false, bool.false, bool.true, bool.true, bool.true, bool.true, bool.true, bool.false, bool.true, bool.true, bool.true, bool.true, bool.true ];
+var pieceMaj = [ bool.false, bool.false, bool.false, bool.false, bool.true, bool.true, bool.true, bool.false, bool.false, bool.false, bool.true, bool.true, bool.true ];
+var pieceMin = [ bool.false, bool.false, bool.true, bool.true, bool.false, bool.false, bool.false, bool.false, bool.true, bool.true, bool.false, bool.false, bool.false ];
+var pieceVal= [ 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  ];
+var pieceCol = [ colors.both, colors.white, colors.white, colors.white, colors.white, colors.white, colors.white,
+	colors.black, colors.black, colors.black, colors.black, colors.black, colors.black ];
+	
+var piecePawn = [ bool.false, bool.true, bool.false, bool.false, bool.false, bool.false, bool.false, bool.true, bool.false, bool.false, bool.false, bool.false, bool.false ];	
+var pieceKnight = [ bool.false, bool.false, bool.true, bool.false, bool.false, bool.false, bool.false, bool.false, bool.true, bool.false, bool.false, bool.false, bool.false ];
+var pieceKing = [ bool.false, bool.false, bool.false, bool.false, bool.false, bool.false, bool.true, bool.false, bool.false, bool.false, bool.false, bool.false, bool.true ];
+var pieceRookQueen = [ bool.false, bool.false, bool.false, bool.false, bool.true, bool.true, bool.false, bool.false, bool.false, bool.false, bool.true, bool.true, bool.false ];
+var pieceBishopQueen = [ bool.false, bool.false, bool.false, bool.true, bool.false, bool.true, bool.false, bool.false, bool.false, bool.true, bool.false, bool.true, bool.false ];
+var pieceSlides = [ bool.false, bool.false, bool.false, bool.true, bool.true, bool.true, bool.false, bool.false, bool.false, bool.true, bool.true, bool.true, bool.false ];
