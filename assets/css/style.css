@@ -2,85 +2,60 @@
     box-sizing: border-box;
 }
 
-body {
-   
-}
+body {}
 
-#header {
-    text-align: center;
-    margin: 0px;
-  float: left;
-}
-
-
-
-#notification{
+#boardAndLabelsContainer {
     float: left;
-    height: 50px;
-    text-align: center;
-    margin: 20px 0px 0px 150px;
-}
-#maingame{
-    margin: 25px;
 }
 
-#ingamecontain{
-    margin: auto;
+#rankLabelsContainer {
+    float: left;
+    width: 60px;
+    height: 483px;
+    margin-left: 30px;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.labels {
+    clear: both;
+    padding: 15px 0px 0px 25px;
+    width: 60px;
+    height: 60px;
+}
+
+#boardContainer {
+    float: left;
+    width: 484px;
+    height: 484px;
     border: solid 2px black;
-    width: 675px;
-    height: 210px;
 }
-.ingame{
+
+.darkSquare {
     float: left;
-    margin: 15px;
-    height: 175px;
-    width: 175px;
-    border: solid 3px black;
+    width: 60px;
+    height: 60px;
+    background-color: green;
 }
 
-#chat{
+.lightSquare {
+    float: left;
+    width: 60px;
+    height: 60px;
+}
+
+#fileLabelsContainer {
     clear: both;
-    margin: auto;
-    border: solid 1px black;
-    width: 600px;
-    height: 200px;
-    overflow-y: scroll;
+    width: 484px;
+    height: 60px;
+    margin-left: 90px;
+    font-weight: 700;
+    font-size: 25px;
 }
 
-#chatinput{
-    height: 30px;
-    width: 600px;
-    border: solid 1px black;
-    margin: auto;
-}
-
-#message{
-    width: 520px;
-}
-
-.boldname{
-    font-weight: bolder;
-    font-size: 14px;
-
-}
-.chatpara{
-    clear: both;
-    margin: 0;
-    padding: 3px;
-}
-.momentstamp{
-    margin-right: 5px;
-    margin-top: 5px;
-    float: right;
-    font-size: 10px;
-}
-.mainmessager{
-    font-size: 14px;
-}
-.playertwo{
-    color: green;
-}
-
-.playerone{
-    color: blue;
+.labelsRow {
+    float: left;
+    width: 60px;
+    height: 60px;
+    padding: 15px 0px 0px 20px;
 }
