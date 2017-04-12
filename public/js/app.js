@@ -9,6 +9,7 @@ while (!chess.game_over()) {
     var moves = chess.moves();
     var move = moves[Math.floor(Math.random() * moves.length)];
     chess.move(move);
+    console.log("move is: " + move)
     var randPosition = chess.ascii();
     if (moveCounter > 1) {
         console.log(randPosition);

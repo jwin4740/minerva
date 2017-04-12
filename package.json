@@ -29,6 +29,8 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "method-override": "^2.3.8",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "react": "^15.5.4",
+    "webpack": "^2.3.3"
   }
 }

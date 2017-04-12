@@ -68,3 +68,12 @@
   top: 2px;
   left: 2px;
 }
+
+.rightNumber{
+  position: absolute;
+  margin-left: 36px;
+  padding: 1px;
+  color: black;
+  font-size: 9px;
+  font-weight: bolder;
+}
