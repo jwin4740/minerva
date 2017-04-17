@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="css/chessboard-0.3.0.css">
     <!--<script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
@@ -18,26 +18,13 @@
         <input type="text" id="fenInput">
         <button id=setFen>Set Fen</button>
     </div>
+    <h2 style="font-size: 50px;" id="gameStatus"></h2>
     <div id="board" style="width: 400px"></div>
     <div id="board2" style="width: 400px"></div>
     <input type="button" id="startBtn" value="Start" />
     <input type="button" id="clearBtn" value="Clear" />
     <input type="button" id="resetBtn" value="Reset" />
-    <br><br><br>
-    <div id="headercontainer">
-        <h3> SET POSITION </h3>
-        <input type="text" id="fenInput">
-        <button id=setFen>Set Fen</button>
-    </div>
-    <div id="boardAndLabelsContainer">
-        <div id="rankLabelsContainer">
-        </div>
-        <div id="boardContainer">
-        </div>
-        <br>
-        <div id="fileLabelsContainer">
-        </div>
-    </div>
+  
     <!--<script src="assets/javascript/minervadefs.js">
     </script>
     <script src="assets/javascript/board.js">
@@ -46,7 +33,8 @@
     </script>-->
     <!--<script src="assets/javascript/minervagui.js">
     </script>-->
-    <!--<script src="./js/defs.js"></script>
+     <script src="./js/jQuerylib.js"></script>
+    <script src="./js/defs.js"></script>
     <script src="./js/io.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/movegen.js"></script>
@@ -56,13 +44,15 @@
     <script src="./js/search.js"></script>
     <script src="./js/perft.js"></script>
     <script src="./js/gui.js"></script>
-    <script src="./js/main.js"></script>-->
+    <script src="./js/main.js"></script>
  
     <script src="./js/chess.js">
     </script>
     <script src="./js/chessboard-0.3.0.js">
     </script>
-    <script src="./js/sample.js"> 
+    <!--<script src="./js/sample.js"> 
+    </script>-->
+      <script src="./js/engineconnection.js"> 
     </script>
 </body>
 

@@ -339,9 +339,10 @@ function StartSearch() {
 
 	SearchController.depth = MAXDEPTH; // set to 5 not MAXDEPTH for testing
 	var t = $.now();
-	var tt = $('#ThinkTimeChoice').val();
+	var tt = $('#ThinkTimeChoice').val(); // for testing set to 3seconds
 
-	SearchController.time = parseInt(tt) * 1000;
+	SearchController.time = 1500;
+	// SearchController.time = parseInt(tt) * 1000;
 	SearchPosition();
 
 	MakeMove(SearchController.best);

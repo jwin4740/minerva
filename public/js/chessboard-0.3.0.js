@@ -17,8 +17,83 @@
   // Chess Util Functions
   //------------------------------------------------------------------------------
   var COLUMNS = 'abcdefgh'.split('');
-var countersix = 21;
+  var SQUARES = {
+    a8: 0,
+    b8: 1,
+    c8: 2,
+    d8: 3,
+    e8: 4,
+    f8: 5,
+    g8: 6,
+    h8: 7,
+    a7: 16,
+    b7: 17,
+    c7: 18,
+    d7: 19,
+    e7: 20,
+    f7: 21,
+    g7: 22,
+    h7: 23,
+    a6: 32,
+    b6: 33,
+    c6: 34,
+    d6: 35,
+    e6: 36,
+    f6: 37,
+    g6: 38,
+    h6: 39,
+    a5: 48,
+    b5: 49,
+    c5: 50,
+    d5: 51,
+    e5: 52,
+    f5: 53,
+    g5: 54,
+    h5: 55,
+    a4: 64,
+    b4: 65,
+    c4: 66,
+    d4: 67,
+    e4: 68,
+    f4: 69,
+    g4: 70,
+    h4: 71,
+    a3: 80,
+    b3: 81,
+    c3: 82,
+    d3: 83,
+    e3: 84,
+    f3: 85,
+    g3: 86,
+    h3: 87,
+    a2: 96,
+    b2: 97,
+    c2: 98,
+    d2: 99,
+    e2: 100,
+    f2: 101,
+    g2: 102,
+    h2: 103,
+    a1: 112,
+    b1: 113,
+    c1: 114,
+    d1: 115,
+    e1: 116,
+    f1: 117,
+    g1: 118,
+    h1: 119
+  };
+  var RANK_1 = 7;
+  var RANK_2 = 6;
+  var RANK_3 = 5;
+  var RANK_4 = 4;
+  var RANK_5 = 3;
+  var RANK_6 = 2;
+  var RANK_7 = 1;
+  var RANK_8 = 0;
+
   function validMove(move) {
+    console.log(move);
     // move should be a string
     if (typeof move !== 'string') return false;
 
@@ -101,9 +176,12 @@ var countersix = 21;
     return tmp[1].toLowerCase();
   }
 
+
+
   // convert FEN string to position object
   // returns false if the FEN string is invalid
   function fenToObj(fen) {
+    console.log(fen);
     if (validFen(fen) !== true) {
       return false;
     }
@@ -137,8 +215,26 @@ var countersix = 21;
 
       currentRow--;
     }
-
+    debugBoard(fen);
+    console.log(position);
     return position;
+  }
+  // 49 through 57 is ascii codes for numbers
+  function debugBoard(fen) {
+
+    console.log(fen.length);
+    var counter = 0;
+    var line = '';
+    var res = "";
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        if (fen[counter] == "/")
+        {
+          res =+ fen[counter].replace("/", "g");
+        }
+      console.log(res);
+      }
+    }
   }
 
   // position object to FEN string
@@ -570,7 +666,7 @@ var countersix = 21;
       return html;
     };
     */
-    
+
 
     function buildBoard(orientation) {
       if (orientation !== 'black') {
@@ -578,6 +674,7 @@ var countersix = 21;
       }
 
       var html = '';
+      var consoleBoard = '';
 
       // algebraic notation / orientation
       var alpha = deepCopy(COLUMNS);
@@ -588,17 +685,21 @@ var countersix = 21;
       }
 
       var squareColor = 'white';
+      var countersix = 91;
       for (var i = 0; i < 8; i++) {
         html += '<div class="' + CSS.row + '">';
+
         for (var j = 0; j < 8; j++) {
           var square = alpha[j] + row;
 
-          html += '<div class="' + CSS.square + ' ' + CSS[squareColor] + ' ' +
+          html += '<div class="' + CSS.square + ' ' + CSS[squareColor] + ' ' + 'clicklander' + ' ' +
             'square-' + square + '" ' +
             'style="width: ' + SQUARE_SIZE + 'px; height: ' + SQUARE_SIZE + 'px" ' +
             'id="' + SQUARE_ELS_IDS[square] + '" ' +
+            'data-number="' + countersix + '" ' +            
             'data-square="' + square + '">';
           html += '<div class="rightNumber">' + countersix + '</div>';
+
 
           if (cfg.showNotation === true) {
             // alpha notation
@@ -629,7 +730,7 @@ var countersix = 21;
         } else {
           row++;
         }
-        countersix += 2;
+        countersix -= 18;
       }
 
       return html;
@@ -706,6 +807,7 @@ var countersix = 21;
 
       // remove original piece from source square
       srcSquareEl.find('.' + CSS.piece).remove();
+
 
       // on complete
       var complete = function () {
@@ -892,6 +994,7 @@ var countersix = 21;
       // make copies of both
       pos1 = deepCopy(pos1);
       pos2 = deepCopy(pos2);
+      console.log(pos1);
 
       var animations = [];
       var squaresMovedTo = {};
@@ -1082,6 +1185,7 @@ var countersix = 21;
       // get source square position
       var sourceSquarePosition =
         $('#' + SQUARE_ELS_IDS[DRAGGED_PIECE_SOURCE]).offset();
+     
 
       // animate the piece to the target square
       var opts = {
@@ -1682,25 +1786,6 @@ var countersix = 21;
 
       // set the size and draw the board
       widget.resize();
-    }
-
-
-    function display64Numbers() {
-      console.log(String.fromCharCode(97)); // a
-      var counter = 21;
-      //  $(".square-g5").append("<div>");
-      for (var i = 1; i > 9; i++) {
-        var letCount = 97;
-        for (var j = 1; j <= 8; j++) {
-          var letter = String.fromCharCode(letCount)
-          var newDiv = $("<div>");
-          newDiv.append(counter);
-          newDiv.addClass("location").append(counter);
-          $(".square-" + letter + i).append(newDiv);
-          letCount++;
-          counter++;
-        }
-      }
     }
 
     function init() {
