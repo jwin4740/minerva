@@ -1,6 +1,10 @@
 var board;
 var blueMove;
 var game = new Chess();
+var whiteSanMove;
+var blackSanMove;
+var movePar;
+var grayRow = 0;
 var sanTo120 = {
     a8: 91,
     b8: 92,
@@ -93,20 +97,26 @@ var makeRandomMove = function (blueMove) {
     // game over
     if (possibleMoves.length === 0) {
         $("#gameStatus").html("GAME OVER");
-        return
+        return;
     };
 
 
     var randomIndex = Math.floor(Math.random() * possibleMoves.length);
     // game.move(possibleMoves[randomIndex]);
-    game.move(blueMove, {
+
+    var blackMove = game.move(blueMove, {
         sloppy: true
     });
-
-
+    var blackSanMove = blackMove.san;
+    var blackMoveSpan = $("<p class='blackMove'>");
+    blackMoveSpan.text(blackSanMove);
+    movePar.append(blackMoveSpan);
     board.position(game.fen());
+    moveCounter++;
 };
+
 var uMove;
+var moveCounter = 1;
 
 var onDrop = function (source, target) {
     // see if the move is legal
@@ -115,11 +125,26 @@ var onDrop = function (source, target) {
         to: target,
         promotion: 'n'
     });
-
+    console.log(move);
     // illegal move
     if (move === null) return 'snapback';
     uMove = move.from + move.to;
     console.log("San move: " + uMove);
+
+
+    whiteSanMove = move.san;
+    movePar = $("<div class='movePar'>");
+    var whiteMoveSpan = $("<p class='whiteMove'>");
+    whiteMoveSpan.text(moveCounter + ") " + whiteSanMove);
+
+    movePar.append(whiteMoveSpan);
+    $(".panelMainNotate").append(movePar);
+    if (grayRow % 2 != 0); {
+        movePar.css("background-color", "lightgray");
+    }
+    grayRow++;
+
+
 
     var blueFrom = sanTo120[move.from];
     var blueTo = sanTo120[move.to];

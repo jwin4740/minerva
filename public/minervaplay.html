@@ -43,7 +43,6 @@
                         </div>
                         <div class="panel-body">
                             <div class="panelMainNotate">
-                                Panel content
                             </div>
                         </div>
                     </div>
@@ -90,28 +89,23 @@
     <script>
         var userName = "default";
         var time = moment();
-        console.log(time);
         $("#timeMoment").html(time._d);
 
 
         $("#sendChat").on("keypress", function (event) {
-            console.log("fired");
             if (event.keyCode === 13) {
                 var upperUser = userName.toUpperCase();
                 var message = $("#sendChat").val();
                 var entry = $("<p class='userEntry'>");
                 var spanElement = $("<span class='userColor'>");
                 spanElement.text(upperUser + ": ");
-
                 entry.append(spanElement);
                 entry.append(message);
                 $(".panelMainChat").append(entry);
-
-
-                console.log(message);
                 $("#sendChat").val("");
             }
         });
+
     </script>
 </body>
 

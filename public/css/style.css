@@ -48,12 +48,18 @@ button {
     padding: 5px;
 }
 
-#panelNotate {
+
+/*#panelNotate {
     height: 250px;
-}
+}*/
 
 .panelMainChat {
     height: 200px;
+    overflow-y: scroll;
+}
+
+.panelMainNotate {
+    height: 225px;
     overflow-y: scroll;
 }
 
@@ -83,22 +89,43 @@ input:focus {
     font-weight: 900;
 }
 
-#timeMoment{
+#timeMoment {
     font-weight: lighter;
     font-size: 11px;
 }
 
-.userEntry{
-
-margin: 0px;
+.userEntry {
+    margin: 0px;
 }
-.userColor{
+
+.userColor {
     font-size: 13px;
-color: green;
-
+    color: green;
 }
 
-.opponentEntry{
-color: blue;
-margin: 0px;
+.opponentEntry {
+    color: blue;
+    margin: 0px;
+}
+
+.movePar {
+    margin: 0px;
+    padding: 8px;
+    clear: both;
+}
+
+.whiteMove {
+    font-size: 12px;
+    font-weight: bolder;
+    width: 67px;
+    float: left;
+    margin-bottom: 0px;
+}
+
+.blackMove {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bolder;
+    width: 50px;
+    margin-bottom: 0px;
 }
