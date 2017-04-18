@@ -2,77 +2,28 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     background-image: url(../img/grayb.jpg);
 }
-#headercontainer{
+body{
+    background-color: transparent;
+}
+
+#headercontainer {
     margin: 5px 0px 5px 0px;
 }
-h3{
+
+h3 {
     margin: 0px;
 }
 
-#fenInput{
-    width: 418px;
+button {
     height: 30px;
     border-radius: 2px;
-}
-button{
-    height: 30px;
-    border-radius: 2px;
-}
-#boardAndLabelsContainer {
-    float: left;
-}
-
-#rankLabelsContainer {
-    float: left;
-    width: 60px;
-    height: 483px;
-    margin-left: 30px;
-    font-weight: 700;
-    font-size: 23px;
-}
-
-.labels {
-    clear: both;
-    padding: 15px 0px 0px 25px;
-    width: 60px;
-    height: 60px;
 }
 
 #boardContainer {
     float: left;
-    width: 484px;
-    height: 484px;
+    margin: 5px;
     border: solid 2px black;
-}
-
-.darkSquare {
-    float: left;
-    width: 60px;
-    height: 60px;
-    background-color: green;
-}
-
-.lightSquare {
-    float: left;
-    width: 60px;
-    height: 60px;
-}
-
-#fileLabelsContainer {
-    clear: both;
-    width: 484px;
-    height: 60px;
-    margin-left: 90px;
-    font-weight: 700;
-    font-size: 23px;
-}
-
-.labelsRow {
-    float: left;
-    width: 60px;
-    height: 60px;
-    padding: 15px 0px 0px 20px;
 }

@@ -834,6 +834,7 @@ var Chess = function (fen) {
     make_move(move);
     if (in_check()) {
       if (in_checkmate()) {
+         $("#gameStatus").html("GAME OVER");
         output += '#';
       } else {
         output += '+';
