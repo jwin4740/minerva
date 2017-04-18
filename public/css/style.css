@@ -74,11 +74,31 @@ input:focus {
 }
 
 .welcomeChat {
-    font-size: 14px;
+    font-size: 17px;
     margin: 1px;
 }
 
 #userName {
     font-size: 12px;
     font-weight: 900;
+}
+
+#timeMoment{
+    font-weight: lighter;
+    font-size: 11px;
+}
+
+.userEntry{
+
+margin: 0px;
+}
+.userColor{
+    font-size: 13px;
+color: green;
+
+}
+
+.opponentEntry{
+color: blue;
+margin: 0px;
 }

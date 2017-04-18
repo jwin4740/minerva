@@ -53,12 +53,12 @@
                         </div>
                         <div class="panel-body">
                             <div class='panelMainChat'>
-                                <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName">testUser</span></p>
-                                <p class="welcomeChat"> Login time: <span id="timeMoment"></span></p>
+                                <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName"></span></p>
+                                <p class="welcomeChat" id="timeMoment"></p>
 
                             </div>
                             <div id="chatField">
-                                <input class="chatInput" placeholder="message">
+                                <input class="chatInput" id="sendChat" placeholder="message">
                             </div>
                         </div>
                     </div>
@@ -87,6 +87,32 @@
     <script src="./js/chess.js"></script>
     <script src="./js/chessboard.js"></script>
     <script src="./js/app.js"></script>
+    <script>
+        var userName = "default";
+        var time = moment();
+        console.log(time);
+        $("#timeMoment").html(time._d);
+
+
+        $("#sendChat").on("keypress", function (event) {
+            console.log("fired");
+            if (event.keyCode === 13) {
+                var upperUser = userName.toUpperCase();
+                var message = $("#sendChat").val();
+                var entry = $("<p class='userEntry'>");
+                var spanElement = $("<span class='userColor'>");
+                spanElement.text(upperUser + ": ");
+
+                entry.append(spanElement);
+                entry.append(message);
+                $(".panelMainChat").append(entry);
+
+
+                console.log(message);
+                $("#sendChat").val("");
+            }
+        });
+    </script>
 </body>
 
 </html>
