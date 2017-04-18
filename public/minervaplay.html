@@ -6,37 +6,72 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/chessboard-0.3.0.css">
     <link rel="stylesheet" href="./css/style.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
     <title> Minerva Multiplayer </title>
 </head>
 
 <body>
-    <div id="headercontainer">
-        <h3> Minerva Multplayer </h3>
-    </div>
-    <div class="row">
+    <div class="totusTuus">
+        <div id="headercontainer">
+            <h6> Minerva Multplayer </h6>
+        </div>
 
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <div id="boardContainer">
-                <div id="board" style="width: 400px"></div>
+        <div class="row">
+            <div class="col-sm-1">
+                <h2 class="filler"> fill </h2>
+            </div>
+            <div class="col-xs-5 smallpad">
+                <section id="boardContainer">
+                    <div id="board"></div>
+                    <!--<input type="button" id="startBtn" value="Start" />
+                        <input type="button" id="clearBtn" value="Clear" />
+                        <input type="button" id="resetBtn" value="Reset" />-->
+                </section>
 
-                <input type="button" id="startBtn" value="Start" />
-                <input type="button" id="clearBtn" value="Clear" />
-                <input type="button" id="resetBtn" value="Reset" />
+            </div>
+            <div class="col-xs-4">
+                <section id="chatAndNotate">
+
+                    <div id="panelNotate" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Moves</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panelMainNotate">
+                                Panel content
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panelChat" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Chat</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class='panelMainChat'>
+                                <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName">testUser</span></p>
+                                <p class="welcomeChat"> Login time: <span id="timeMoment"></span></p>
+
+                            </div>
+                            <div id="chatField">
+                                <input class="chatInput" placeholder="message">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <h2 class="filler"> fill </h2>
             </div>
         </div>
-        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Chat</h3>
-                </div>
-                <div class="panel-body">
-                    Panel content
-                </div>
-            </div>
-        </div>
     </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="./js/enginescripts/defs.js"></script>
     <script src="./js/enginescripts/io.js"></script>

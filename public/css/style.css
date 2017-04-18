@@ -5,12 +5,14 @@
 html {
     background-image: url(../img/grayb.jpg);
 }
-body{
+
+body {
     background-color: transparent;
+    font-family: 'Righteous', cursive;
 }
 
 #headercontainer {
-    margin: 5px 0px 5px 0px;
+    margin: 5px 0px 15px 0px;
 }
 
 h3 {
@@ -22,8 +24,61 @@ button {
     border-radius: 2px;
 }
 
-#boardContainer {
+
+/*#boardContainer {
     float: left;
-    margin: 5px;
+    width: 490px;
+    text-align: center;
     border: solid 2px black;
+    margin: 0px;
+}*/
+
+.filler {
+    background-color: black;
+    height: 800px;
+    padding: 10px;
+}
+
+.smallpad {
+    padding: 5px;
+    padding-top: 0px;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
+#panelNotate {
+    height: 250px;
+}
+
+.panelMainChat {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#chatField {
+    border-top: solid 1px lightgray;
+}
+
+.chatInput {
+    border: transparent;
+    width: 100%;
+    padding: 2px;
+    height: 30px;
+}
+
+input:focus {
+    padding: 4px;
+    outline: none;
+}
+
+.welcomeChat {
+    font-size: 14px;
+    margin: 1px;
+}
+
+#userName {
+    font-size: 12px;
+    font-weight: 900;
 }
