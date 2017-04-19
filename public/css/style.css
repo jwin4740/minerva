@@ -28,13 +28,13 @@ button {
 }
 
 
-/*#boardContainer {
+#board {
     float: left;
-    width: 490px;
+    width: 88%;
     text-align: center;
     border: solid 2px black;
     margin: 0px;
-}*/
+}
 
 .filler {
     background-color: black;
