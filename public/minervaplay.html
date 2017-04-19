@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/chessboard-0.3.0.css">
     <link rel="stylesheet" href="./css/style.css">
@@ -17,13 +19,54 @@
 
 <body>
     <div class="totusTuus">
+        <section id="gameModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">New Game</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                            <h4 class="modal-title" id="exampleModalLabel">New Game Settings</h5>
+                        </div>
+                        <div class="modal-body">
+                                 <span class="label label-default">Choose Side</span>                            
+                                <select name="side">
+                                    <option value="white">white</option>
+                                    <option value="black">black</option>
+                                </select>
+                                <br>
+                                  <br>
+                              <span class="label label-default">Time Settings</span>
+                                <select name="time">
+                                    <option value="60min5delay">60min with 5sec delay</option>
+                                    <option value="30min5delay">30min with 5sec delay</option>
+                                    <option value="15min">15min</option>
+                                    <option value="5min">5min</option>
+                                    <option value="1min">1min</option>
+                                </select>
+                                <br><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <div id="headercontainer">
             <h6> Minerva Multplayer </h6>
         </div>
 
         <div class="row">
             <div class="col-sm-1">
-                <h2 class="filler"> fill </h2>
+                <img class="flank" src="./img/column3.png">
+
+
             </div>
             <div class="col-xs-5 smallpad">
                 <section id="boardContainer">
@@ -62,16 +105,16 @@
                         </div>
                     </div>
                 </section>
-
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <h2 class="filler"> fill </h2>
+                <img class="flank" src="./img/column3.png">
             </div>
         </div>
+
+
+
     </div>
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="./js/enginescripts/defs.js"></script>
     <script src="./js/enginescripts/io.js"></script>
     <script src="./js/enginescripts/board.js"></script>
@@ -85,13 +128,11 @@
     <script src="./js/enginescripts/main.js"></script>
     <script src="./js/chess.js"></script>
     <script src="./js/chessboard.js"></script>
-    <script src="./js/app.js"></script>
+    <script src="./js/humangame.js"></script>
     <script>
         var userName = "default";
         var time = moment();
         $("#timeMoment").html(time._d);
-
-
         $("#sendChat").on("keypress", function (event) {
             if (event.keyCode === 13) {
                 var upperUser = userName.toUpperCase();
@@ -105,7 +146,6 @@
                 $("#sendChat").val("");
             }
         });
-
     </script>
 </body>
 

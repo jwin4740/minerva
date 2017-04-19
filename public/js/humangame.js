@@ -78,42 +78,15 @@ $('#resetBtn').on("click", function () {
     game.reset();
 })
 
-// do not pick up pieces if the game is over
-// only pick up pieces for White
+
 var onDragStart = function (source, piece, position, orientation) {
-    if (game.in_checkmate() === true || game.in_draw() === true ||
-        piece.search(/^b/) !== -1) {
+    if (game.in_checkmate() === true || game.in_draw() === true) {
         return false;
     }
 };
 var counter = 0;
 
-var makeRandomMove = function (blueMove) {
-    counter++;
-    var possibleMoves = game.moves();
-    console.log(possibleMoves.length);
-    console.log(possibleMoves);
 
-    // game over
-    if (possibleMoves.length === 0) {
-        $("#gameStatus").html("GAME OVER");
-        return;
-    };
-
-
-    var randomIndex = Math.floor(Math.random() * possibleMoves.length);
-    // game.move(possibleMoves[randomIndex]);
-
-    var blackMove = game.move(blueMove, {
-        sloppy: true
-    });
-    var blackSanMove = blackMove.san;
-    var blackMoveSpan = $("<p class='blackMove'>");
-    blackMoveSpan.text(blackSanMove);
-    movePar.append(blackMoveSpan);
-    board.position(game.fen());
-    moveCounter++;
-};
 
 var uMove;
 var moveCounter = 1;
@@ -132,32 +105,15 @@ var onDrop = function (source, target) {
     console.log("San move: " + uMove);
 
 
-    whiteSanMove = move.san;
-    movePar = $("<div class='movePar'>");
-    var whiteMoveSpan = $("<p class='whiteMove'>");
-    whiteMoveSpan.text(moveCounter + ") " + whiteSanMove);
+    // whiteSanMove = move.san;
+    // movePar = $("<div class='movePar'>");
+    // var whiteMoveSpan = $("<p class='whiteMove'>");
+    // whiteMoveSpan.text(moveCounter + ") " + whiteSanMove);
 
-    movePar.append(whiteMoveSpan);
-    $(".panelMainNotate").append(movePar);
-    if (grayRow % 2 != 0); {
-        movePar.css("background-color", "lightgray");
-    }
-    grayRow++;
+    // movePar.append(whiteMoveSpan);
+    // $(".panelMainNotate").append(movePar);
+ 
 
-
-
-    var blueFrom = sanTo120[move.from];
-    var blueTo = sanTo120[move.to];
-    console.log(blueFrom);
-    console.log(blueTo);
-    UserMove.from = blueFrom;
-    UserMove.to = blueTo;
-    console.log(UserMove.from);
-    MakeUserMove();
-    setTimeout(function () {
-        blueMove = PrMove(SearchController.best);
-        makeRandomMove(blueMove);
-    }, 1501);
 
 
     // make random legal move for black
