@@ -17,81 +17,11 @@
 
 
 
-        <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>CREATE ACCOUNT</a>
-        <div class="modal fade" id="modal-id">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">CREATE MINERVACHESS ACCOUNT</h4>
-                    </div>
-                    <div class="modal-body">
-                        <section>
-                            <div id='credentialError'></div>
-                            <div class="">
-                                <label>Username</label>
-                                <input type="text" class="username" placeholder="username" name="username">
-                            </div>
-                            <div class="">
-                                <label>Email</label>
-                                <input type="email" class="email" placeholder="email" name="email">
-                            </div>
-                            <div class="">
-                                <label>Password</label>
-                                <input type="password" class="password" placeholder="password" name="password">
-                            </div>
-                            <div class="">
-                                <label>Confirm Password</label>
-                                <input type="password" class="confirmpassword" placeholder="password confirmation" name="confirmpassword">
-                            </div>
-                            <button id="newUser" type="button" class="btn btn-primary" data-dismiss="">Submit</button>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a href="/register" class="btn btn-primary" id="createAccount">CREATE ACCOUNT</a>
+
+
+
     </div>
-    <script>
-        var pass = false;
-        var userData = {};
-        $("#newUser").on("click", function () {
-            userData = {
-                username: $(".username").val(),
-                email: $(".email").val(),
-                password: $(".password").val(),
-                confirmpassword: $(".confirmpassword").val()
-
-            }
-            console.log(userData);
-            postIt();
-
-            if (pass) {
-                $(this).attr("data-dismiss", "modal");
-
-                
-            } else {
-
-                var errorHeader = $("<h5 class='errorHeader'>");
-                errorHeader.append("INVALID USERNAME AND/OR PASSWORD. PLEASE TRY AGAIN");
-                $("#credentialError").html(errorHeader);
-
-            }
-        });
-
-        function postIt() {
-            $.ajax({
-                    url: "/users",
-                    data: userData,
-                    method: "POST"
-                })
-                .done(function (data) {
-                    // when the data is posted, you are redirected to the results page
-                    var url = "/results";
-                    // $(location).attr('href', url);
-
-                });
-        }
-    </script>
 </body>
 
 </html>

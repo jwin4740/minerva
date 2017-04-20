@@ -26,7 +26,7 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../public/register.html"));
     });
 
-           app.get("/users", function (req, res) {
+           app.get("/usererror", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/registeruser.html"));
     });
 
