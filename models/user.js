@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("users", {
     id: {
       type: DataTypes.INTEGER,
@@ -16,19 +16,20 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     hash: {
       type: DataTypes.STRING
     },
     salt: {
       type: DataTypes.STRING
     }
-  },
-  {
+  }, {
     timestamps: false,
     freezeTableName: true,
     tableName: 'users'
-  }
-  );
+  });
   return User;
 };
-

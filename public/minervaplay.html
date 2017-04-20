@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="./js/enginescripts/jQueryLib.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/chessboard-0.3.0.css">
@@ -25,28 +26,28 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                             <h4 class="modal-title" id="exampleModalLabel">New Game Settings</h5>
                         </div>
                         <div class="modal-body">
-                                 <span class="label label-default">Choose Side</span>                            
-                                <select name="side">
+                            <span class="label label-default">Choose Side</span>
+                            <select name="side">
                                     <option value="white">white</option>
                                     <option value="black">black</option>
                                 </select>
-                                <br>
-                                  <br>
-                              <span class="label label-default">Time Settings</span>
-                                <select name="time">
+                            <br>
+                            <br>
+                            <span class="label label-default">Time Settings</span>
+                            <select name="time">
                                     <option value="60min5delay">60min with 5sec delay</option>
                                     <option value="30min5delay">30min with 5sec delay</option>
                                     <option value="15min">15min</option>
                                     <option value="5min">5min</option>
                                     <option value="1min">1min</option>
                                 </select>
-                                <br><br>
+                            <br><br>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
@@ -55,7 +56,7 @@
                 </div>
             </div>
         </section>
-<!--end modal-->
+        <!--end modal-->
 
         <div id="headercontainer">
             <h6> Minerva Multplayer </h6>
@@ -68,13 +69,13 @@
 
             </div>
             <div class="col-xs-5 smallpad">
-           
-                    <div id="board"></div>
-                    
-                    <!--<input type="button" id="startBtn" value="Start" />
+
+                <div id="board"></div>
+
+                <!--<input type="button" id="startBtn" value="Start" />
                         <input type="button" id="clearBtn" value="Clear" />
                         <input type="button" id="resetBtn" value="Reset" />-->
-                
+
 
             </div>
             <div class="col-xs-4">

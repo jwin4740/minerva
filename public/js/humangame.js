@@ -3,6 +3,7 @@ var blueMove;
 var game = new Chess();
 var whiteSanMove;
 var blackSanMove;
+var userColor = "white";
 var movePar;
 var grayRow = 0;
 var sanTo120 = {
@@ -112,7 +113,7 @@ var onDrop = function (source, target) {
 
     // movePar.append(whiteMoveSpan);
     // $(".panelMainNotate").append(movePar);
- 
+
 
 
 
@@ -126,17 +127,30 @@ var onSnapEnd = function () {
     board.position(game.fen());
 
 };
+if (userColor === "white") {
+    var cfg = {
+        draggable: true,
+        position: 'start',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        orientation: 'white',
+        onSnapEnd: onSnapEnd
+    };
+}
+else {
+       var cfg = {
+        draggable: true,
+        position: 'start',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        orientation: 'black',
+        onSnapEnd: onSnapEnd
+    };
+}
 
-var cfg = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    orientation: 'black',
-    onSnapEnd: onSnapEnd
-};
+
 board = ChessBoard('board', cfg);
 $('#clearBtn').on('click', board.clear);
 $('#startBtn').on('click', board.start);
 
-console.log(GameBoard.posKey)
+console.log(GameBoard.posKey);

@@ -37,7 +37,7 @@ module.exports = function(app) {
 
 
     //REGISTER NEW USER
-    app.post("/users/register", function(req, res, next) {
+    app.post("/users", function(req, res, next) {
         //Validation - checks if form is filled out properly
         req.checkBody('email', 'Email is required').notEmpty();
         req.checkBody('email', 'Email is not valid').isEmail();
