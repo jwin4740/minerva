@@ -10,6 +10,7 @@ var db = require("../models");
 var path = require("path");
 var sessions = require("express-session");
 var crypto = require('crypto');
+var moment = require('moment');
 
 
 var session;
@@ -49,45 +50,45 @@ module.exports = function (app) {
       console.log(errors);
       req.session.success = false;
       res.redirect("/usererror");
-      } else { 
+    } else {
       //   //else look if there is a current user with same username or same email address
-        res.redirect('/');
-      //   db.User.findAll({
-      //     where: {
-      //       $or: [{
-      //           username: req.body.username
-      //         },
-      //         {
-      //           email: req.body.email
-      //         }
-      //       ]
-      //     }
-      //   }).then(function (userResults) {
-      //       if (userResults.length) { //if there is a match of same name, restart register page
-      //         res.redirect('/');
-      //       }
-      //       //   	}else { //else hash password and create the user
 
-      //       //   		req.session.success = true;
+      db.User.findAll({
+        where: {
+          $or: [{
+              username: req.body.username
+            },
+            {
+              email: req.body.email
+            }
+          ]
+        }
+      }).then(function (userResults) {
+        if (userResults.length) { //if there is a match of same name, restart register page
+          res.redirect('/usererror');
+        } else {
+          //else hash password and create the user
 
-      //       //             var salt = genRandomString(32);
-      //       //             var hashedPassword = sha512(req.body.password, salt).passwordHash;
+          req.session.success = true;
 
-      //       //             db.User.create({
-      //       //                 email: req.body.email,
-      //       //                 username: req.body.username,
-      //       //                 hash: hashedPassword,
-      //       //                 salt: salt
-      //       //             }).then(function(result) {
-      //       //                 // redirect to user.html with username in welcome message
-      //       //                  req.session.newRegister = true;
-      //       //                 res.redirect('/');
-      //       //             });   		
-      //       //         }
+          var salt = genRandomString(32);
+          var hashedPassword = sha512(req.body.password, salt).passwordHash;
+          var created = moment().format('MMMM Do YYYY, h:mm:ss a');
+          db.User.create({
+            email: req.body.email,
+            username: req.body.username,
+            rating : 1000,
+            hash: hashedPassword,
+            salt: salt,
+            account_created: created
+          }).then(function (result) {
+            // redirect to user.html with username in welcome message
+            req.session.newRegister = true;
+            res.redirect('/');
+          });
+        }
+      });
 
-      //       //   });
-      //       // }
-      //     }
     }
   });
 

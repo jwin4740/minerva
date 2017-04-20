@@ -40,6 +40,10 @@ require("./routes/html-routes.js")(app);
 
 
 
-app.listen(port, function () {
-    console.log("App listening on port " + port);
+db.sequelize.sync({
+    force: false
+}).then(function () {
+    app.listen(port, function () {
+        console.log("App listening on port " + port);
+    });
 });
