@@ -17,13 +17,10 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     rating: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
-    hash: {
-      type: DataTypes.STRING
-    },
-    salt: {
-      type: DataTypes.STRING
+    security: {
+      type: DataTypes.STRING(1000)
     },
     account_created: {
       type: DataTypes.STRING

@@ -9,28 +9,24 @@
 var db = require("../models");
 var path = require("path");
 var sessions = require("express-session");
-var crypto = require('crypto');
+var CryptoJS = require('crypto-js');
 var moment = require('moment');
-
+var passhash = require('password-hash-and-salt');
+var security;
 
 var session;
 
-//hash functions
-const sha512 = (password, salt) => {
-  let hash = crypto.createHmac('sha512', salt);
-  hash.update(password);
-  let value = hash.digest('hex');
-  return {
-    salt: salt,
-    passwordHash: value
-  };
-};
 
-const genRandomString = (length) => {
-  return crypto.randomBytes(Math.ceil(length / 2))
-    .toString('hex')
-    .slice(0, length);
-};
+
+
+
+
+
+
+
+
+
+
 
 // Routes
 // =============================================================
@@ -70,21 +66,28 @@ module.exports = function (app) {
           //else hash password and create the user
 
           req.session.success = true;
+          passhash(req.body.password).hash(function (error, hash) {
+            if (error)
+              throw new Error('Something went wrong!');
 
-          var salt = genRandomString(32);
-          var hashedPassword = sha512(req.body.password, salt).passwordHash;
-          var created = moment().format('MMMM Do YYYY, h:mm:ss a');
-          db.User.create({
-            email: req.body.email,
-            username: req.body.username,
-            rating : 1000,
-            hash: hashedPassword,
-            salt: salt,
-            account_created: created
-          }).then(function (result) {
-            // redirect to user.html with username in welcome message
-            req.session.newRegister = true;
-            res.redirect('/');
+            // Store hash (incl. algorithm, iterations, and salt) 
+            console.log(hash);
+            security = hash;
+
+
+
+            var created = moment().format('MMMM Do YYYY, h:mm:ss a');
+            db.User.create({
+              email: req.body.email,
+              username: req.body.username,
+              rating: 1000,
+              security: security,
+              account_created: created
+            }).then(function (result) {
+              // redirect to user.html with username in welcome message
+              req.session.newRegister = true;
+              res.redirect('/');
+            });
           });
         }
       });
@@ -95,9 +98,8 @@ module.exports = function (app) {
   //SESSION LOGIN
   app.post("/login", function (req, res) {
     var session = req.session;
-    var email = req.body.email;
-    var password = req.body.password;
-    console.log("am here");
+    var email = req.body.logEmail;
+    var password = req.body.logPassword;
     session.newRegister = false;
     //checks hash against hash for entry validation
     db.User.findOne({
@@ -105,8 +107,22 @@ module.exports = function (app) {
         email: email
       }
     }).then(function (data) {
-      var salt = data.salt;
-      var hashedPassword = sha512(req.body.password, salt).passwordHash;
+      console.log(data);
+  
+      var hashedPassword = sha256(req.body.password, salt).passwordHash;
+
+
+
+      // Verifying a hash 
+// passhash('mysecret').verifyAgainst(security, function (error, verified) {
+//   if (error)
+//     throw new Error('Something went wrong!');
+//   if (!verified) {
+//     console.log("Don't try! We got you!");
+//   } else {
+//     console.log("The secret is...");
+//   }
+// });
       if (hashedPassword === data.hash) {
         session.loggedIn = true;
         session.uniqueID = [data.email, data.role, data.id, data.username];
