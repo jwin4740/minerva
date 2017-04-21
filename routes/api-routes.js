@@ -107,46 +107,20 @@ module.exports = function (app) {
         email: email
       }
     }).then(function (data) {
-      console.log(data);
+      var parsedKey = data.dataValues.security;
   
-      var hashedPassword = sha256(req.body.password, salt).passwordHash;
-
-
 
       // Verifying a hash 
-// passhash('mysecret').verifyAgainst(security, function (error, verified) {
-//   if (error)
-//     throw new Error('Something went wrong!');
-//   if (!verified) {
-//     console.log("Don't try! We got you!");
-//   } else {
-//     console.log("The secret is...");
-//   }
-// });
-      if (hashedPassword === data.hash) {
-        session.loggedIn = true;
-        session.uniqueID = [data.email, data.role, data.id, data.username];
-        if (data.role === "admin") {
-          res.send({
-            redirect: '/admin'
-          });
-        } else if (data.role === "user") {
-          res.send({
-            redirect: '/user/' + data.id
-          });
+      passhash(password).verifyAgainst(parsedKey, function (error, verified) {
+        if (error)
+          throw new Error('Something went wrong!');
+        if (!verified) {
+          console.log("Don't try! We got you!");
         } else {
-          console.log('No role found');
+          res.redirect('/');
+          console.log("you have successfully logged in");
         }
-      } else {
-        console.log("Illegal entry detected.");
-        res.status(400).send();
-      }
-
-
-
-    }).catch(function (err) {
-      console.log("The error is" + err);
-      res.status(400).send();
+      });
     });
   });
 
