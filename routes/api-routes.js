@@ -33,6 +33,32 @@ function UserConstruct(username, email) {
 // Routes
 // =============================================================
 module.exports = function (app) {
+  // function GameConstruct(startGame, playerOne, playerTwo, whiteMove, blackMove) {
+  //   this.startGame = startGame;
+  //   this.playerOne = playerOne;
+  //   this.playerTwo = playerTwo;
+  //   this.whiteMove = whiteMove;
+  //   this.blackMove = blackMove;
+  // }
+
+  var gameObject = {
+    gameStart: false,
+    timeSettings: "none",
+    playerOne: {
+      username: "username",
+      color: "",
+      rating: "",
+      ready: false
+    },
+    playerTwo: {
+      username: "username2",
+      color: "",
+      rating: "",
+      ready: false
+    }
+  }
+
+
 
 
   // posts username/email object to the route
@@ -163,6 +189,11 @@ module.exports = function (app) {
 
   app.get("/loggedIn", function (req, res) {
     res.json(req.session);
+  });
+
+
+  app.get("/game", function (req, res) {
+    res.json(gameObject);
   });
 
 };

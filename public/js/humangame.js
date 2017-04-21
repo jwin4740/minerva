@@ -1,11 +1,3 @@
-var board;
-var blueMove;
-var game = new Chess();
-var whiteSanMove;
-var blackSanMove;
-var userColor = "white";
-var movePar;
-var grayRow = 0;
 var sanTo120 = {
     a8: 91,
     b8: 92,
@@ -73,15 +65,41 @@ var sanTo120 = {
     h1: 28
 };
 
+var board;
+var blueMove;
+var game = new Chess();
+var whiteSanMove;
+var blackSanMove;
+var userColor = "white";
+var movePar;
+var grayRow = 0;
+var gameStart = false;
+var gameDataArray = [];
+
 $('#resetBtn').on("click", function () {
     console.log("clicked");
     $("#gameStatus").html("");
     game.reset();
 })
 
+$('#startGame').on("click", function () {
+    gameStart = true;
+})
+
+// get initial data and push to array
+$.get("/game", function (data) {
+    console.log(data);
+    gameDataArray.push(data);
+    console.log(gameDataArray);
+});
+
+
+function startGame() {
+    gameStart = true;
+}
 
 var onDragStart = function (source, piece, position, orientation) {
-    if (game.in_checkmate() === true || game.in_draw() === true) {
+    if (game.in_checkmate() === true || game.in_draw() === true || gameStart === false) {
         return false;
     }
 };
@@ -136,9 +154,8 @@ if (userColor === "white") {
         orientation: 'white',
         onSnapEnd: onSnapEnd
     };
-}
-else {
-       var cfg = {
+} else {
+    var cfg = {
         draggable: true,
         position: 'start',
         onDragStart: onDragStart,
@@ -152,5 +169,3 @@ else {
 board = ChessBoard('board', cfg);
 $('#clearBtn').on('click', board.clear);
 $('#startBtn').on('click', board.start);
-
-console.log(GameBoard.posKey);
