@@ -22,7 +22,25 @@ function UserConstruct(username, email) {
 }
 
 
-
+var gameObjectArray = [{
+  gameStart: false,
+  timeSettings: "none",
+  playersJoined: 0,
+  playerOne: {
+    email: "",
+    username: "playerOne",
+    color: "",
+    rating: "",
+    ready: false
+  },
+  playerTwo: {
+    email: "",
+    username: "playerTwo",
+    color: "",
+    rating: "",
+    ready: false
+  }
+}];
 
 
 
@@ -41,24 +59,7 @@ module.exports = function (app) {
   //   this.blackMove = blackMove;
   // }
 
-  var gameObject = {
-    gameStart: false,
-    timeSettings: "none",
-    playerOne: {
-      email: "",
-      username: "playerOne",
-      color: "",
-      rating: "",
-      ready: false
-    },
-    playerTwo: {
-      email: "",
-      username: "playerTwo",
-      color: "",
-      rating: "",
-      ready: false
-    }
-  }
+
 
 
 
@@ -193,8 +194,15 @@ module.exports = function (app) {
     res.json(req.session);
   });
 
+  app.post("/game", function (req, res) {
+    var joined = req.body;
+    console.log(joined)
+    res.json(joined);
+  });
+
 
   app.get("/game", function (req, res) {
+
     res.json(gameObject);
   });
 

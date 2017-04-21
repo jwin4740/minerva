@@ -21,7 +21,7 @@
 <body>
     <div class="totusTuus">
         <section id="gameModal">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">New Game</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>
             <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -137,6 +137,7 @@
             var playerTwoColor;
             console.log(side);
             gameDataArray[0].playerOne.color = side;
+            gameDataArray[0].playerOne.ready = true;
             if (side === "white") {
                 playerTwoColor = "black"
             } else {
@@ -145,23 +146,26 @@
             gameDataArray[0].playerTwo.color = playerTwoColor;
             console.log(gameDataArray);
 
-        })
-        var userName = "default";
-        var time = moment();
-        $("#timeMoment").html(time._d);
-        $("#sendChat").on("keypress", function (event) {
-            if (event.keyCode === 13) {
-                var upperUser = userName.toUpperCase();
-                var message = $("#sendChat").val();
-                var entry = $("<p class='userEntry'>");
-                var spanElement = $("<span class='userColor'>");
-                spanElement.text(upperUser + ": ");
-                entry.append(spanElement);
-                entry.append(message);
-                $(".panelMainChat").append(entry);
-                $("#sendChat").val("");
-            }
+            checkIfReady();
+
         });
+
+        // var userName = "default";
+        // var time = moment();
+        // $("#timeMoment").html(time._d);
+        // $("#sendChat").on("keypress", function (event) {
+        //     if (event.keyCode === 13) {
+        //         var upperUser = userName.toUpperCase();
+        //         var message = $("#sendChat").val();
+        //         var entry = $("<p class='userEntry'>");
+        //         var spanElement = $("<span class='userColor'>");
+        //         spanElement.text(upperUser + ": ");
+        //         entry.append(spanElement);
+        //         entry.append(message);
+        //         $(".panelMainChat").append(entry);
+        //         $("#sendChat").val("");
+        //     }
+        // });
     </script>
 </body>
 

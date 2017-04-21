@@ -76,6 +76,7 @@ var grayRow = 0;
 var gameStart = false;
 var gameDataArray = [];
 var userCredentials = [];
+var playerInfoArray = []; // once it is filled with both players; players get assigned playerOne of playerTwo
 
 $('#resetBtn').on("click", function () {
     console.log("clicked");
@@ -83,16 +84,16 @@ $('#resetBtn').on("click", function () {
     game.reset();
 })
 
-$('#startGame').on("click", function () {
-    gameStart = true;
-})
+// $('#startGame').on("click", function () {
+//     gameStart = true;
+// })
 
 // get initial data and push to array
 $.get("/game", function (data) {
     console.log(data);
     gameDataArray.push(data);
     console.log(gameDataArray);
-    setTimeout(fireCall, 1500) // TODO fire on Promise
+    setTimeout(fireCall, 2000) // TODO fire on Promise
 });
 
 function fireCall() {
@@ -114,12 +115,47 @@ function fireCall() {
     });
 }
 
-function updateGameData(email, userID, rating) {
-    gameDataArray[0].playerOne.email = email;
-    gameDataArray[0].playerOne.username = userID;
-    gameDataArray[0].playerOne.rating = rating;
-    console.log(gameDataArray);
 
+
+function updateGameData(email, userID, rating) {
+    if (gameDataArray[0].playersJoined === 0) {
+        gameDataArray[0].playerOne.email = email;
+        gameDataArray[0].playerOne.username = userID;
+        gameDataArray[0].playerOne.rating = rating;
+        gameDataArray[0].playersJoined = 1;
+        console.log(gameDataArray);
+        $.post("/game", {
+            gameDataArray
+        }).done(checkPost);
+
+
+    } else {
+        gameDataArray[0].playerTwo.email = email;
+        gameDataArray[0].playerTwo.username = userID;
+        gameDataArray[0].playerTwo.rating = rating;
+        gameDataArray[0].playersJoined = 2;
+        console.log(gameDataArray);
+        $.post("/game", {
+            gameDataArray
+        }).done(checkPost);
+    }
+
+
+}
+
+function checkPost() {
+    $.get("/game", function (data) {
+        console.log("hello postman");
+        console.log(data);
+    })
+}
+
+function checkIfReady() {
+    if (gameDataArray[0].playerOne.ready === true && gameDataArray[0].playerTwo.ready === true) {
+        $("body").append("We are ready");
+    } else {
+        $("body").append("Waiting for the other player");
+    }
 }
 
 
