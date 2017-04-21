@@ -1,0 +1,96 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="pull-left"><img id="barrLogo" class="img-responsive" src="/images/barrLogo.png"></a> 
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             <ul class="nav navbar-nav navbar-right">
+                <li class="signedIn" id="logoutButton"><a href="/logout">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <h1>Welcome admin: {{userName}}</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Add a new tournament -> </h2>
+            <form id="addTournamentForm" method="post" action="/add/tournament">
+                <div class="form-group">
+                    <label>Tournament name</label>
+                    <input type="text" class="form-control" placeholder="Name"
+                    name="name">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" class="form-control"
+                    placeholder="Date" name="date">
+                </div>
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" class="form-control"
+                    placeholder="Time" name="time">
+                </div>
+                 <div class="form-group hidden">
+                    <input type="text" class="form-control"
+                    value="1" name="active_flag">
+                </div>
+                <button type="submit" class="btn btn-lg btn-success red" id="addTournament">Add Tournament</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- List of Tournaments -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>List of Tournaments</h2>
+            <div id="tournamentsList">
+                {{#each tournament}}
+                    <div class="tournamentDataDiv" id="tournamentDiv{{this.id}}">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                 <form id="editTournamentForm">
+                                    <div class="tournamentData" id="{{this.id}}">
+
+                                        <h3>Name: <input class="non-editable editBoxes tournamentName" type="textbox" value="{{this.name}}"></h3>
+                                        <p>Date: <input class="non-editable editBoxes tournamentDate" type="textbox" value="{{dateFormat this.date}}"></p>
+                                        <p>Time: <input class="non-editable editBoxes tournamentTime" type="textbox" value="{{timeFormat this.time}}"></p>
+
+                                        <button type='submit' class="btn btn-lg btn-warning blue edit">Edit</button>
+                                        <button type='submit' class='editButtons hidden update btn btn-lg btn-info green'>Update</button>
+                                        <button type='submit' class='editButtons hidden delete btn btn-lg btn-danger red'>Delete</button>
+                                        <button class='editButtons undoEditClick hidden btn btn-lg btn-warning blue'><i class='fa fa-undo' aria-hidden='true'></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="/checkin/{{this.id}}">
+                                <button class="btn form-inline btn-lg btn-success green checkInPlayers">Check in players</button></a>
+                            </div>
+                        </div>  
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+ 
+    
+</div>
+   <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">&copy; Akhila | David | Kelly | Melinda 2017</span>
+      </div>
+    </footer>
+
+<script type="text/javascript" src="/js/admin.js"></script>

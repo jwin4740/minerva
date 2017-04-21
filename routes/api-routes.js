@@ -34,6 +34,7 @@ function UserConstruct(username, email) {
 // =============================================================
 module.exports = function (app) {
 
+
   // posts username/email object to the route
   app.post("/api/users", function (req, res) {
     db.User.findAll({})
@@ -87,9 +88,9 @@ module.exports = function (app) {
           res.redirect('/usererror');
         } else {
           //else hash password and create the user
-          session.loggedIn = true;
-          session.uniqueID = [data.email, data.id, data.username];
-          console.log(session.uniqueID);
+          req.session.loggedIn = true;
+
+
           req.session.success = true;
           passhash(req.body.password).hash(function (error, hash) {
             if (error)
@@ -125,6 +126,7 @@ module.exports = function (app) {
     var session = req.session;
     var email = req.body.logEmail;
     var password = req.body.logPassword;
+    console.log(session);
 
     session.newRegister = false;
     //checks hash against hash for entry validation
@@ -133,18 +135,28 @@ module.exports = function (app) {
         email: email
       }
     }).then(function (data) {
+
       var parsedKey = data.dataValues.security;
       var userName = data.dataValues.username;
 
 
       // Verifying a hash 
       passhash(password).verifyAgainst(parsedKey, function (error, verified) {
-        if (error)
-          throw new Error('Something went wrong!');
+        if (error) {
+
+          console.log(error);
+        }
         if (!verified) {
           console.log("Don't try! We got you!");
         } else {
+          session.loggedIn = true;
+
+          session.uniqueID = [data.dataValues.email, data.dataValues.username, data.dataValues.rating];
+
+          console.log(session.uniqueID);
+          console.log(session);
           res.redirect('/');
+     
 
           console.log("you have successfully logged in");
         }
@@ -209,9 +221,9 @@ module.exports = function (app) {
         res.json(dbPost);
       });
   });
-    app.get("/loggedIn", function(req, res) {
-    	res.json(req.session);
-    });
+  app.get("/loggedIn", function (req, res) {
+    res.json(req.session);
+  });
   // PUT route for updating posts
   app.put("/api/posts", function (req, res) {
     db.Post.update(req.body, {

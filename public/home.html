@@ -55,22 +55,9 @@
 
 
     </div>
-    <script>
-        $.ajax({
-                url: "/api/users",
-                method: "POST"
-            })
-            .done(function (data) {
-                // when the data is posted, you are redirected to the results page
-                // var url = "/results";
-                // $(location).attr('href', url);
-                console.log("done");
+ <script type="text/javascript" src="./js/userlogin.js"></script>
 
-            });
-        if (session != NULL) {
-            console.log(session.uniqueID);
-        }
-    </script>
+
 </body>
 
 </html>
