@@ -94,6 +94,8 @@ $.get("/game", function (data) {
 });
 
 
+
+
 function startGame() {
     gameStart = true;
 }

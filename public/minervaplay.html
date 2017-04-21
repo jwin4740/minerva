@@ -34,9 +34,9 @@
                         </div>
                         <div class="modal-body">
                             <span class="label label-default">Choose Side</span>
-                            <select name="side">
-                                    <option value="white">white</option>
-                                    <option value="black">black</option>
+                            <select name="side" id="sideColor">
+                                    <option id ="whiteSide" value="white">white</option>
+                                    <option id ="blackSide" value="black">black</option>
                                 </select>
                             <br>
                             <br>
@@ -51,7 +51,7 @@
                             <br><br>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                            <button type="button" id="setSides" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -132,6 +132,20 @@
     <script src="./js/chessboard.js"></script>
     <script src="./js/humangame.js"></script>
     <script>
+        $('#setSides').on("click", function () {
+            var side = $('#sideColor').val();
+            var playerTwoColor;
+            console.log(side);
+            gameDataArray[0].playerOne.color = side;
+            if (side === "white") {
+                playerTwoColor = "black"
+            } else {
+                playerTwoColor = "white"
+            }
+            gameDataArray[0].playerTwo.color = playerTwoColor;
+            console.log(gameDataArray);
+
+        })
         var userName = "default";
         var time = moment();
         $("#timeMoment").html(time._d);
