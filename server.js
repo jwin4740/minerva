@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
 var path = require("path");
+var userArray = [];
 
 
 var port = process.env.PORT || 3000;

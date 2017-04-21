@@ -13,11 +13,13 @@ var CryptoJS = require('crypto-js');
 var moment = require('moment');
 var passhash = require('password-hash-and-salt');
 var security;
-
+var userArray = [];
 var session;
 
-
-
+function UserConstruct(username, email) {
+  this.username = username;
+  this.email = email;
+}
 
 
 
@@ -31,6 +33,27 @@ var session;
 // Routes
 // =============================================================
 module.exports = function (app) {
+
+  // posts username/email object to the route
+  app.post("/api/users", function (req, res) {
+    db.User.findAll({})
+      .then(function (data) {
+        var n = data.length;
+        console.log(data[0].dataValues.username);
+        for (var i = 0; i < n; i++) {
+          var newUser = new UserConstruct(data[i].dataValues.username, data[i].dataValues.email);
+          userArray.push(newUser);
+
+        }
+        console.log(userArray);
+        res.json(userArray);
+      });
+  });
+
+  app.get("/api/users", function (req, res) {
+    res.json(userArray);
+
+  });
   //REGISTER NEW USER
   app.post("/users", function (req, res, next) {
     //Validation - checks if form is filled out properly
@@ -64,7 +87,9 @@ module.exports = function (app) {
           res.redirect('/usererror');
         } else {
           //else hash password and create the user
-
+          session.loggedIn = true;
+          session.uniqueID = [data.email, data.id, data.username];
+          console.log(session.uniqueID);
           req.session.success = true;
           passhash(req.body.password).hash(function (error, hash) {
             if (error)
@@ -100,6 +125,7 @@ module.exports = function (app) {
     var session = req.session;
     var email = req.body.logEmail;
     var password = req.body.logPassword;
+
     session.newRegister = false;
     //checks hash against hash for entry validation
     db.User.findOne({
@@ -108,7 +134,8 @@ module.exports = function (app) {
       }
     }).then(function (data) {
       var parsedKey = data.dataValues.security;
-  
+      var userName = data.dataValues.username;
+
 
       // Verifying a hash 
       passhash(password).verifyAgainst(parsedKey, function (error, verified) {
@@ -118,11 +145,13 @@ module.exports = function (app) {
           console.log("Don't try! We got you!");
         } else {
           res.redirect('/');
+
           console.log("you have successfully logged in");
         }
       });
     });
   });
+
 
   // GET route for getting all of the posts
   app.get("/api/posts/", function (req, res) {
@@ -180,7 +209,9 @@ module.exports = function (app) {
         res.json(dbPost);
       });
   });
-
+    app.get("/loggedIn", function(req, res) {
+    	res.json(req.session);
+    });
   // PUT route for updating posts
   app.put("/api/posts", function (req, res) {
     db.Post.update(req.body, {
