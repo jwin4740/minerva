@@ -75,6 +75,7 @@ var movePar;
 var grayRow = 0;
 var gameStart = false;
 var gameDataArray = [];
+var userCredentials = [];
 
 $('#resetBtn').on("click", function () {
     console.log("clicked");
@@ -91,9 +92,35 @@ $.get("/game", function (data) {
     console.log(data);
     gameDataArray.push(data);
     console.log(gameDataArray);
+    setTimeout(fireCall, 1500) // TODO fire on Promise
 });
 
+function fireCall() {
+    $.get("/loggedIn", function (data) {
+        console.log(data);
+        if (data.loggedIn) {
+            var tempEmail = data.uniqueID[0];
+            var tempID = data.uniqueID[1];
+            var tempRating = data.uniqueID[2];
 
+            sessionStorage.email = tempEmail;
+            sessionStorage.userID = tempID;
+            sessionStorage.rating = tempRating;
+
+            userCredentials.push(sessionStorage);
+            console.log(userCredentials);
+            updateGameData(tempEmail, tempID, tempRating);
+        }
+    });
+}
+
+function updateGameData(email, userID, rating) {
+    gameDataArray[0].playerOne.email = email;
+    gameDataArray[0].playerOne.username = userID;
+    gameDataArray[0].playerOne.rating = rating;
+    console.log(gameDataArray);
+
+}
 
 
 function startGame() {

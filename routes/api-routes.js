@@ -45,13 +45,15 @@ module.exports = function (app) {
     gameStart: false,
     timeSettings: "none",
     playerOne: {
-      username: "username",
+      email: "",
+      username: "playerOne",
       color: "",
       rating: "",
       ready: false
     },
     playerTwo: {
-      username: "username2",
+      email: "",
+      username: "playerTwo",
       color: "",
       rating: "",
       ready: false

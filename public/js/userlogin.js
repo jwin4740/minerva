@@ -12,7 +12,7 @@ $(document).ready(function () {
             sessionStorage.userID = data.uniqueID[1];
             sessionStorage.rating = data.uniqueID[2];
             console.log(sessionStorage);
-            $("body").append("<h1> You are in </h1>");
+          
 
         }
 
