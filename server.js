@@ -41,6 +41,7 @@ require("./routes/html-routes.js")(app);
 
 
 
+
 db.sequelize.sync({
     force: false
 }).then(function () {

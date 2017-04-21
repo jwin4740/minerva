@@ -59,11 +59,19 @@ module.exports = function (app) {
   //   this.blackMove = blackMove;
   // }
 
+  db.gamesetup.create({
+    starter: 'active'
+  });
+ 
 
+  //  db.gamesetup.destroy({ 
+  //   where: {
+  //     starter: 'active'
+  //   },
+  //   truncate: true 
+  // });
 
-
-
-
+  
   // posts username/email object to the route
   app.post("/api/users", function (req, res) {
     db.User.findAll({})
