@@ -8,13 +8,12 @@
 // Requiring our Todo model
 var db = require("../models");
 var path = require("path");
-var sessions = require("express-session");
-var CryptoJS = require('crypto-js');
+// var sessions = require("express-session");
 var moment = require('moment');
 var passhash = require('password-hash-and-salt');
 var security;
 var userArray = [];
-var session;
+// var session;
 
 function UserConstruct(username, email) {
   this.username = username;
@@ -59,10 +58,8 @@ module.exports = function (app) {
   //   this.blackMove = blackMove;
   // }
 
-  db.gamesetup.create({
-    starter: 'active'
-  });
- 
+
+
 
   //  db.gamesetup.destroy({ 
   //   where: {
@@ -71,7 +68,6 @@ module.exports = function (app) {
   //   truncate: true 
   // });
 
-  
   // posts username/email object to the route
   app.post("/api/users", function (req, res) {
     db.User.findAll({})
@@ -105,7 +101,7 @@ module.exports = function (app) {
 
     if (errors) { //if errors restart register page
       console.log(errors);
-      req.session.success = false;
+      // req.session.success = false;
       res.redirect("/usererror");
     } else {
       //   //else look if there is a current user with same username or same email address
@@ -125,10 +121,10 @@ module.exports = function (app) {
           res.redirect('/usererror');
         } else {
           //else hash password and create the user
-          req.session.loggedIn = true;
+          // req.session.loggedIn = true;
 
 
-          req.session.success = true;
+          // req.session.success = true;
           passhash(req.body.password).hash(function (error, hash) {
             if (error)
               throw new Error('Something went wrong!');
@@ -148,7 +144,7 @@ module.exports = function (app) {
               account_created: created
             }).then(function (result) {
               // redirect to user.html with username in welcome message
-              req.session.newRegister = true;
+              // req.session.newRegister = true;
               res.redirect('/');
             });
           });
@@ -160,12 +156,12 @@ module.exports = function (app) {
 
   //SESSION LOGIN
   app.post("/login", function (req, res) {
-    var session = req.session;
+    // var session = req.session;
     var email = req.body.logEmail;
     var password = req.body.logPassword;
-    console.log(session);
+    // console.log(session);
 
-    session.newRegister = false;
+    // session.newRegister = false;
     //checks hash against hash for entry validation
     db.User.findOne({
       where: {
@@ -180,18 +176,17 @@ module.exports = function (app) {
       // Verifying a hash 
       passhash(password).verifyAgainst(parsedKey, function (error, verified) {
         if (error) {
-
           console.log(error);
         }
         if (!verified) {
           console.log("Don't try! We got you!");
         } else {
-          session.loggedIn = true;
+          // session.loggedIn = true;
 
-          session.uniqueID = [data.dataValues.email, data.dataValues.username, data.dataValues.rating];
-          console.log(session.uniqueID);
-          console.log(session);
-          res.redirect('/');
+          // session.uniqueID = [data.dataValues.email, data.dataValues.username, data.dataValues.rating];
+          // console.log(session.uniqueID);
+          // console.log(session);
+          res.redirect('/minervaplay');
           console.log("you have successfully logged in");
         }
       });
@@ -199,19 +194,45 @@ module.exports = function (app) {
   });
 
   app.get("/loggedIn", function (req, res) {
-    res.json(req.session);
+    // res.json(req.session);
   });
 
   app.post("/game", function (req, res) {
-    var joined = req.body;
-    console.log(joined)
-    res.json(joined);
+    // res.json(req.body);
+    db.gamesetup.update(req.body.gameDataArray[0]);
+    console.log(req.body.gameDataArray[0]);
+
+
+    // db.gamesetup.findAll({}).then(function (data) {
+    //   console.log(data);
+    //   res.json(data);
+    // })
+
+
+  });
+
+  // PUT route for updating todos. We can get the updated todo data from req.body
+  app.put("/game", function (req, res) {
+    // Update takes in an object describing the properties we want to update, and
+    // we use where to describe which objects we want to update
+    console.log(req.body[0]);
+    // db.gamesetup.update(req.body.gameDataArray[0], {
+    //   where: {
+    //     id: 1
+    //   }
+    // });
+    // .then(function () {
+    //   res.json(dbTodo);
+    // });
   });
 
 
   app.get("/game", function (req, res) {
+    db.gamesetup.findAll({}).then(function (data) {
+    
+      res.json(data);
+    })
 
-    res.json(gameObject);
   });
 
 };

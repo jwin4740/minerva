@@ -17,3 +17,4 @@ playerTwoReady boolean DEFAULT false,
 playerTwoColor VARCHAR(255) Default NULL,
 starter VARCHAR(255) DEFAULT NULL
 );
+

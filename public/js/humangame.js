@@ -91,7 +91,7 @@ $('#resetBtn').on("click", function () {
 // get initial data and push to array
 $.get("/game", function (data) {
     console.log(data);
-    gameDataArray.push(data);
+    gameDataArray.push(data[0]);
     console.log(gameDataArray);
     setTimeout(fireCall, 2000) // TODO fire on Promise
 });
@@ -104,12 +104,12 @@ function fireCall() {
             var tempID = data.uniqueID[1];
             var tempRating = data.uniqueID[2];
 
-            sessionStorage.email = tempEmail;
-            sessionStorage.userID = tempID;
-            sessionStorage.rating = tempRating;
+            // sessionStorage.email = tempEmail;
+            // sessionStorage.userID = tempID;
+            // sessionStorage.rating = tempRating;
 
-            userCredentials.push(sessionStorage);
-            console.log(userCredentials);
+            // userCredentials.push(sessionStorage);
+            // console.log(userCredentials);
             updateGameData(tempEmail, tempID, tempRating);
         }
     });
@@ -118,26 +118,38 @@ function fireCall() {
 
 
 function updateGameData(email, userID, rating) {
-    if (gameDataArray[0].playersJoined === 0) {
-        gameDataArray[0].playerOne.email = email;
-        gameDataArray[0].playerOne.username = userID;
-        gameDataArray[0].playerOne.rating = rating;
+    if (2 == 2) {
+        gameDataArray[0].playerOneEmail = email;
+        gameDataArray[0].playerOneUserName = userID;
+        gameDataArray[0].playerOneRating = rating;
         gameDataArray[0].playersJoined = 1;
         console.log(gameDataArray);
-        $.post("/game", {
-            gameDataArray
-        }).done(checkPost);
-
+        $.ajax({
+                method: "PUT",
+                url: "/game",
+                data: [gameDataArray]
+            })
+            .done(function () {
+                console.log("work");
+            });
 
     } else {
-        gameDataArray[0].playerTwo.email = email;
-        gameDataArray[0].playerTwo.username = userID;
-        gameDataArray[0].playerTwo.rating = rating;
+        gameDataArray[0].playerTwoEmail = email;
+        gameDataArray[0].playerTwoUserName = userID;
+        gameDataArray[0].playerTwoRating = rating;
         gameDataArray[0].playersJoined = 2;
         console.log(gameDataArray);
-        $.post("/game", {
-            gameDataArray
-        }).done(checkPost);
+        $.ajax({
+                method: "PUT",
+                url: "/game",
+                data: grayRow
+
+
+            })
+            .done(function () {
+                console.log("work")
+            });
+
     }
 
 
