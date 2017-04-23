@@ -18,15 +18,20 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../public/home.html"));
     });
 
-        app.get("/minervaplay", function (req, res) {
+    app.get("/realchess", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/index.html"));
+    });
+
+
+    app.get("/minervaplay", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/minervaplay.html"));
     });
 
-           app.get("/register", function (req, res) {
+    app.get("/register", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/register.html"));
     });
 
-           app.get("/usererror", function (req, res) {
+    app.get("/usererror", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/registeruser.html"));
     });
 
