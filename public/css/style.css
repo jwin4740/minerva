@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-image: url(../img/grayb.jpg);
+}
+
+body {
+    background-color: transparent;
+    font-family: 'Righteous', cursive;
+}
+/*.totusTuus{
+    background-image: url("../img/column3.png");
+    background-size: cover;
+}*/
+#headercontainer {
+    margin: 5px 0px 15px 0px;
+}
+
+h3 {
+    margin: 0px;
+}
+
+button {
+    height: 30px;
+    border-radius: 2px;
+}
+
+
+#board {
+    float: left;
+    width: 88%;
+    text-align: center;
+    border: solid 2px black;
+    margin: 0px;
+}
+
+.filler {
+    background-color: black;
+    height: 800px;
+    padding: 10px;
+}
+
+.smallpad {
+    padding: 5px;
+    padding-top: 0px;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
+
+/*#panelNotate {
+    height: 250px;
+}*/
+
+.panelMainChat {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.panelMainNotate {
+    height: 225px;
+    overflow-y: scroll;
+}
+
+#chatField {
+    border-top: solid 1px lightgray;
+}
+
+.chatInput {
+    border: transparent;
+    width: 100%;
+    padding: 2px;
+    height: 30px;
+}
+
+input:focus {
+    padding: 4px;
+    outline: none;
+}
+
+.welcomeChat {
+    font-size: 17px;
+    margin: 1px;
+}
+
+#userName {
+    font-size: 12px;
+    font-weight: 900;
+}
+
+#timeMoment {
+    font-weight: lighter;
+    font-size: 11px;
+}
+
+.userEntry {
+    margin: 0px;
+}
+
+.userColor {
+    font-size: 13px;
+    color: green;
+}
+
+.opponentEntry {
+    color: blue;
+    margin: 0px;
+}
+
+.movePar {
+    margin: 0px;
+    padding: 8px;
+    clear: both;
+}
+
+.whiteMove {
+    font-size: 12px;
+    font-weight: bolder;
+    width: 67px;
+    float: left;
+    margin-bottom: 0px;
+}
+
+.blackMove {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bolder;
+    width: 50px;
+    margin-bottom: 0px;
+}
+
+.flank{
+    width: 100px;
+    height: 600px;
+}
+
+.errorHeader{
+    background-color: lightcoral;
+    padding: 10px;
+    border-radius: 3px;
+    padding-left: 25px;
+}
