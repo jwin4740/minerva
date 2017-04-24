@@ -186,15 +186,6 @@ db.sequelize.sync({
     force: false
 }).then(function () {
     http.listen(port, function () {
-        console.log('listening on *: ' + port);
+        console.log('server listening on port: ' + port);
     });
 });
-
-
-
-
-
-
-
-
-
