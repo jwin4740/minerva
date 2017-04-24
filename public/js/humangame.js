@@ -65,98 +65,230 @@ var sanTo120 = {
     h1: 28
 };
 
+
+
+
+
 var board;
 var blueMove;
 var game = new Chess();
 var whiteSanMove;
 var blackSanMove;
-var userColor = "white";
+var userColor;
 var movePar;
 var grayRow = 0;
 var gameStart = false;
 var gameDataArray = [];
 var userCredentials = [];
 var playerInfoArray = []; // once it is filled with both players; players get assigned playerOne of playerTwo
+var socket = io.connect();
+var messageForm = $('#messageForm');
+var sendChat = $('#sendChat');
+var chat = $('#chat');
+var userFormArea = $('#userFormArea');
+var messageArea = $('#messageArea');
+var userForm = $('#userForm');
+var users = $('#users');
+var username = $('#username');
+var clientSession;
+var connections = 0;
+var whiteBoolClient = false;
+var whiteBoolServer = true;
 
-$('#resetBtn').on("click", function () {
-    console.log("clicked");
-    $("#gameStatus").html("");
-    game.reset();
-})
 
-// $('#startGame').on("click", function () {
-//     gameStart = true;
-// })
+// $("#sendChat").on("keypress", function (event) {
+//     if (event.keyCode === 13) {
+//         // var upperUser = userName.toUpperCase();
+//         // var message = $("#sendChat").val();
+//         // var entry = $("<p class='userEntry'>");
+//         // var spanElement = $("<span class='userColor'>");
+//         // spanElement.text(upperUser + ": ");
+//         // entry.append(spanElement);
+//         // entry.append(message);
+//         // $(".panelMainChat").append(entry);
+//         $("#sendChat").val("");
+//     }
+// });
 
-// get initial data and push to array
-$.get("/game", function (data) {
-    console.log(data);
-    gameDataArray.push(data);
+// ---------------------------------------------
+$('#setSides').on("click", function () {
+    var side = $('#sideColor').val();
+    var playerTwoColor;
+    console.log(side);
+    gameDataArray[0].playerOne.color = side;
+    gameDataArray[0].playerOne.ready = true;
+    if (side === "white") {
+        playerTwoColor = "black"
+    } else {
+        playerTwoColor = "white"
+    }
+    gameDataArray[0].playerTwo.color = playerTwoColor;
     console.log(gameDataArray);
-    setTimeout(fireCall, 2000) // TODO fire on Promise
+
+    checkIfReady();
+
+});
+$("#logIn").on("click", function () {
+    var userVal = $("#username").val();
+    var username = {
+        username: userVal
+    };
+    console.log("clicked");
+    $.post("/login", username)
+        .done(function () {
+
+
+            getSessionId();
+        });
+
+
 });
 
-function fireCall() {
+
+function getSessionId() {
+
     $.get("/loggedIn", function (data) {
-        console.log(data);
-        if (data.loggedIn) {
-            var tempEmail = data.uniqueID[0];
-            var tempID = data.uniqueID[1];
-            var tempRating = data.uniqueID[2];
 
-            sessionStorage.email = tempEmail;
-            sessionStorage.userID = tempID;
-            sessionStorage.rating = tempRating;
+        clientSession = data;
+        console.log(clientSession);
+    });
 
-            userCredentials.push(sessionStorage);
-            console.log(userCredentials);
-            updateGameData(tempEmail, tempID, tempRating);
+}
+
+$('#startGame').on("click", function () {
+    socket.emit('start game click', {
+        whiteBoolClient: false
+    });
+    whiteBoolClient = true;
+
+});
+
+socket.on('game started', function (data) {
+    if (whiteBoolClient === false) {
+        whiteBoolClient = data.whiteBoolServer;
+    }
+    console.log(data);
+    configBoard();
+});
+sendChat.on("keypress", function () {
+    if (event.keyCode === 13) {
+        console.log('submitted');
+        socket.emit('send message', sendChat.val());
+        sendChat.val("");
+    }
+});
+socket.on('new message', function (data) {
+    $(".panelMainChat").append("<div class='well'>" + data.msg + "</div>");
+});
+
+userForm.submit(function (e) {
+    e.preventDefault();
+    console.log('submitted');
+    socket.emit('new user', username.val(), function (data) {
+        if (data) {
+            userFormArea.hide();
+            messageArea.show();
         }
     });
-}
+    username.val("");
+});
 
-
-
-function updateGameData(email, userID, rating) {
-    if (gameDataArray[0].playersJoined === 0) {
-        gameDataArray[0].playerOne.email = email;
-        gameDataArray[0].playerOne.username = userID;
-        gameDataArray[0].playerOne.rating = rating;
-        gameDataArray[0].playersJoined = 1;
-        console.log(gameDataArray);
-        $.post("/game", {
-            gameDataArray
-        }).done(checkPost);
-
-
-    } else {
-        gameDataArray[0].playerTwo.email = email;
-        gameDataArray[0].playerTwo.username = userID;
-        gameDataArray[0].playerTwo.rating = rating;
-        gameDataArray[0].playersJoined = 2;
-        console.log(gameDataArray);
-        $.post("/game", {
-            gameDataArray
-        }).done(checkPost);
+socket.on('get users', function (data) {
+    var content = '';
+    var n = data.length;
+    for (var i = 0; i < n; i++) {
+        content += '<li class="list-group-item">' + data[i] + '</li>';
     }
+    users.html(content);
+});
+
+socket.on('move', function (plyMove) {
+
+    game.move(plyMove.move);
+    console.log("movesocket");
+    board.position(game.fen());
+
+});
+// $('#resetBtn').on("click", function () {
+//     console.log("clicked");
+//     $("#gameStatus").html("");
+//     game.reset();
+// })
+
+// // $('#startGame').on("click", function () {
+// //     gameStart = true;
+// // })
+
+// // get initial data and push to array
+// $.get("/game", function (data) {
+//     console.log(data);
+//     gameDataArray.push(data);
+//     console.log(gameDataArray);
+//     setTimeout(fireCall, 2000) // TODO fire on Promise
+// });
+
+// function fireCall() {
+//     $.get("/loggedIn", function (data) {
+//         console.log(data);
+//         if (data.loggedIn) {
+//             var tempEmail = data.uniqueID[0];
+//             var tempID = data.uniqueID[1];
+//             var tempRating = data.uniqueID[2];
+
+//             sessionStorage.email = tempEmail;
+//             sessionStorage.userID = tempID;
+//             sessionStorage.rating = tempRating;
+
+//             userCredentials.push(sessionStorage);
+//             console.log(userCredentials);
+//             updateGameData(tempEmail, tempID, tempRating);
+//         }
+//     });
+// }
 
 
-}
 
-function checkPost() {
-    $.get("/game", function (data) {
-        console.log("hello postman");
-        console.log(data);
-    })
-}
+// function updateGameData(email, userID, rating) {
+//     if (gameDataArray[0].playersJoined === 0) {
+//         gameDataArray[0].playerOne.email = email;
+//         gameDataArray[0].playerOne.username = userID;
+//         gameDataArray[0].playerOne.rating = rating;
+//         gameDataArray[0].playersJoined = 1;
+//         console.log(gameDataArray);
+//         $.post("/game", {
+//             gameDataArray
+//         }).done(checkPost);
 
-function checkIfReady() {
-    if (gameDataArray[0].playerOne.ready === true && gameDataArray[0].playerTwo.ready === true) {
-        $("body").append("We are ready");
-    } else {
-        $("body").append("Waiting for the other player");
-    }
-}
+
+//     } else {
+//         gameDataArray[0].playerTwo.email = email;
+//         gameDataArray[0].playerTwo.username = userID;
+//         gameDataArray[0].playerTwo.rating = rating;
+//         gameDataArray[0].playersJoined = 2;
+//         console.log(gameDataArray);
+//         $.post("/game", {
+//             gameDataArray
+//         }).done(checkPost);
+//     }
+
+
+// }
+
+// function checkPost() {
+//     $.get("/game", function (data) {
+//         console.log("hello postman");
+//         console.log(data);
+//     })
+// }
+
+// function checkIfReady() {
+//     if (gameDataArray[0].playerOne.ready === true && gameDataArray[0].playerTwo.ready === true) {
+//         $("body").append("We are ready");
+//     } else {
+//         $("body").append("Waiting for the other player");
+//     }
+// }
+
 
 
 function startGame() {
@@ -182,9 +314,13 @@ var onDrop = function (source, target) {
         to: target,
         promotion: 'n'
     });
-    console.log(move);
+
     // illegal move
     if (move === null) return 'snapback';
+    socket.emit('move', {
+        move: move,
+        board: game.fen()
+    });
     uMove = move.from + move.to;
     console.log("San move: " + uMove);
 
@@ -210,27 +346,27 @@ var onSnapEnd = function () {
     board.position(game.fen());
 
 };
-if (userColor === "white") {
-    var cfg = {
-        draggable: true,
-        position: 'start',
-        onDragStart: onDragStart,
-        onDrop: onDrop,
-        orientation: 'white',
-        onSnapEnd: onSnapEnd
-    };
-} else {
-    var cfg = {
-        draggable: true,
-        position: 'start',
-        onDragStart: onDragStart,
-        onDrop: onDrop,
-        orientation: 'black',
-        onSnapEnd: onSnapEnd
-    };
+
+function configBoard() {
+    if (whiteBoolClient === true && whiteBoolServer === true) {
+        var cfg = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            orientation: 'white',
+            onSnapEnd: onSnapEnd
+        };
+    } else {
+        var cfg = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            orientation: 'black',
+            onSnapEnd: onSnapEnd
+        };
+    }
+    startGame();
+    board = ChessBoard('board', cfg);
 }
-
-
-board = ChessBoard('board', cfg);
-$('#clearBtn').on('click', board.clear);
-$('#startBtn').on('click', board.start);

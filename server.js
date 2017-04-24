@@ -74,6 +74,24 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
+       socket.on('start game click', function (data) {
+        console.log(data);
+        io.sockets.emit('game started', {
+            msg: data,
+            whiteBoolServer : false
+        });
+    });
+
+// ply move
+    socket.on('move', function(plyMove) {
+         console.log("movesocket");
+        socket.broadcast.emit('move', plyMove);
+        
+        console.log(plyMove);
+    });
+
+
+
     // new user
 
     socket.on('new user', function (data, callback) {
