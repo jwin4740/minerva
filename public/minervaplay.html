@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!--<script src="./js/enginescripts/jQueryLib.js"></script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/chessboard-0.3.0.css">
@@ -131,7 +132,34 @@
     <script src="./js/chess.js"></script>
     <script src="./js/chessboard.js"></script>
     <script src="./js/humangame.js"></script>
-    <script>
+    <script type="text/javascript">
+        var socket = io.connect();
+        var messageForm = $('#messageForm');
+        var sendChat = $('#sendChat');
+        var chat = $('#chat');
+        var userFormArea = $('#userFormArea');
+        var messageArea = $('#messageArea');
+        var userForm = $('#userForm');
+        var users = $('#users');
+        var username = $('#username');
+        var clientSession;
+
+
+        // $("#sendChat").on("keypress", function (event) {
+        //     if (event.keyCode === 13) {
+        //         // var upperUser = userName.toUpperCase();
+        //         // var message = $("#sendChat").val();
+        //         // var entry = $("<p class='userEntry'>");
+        //         // var spanElement = $("<span class='userColor'>");
+        //         // spanElement.text(upperUser + ": ");
+        //         // entry.append(spanElement);
+        //         // entry.append(message);
+        //         // $(".panelMainChat").append(entry);
+        //         $("#sendChat").val("");
+        //     }
+        // });
+
+        // ---------------------------------------------
         $('#setSides').on("click", function () {
             var side = $('#sideColor').val();
             var playerTwoColor;
@@ -149,24 +177,67 @@
             checkIfReady();
 
         });
+        $("#logIn").on("click", function () {
+            var userVal = $("#username").val();
+            var username = {
+                username: userVal
+            };
+            console.log("clicked");
+            $.post("/login", username)
+                .done(function () {
 
-        // var userName = "default";
-        // var time = moment();
-        // $("#timeMoment").html(time._d);
-        // $("#sendChat").on("keypress", function (event) {
-        //     if (event.keyCode === 13) {
-        //         var upperUser = userName.toUpperCase();
-        //         var message = $("#sendChat").val();
-        //         var entry = $("<p class='userEntry'>");
-        //         var spanElement = $("<span class='userColor'>");
-        //         spanElement.text(upperUser + ": ");
-        //         entry.append(spanElement);
-        //         entry.append(message);
-        //         $(".panelMainChat").append(entry);
-        //         $("#sendChat").val("");
-        //     }
-        // });
+
+                    getSessionId();
+                });
+
+
+        });
+        getSessionId();
+
+        function getSessionId() {
+
+            $.get("/loggedIn", function (data) {
+
+                clientSession = data;
+                console.log(clientSession);
+            });
+
+        }
+
+
+        sendChat.on("keypress", function () {
+            if (event.keyCode === 13) {
+                console.log('submitted');
+                socket.emit('send message', sendChat.val());
+                sendChat.val("");
+            }
+        });
+        socket.on('new message', function (data) {
+            $(".panelMainChat").append("<div class='well'>" +  data.msg + "</div>");
+        });
+
+        userForm.submit(function (e) {
+            e.preventDefault();
+            console.log('submitted');
+            socket.emit('new user', username.val(), function (data) {
+                if (data) {
+                    userFormArea.hide();
+                    messageArea.show();
+                }
+            });
+            username.val("");
+        });
+
+        socket.on('get users', function (data) {
+            var content = '';
+            var n = data.length;
+            for (var i = 0; i < n; i++) {
+                content += '<li class="list-group-item">' + data[i] + '</li>';
+            }
+            users.html(content);
+        })
     </script>
+
 </body>
 
 </html>
