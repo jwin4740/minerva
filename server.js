@@ -85,7 +85,7 @@ io.sockets.on('connection', function (socket) {
 // ply move
     socket.on('move', function(plyMove) {
          console.log("movesocket");
-        socket.broadcast.emit('move', plyMove);
+        io.sockets.emit('serverMove', plyMove);
         
         console.log(plyMove);
     });

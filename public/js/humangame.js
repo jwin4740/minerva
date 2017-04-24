@@ -202,13 +202,15 @@ socket.on('get users', function (data) {
     users.html(content);
 });
 
-socket.on('move', function (plyMove) {
+socket.on('serverMove', function (plyMove) {
 
-    game.move(plyMove.move);
+   
     console.log("movesocket");
-    board.position(game.fen());
+  
+     game.move(plyMove.move);
 
 });
+
 // $('#resetBtn').on("click", function () {
 //     console.log("clicked");
 //     $("#gameStatus").html("");
