@@ -42,13 +42,7 @@ require("./routes/api-routes.js")(app);
 // require("./routes/api-routes.js")(app);
 
 
-db.sequelize.sync({
-    force: false
-}).then(function () {
-    server.listen(port, function () {
-        console.log('server listening on port: ' + port);
-    });
-});
+
 
 
 
@@ -83,11 +77,11 @@ io.sockets.on('connection', function (socket) {
     });
 
 // ply move
-    socket.on('move', function(plyMove) {
+    socket.on('move', function(msg) {
          console.log("movesocket");
-        io.sockets.emit('serverMove', plyMove);
+        socket.broadcast.emit('move', msg);
         
-        console.log(plyMove);
+        console.log(msg);
     });
 
 
@@ -105,15 +99,15 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('get users', users);
     }
 
-
-
-
-
-
-
-
 });
 
 
 
 
+db.sequelize.sync({
+    force: false
+}).then(function () {
+    server.listen(port, function () {
+        console.log('server listening on port: ' + port);
+    });
+});

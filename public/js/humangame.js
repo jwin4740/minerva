@@ -94,6 +94,8 @@ var clientSession;
 var connections = 0;
 var whiteBoolClient = false;
 var whiteBoolServer = true;
+var game;
+
 
 
 // $("#sendChat").on("keypress", function (event) {
@@ -202,14 +204,7 @@ socket.on('get users', function (data) {
     users.html(content);
 });
 
-socket.on('serverMove', function (plyMove) {
 
-   
-    console.log("movesocket");
-  
-     game.move(plyMove.move);
-
-});
 
 // $('#resetBtn').on("click", function () {
 //     console.log("clicked");
@@ -291,6 +286,14 @@ socket.on('serverMove', function (plyMove) {
 //     }
 // }
 
+socket.on('move', function (msg) {
+    console.log("movesocket");
+    game.move(msg);
+    board.position(game.fen());
+
+
+
+});
 
 
 function startGame() {
@@ -319,10 +322,7 @@ var onDrop = function (source, target) {
 
     // illegal move
     if (move === null) return 'snapback';
-    socket.emit('move', {
-        move: move,
-        board: game.fen()
-    });
+    socket.emit('move', move);
     uMove = move.from + move.to;
     console.log("San move: " + uMove);
 
