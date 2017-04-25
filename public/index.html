@@ -53,90 +53,34 @@
             </div>
         </div>
     </div>
- <script type="text/javascript" src="./js/userlogin.js"></script>
- <script type="text/javascript">
 
-        var socket = io.connect();
-        var messageForm = $('#messageForm');
-        var message = $('#message');
-        var chat = $('#chat');
-        var userFormArea = $('#userFormArea');
-        var messageArea = $('#messageArea');
-        var userForm = $('#userForm');
-        var users = $('#users');
-        var username = $('#username');
-        var clientSession;
+ <script type="text/javascript">
 
         // ---------------------------------------------
 
-        $("#logIn").on("click", function () {
+        $("#logButton").on("click", function () {
             var userVal = $("#username").val();
+            var passVal = $("#password").val();
             var username = {
-                username: userVal
+                username: userVal,
+                password : passVal
             };
             console.log("clicked");
-            $.post("/login", username)
-                .done(function () {
-                   
-
-                    getSessionId();
-                });
-
-
+            $.post("/login", username);
         });
-        getSessionId();
+      
 
-        function getSessionId() {
+        // function getSessionId() {
 
-            $.get("/loggedIn", function (data) {
+        //     $.get("/loggedIn", function (data) {
             
-                clientSession = data;
-                console.log(clientSession);
-            });
+        //         clientSession = data;
+        //         console.log(clientSession);
+        //     });
 
-        }
-
-
-
- 
+        // }
 
 
-
-
-        messageForm.submit(function (e) {
-            e.preventDefault();
-            console.log('submitted');
-            socket.emit('send message', message.val());
-            message.val("");
-        });
-        socket.on('new message', function (data) {
-            chat.append("<div class='well'><h3>" + data.user + ": </h3>" + data.msg + "</div>");
-        });
-
-        userForm.submit(function (e) {
-            e.preventDefault();
-            console.log('submitted');
-            socket.emit('new user', username.val(), function (data) {
-                if (data) {
-                    userFormArea.hide();
-                    messageArea.show();
-                }
-            });
-            username.val("");
-        });
-
-        socket.on('get users', function (data) {
-            var content = '';
-            var n = data.length;
-            for (var i = 0; i < n; i++) {
-                content += '<li class="list-group-item">' + data[i] + '</li>';
-            }
-            users.html(content);
-        })
- 
- 
- 
- 
  </script>
 
 

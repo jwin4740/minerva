@@ -90,11 +90,21 @@ var messageArea = $('#messageArea');
 var userForm = $('#userForm');
 var users = $('#users');
 var username = $('#username');
-var clientSession;
+var localData;
 var connections = 0;
 var whiteBoolClient = false;
 var whiteBoolServer = true;
 var game;
+var userID;
+var whitePlayerID;
+var blackPlayerID;
+var whitePlayerRating;
+var blackPlayerRating;
+var whitePlayerID;
+var blackPlayerID;
+var userColor;
+
+var sessionStorage;
 
 
 
@@ -113,65 +123,67 @@ var game;
 // });
 
 // ---------------------------------------------
-$('#setSides').on("click", function () {
-    var side = $('#sideColor').val();
-    var playerTwoColor;
-    console.log(side);
-    gameDataArray[0].playerOne.color = side;
-    gameDataArray[0].playerOne.ready = true;
-    if (side === "white") {
-        playerTwoColor = "black"
-    } else {
-        playerTwoColor = "white"
-    }
-    gameDataArray[0].playerTwo.color = playerTwoColor;
-    console.log(gameDataArray);
 
-    checkIfReady();
 
+$('#whiteGuy').on("click", function () {
+
+    sessionStorage.whitePlayerID = sessionStorage.userID;
+    userID = sessionStorage.userID;
+    whitePlayerID = sessionStorage.userID;
+    whitePlayerRating = sessionStorage.rating;
+    userColor = "white";
+    delete sessionStorage.color;
+
+
+    socket.emit('white player click', sessionStorage);
 });
-$("#logIn").on("click", function () {
-    var userVal = $("#username").val();
-    var username = {
-        username: userVal
-    };
-    console.log("clicked");
-    $.post("/login", username)
-        .done(function () {
+
+$('#blackGuy').on("click", function () {
+    sessionStorage.blackPlayerID = sessionStorage.userID;
+    userID = sessionStorage.userID;
+    blackPlayerID = sessionStorage.userID;
+    blackPlayerRating = sessionStorage.rating;
+    userColor = "black";
+    delete sessionStorage.color;
 
 
-            getSessionId();
-        });
-
+    socket.emit('black player click', sessionStorage);
 
 });
 
+socket.on('white player click', function (data) {
+    console.log("I got white's data");
 
-function getSessionId() {
+    sessionStorage.whitePlayerID = data.whitePlayerID;
+    sessionStorage.whitePlayerRating = data.rating;
+    delete sessionStorage.rating;
+    localData = sessionStorage;
+    console.log(sessionStorage);
+});
 
-    $.get("/loggedIn", function (data) {
+socket.on('black player click', function (data) {
+    console.log("I got black's data");
+    sessionStorage.blackPlayerID = data.blackPlayerID;
+    sessionStorage.blackPlayerRating = data.rating;
+    delete sessionStorage.rating;
+    localData = sessionStorage;
+    console.log(sessionStorage);
+});
 
-        clientSession = data;
-        console.log(clientSession);
-    });
-
-}
 
 $('#startGame').on("click", function () {
-    socket.emit('start game click', {
-        whiteBoolClient: false
-    });
-    whiteBoolClient = true;
-
+    gameStart = true;
+    socket.emit('game started', gameStart);
+    configBoard();
 });
 
 socket.on('game started', function (data) {
-    if (whiteBoolClient === false) {
-        whiteBoolClient = data.whiteBoolServer;
-    }
     console.log(data);
     configBoard();
 });
+
+
+// chat -----------------------------------------------------------
 sendChat.on("keypress", function () {
     if (event.keyCode === 13) {
         console.log('submitted');
@@ -195,106 +207,43 @@ userForm.submit(function (e) {
     username.val("");
 });
 
-socket.on('get users', function (data) {
-    var content = '';
-    var n = data.length;
-    for (var i = 0; i < n; i++) {
-        content += '<li class="list-group-item">' + data[i] + '</li>';
-    }
-    users.html(content);
-});
+// chat -----------------------------------------------------------
 
 
-
-// $('#resetBtn').on("click", function () {
-//     console.log("clicked");
-//     $("#gameStatus").html("");
-//     game.reset();
-// })
-
-// // $('#startGame').on("click", function () {
-// //     gameStart = true;
-// // })
-
-// // get initial data and push to array
-// $.get("/game", function (data) {
-//     console.log(data);
-//     gameDataArray.push(data);
-//     console.log(gameDataArray);
-//     setTimeout(fireCall, 2000) // TODO fire on Promise
-// });
-
-// function fireCall() {
-//     $.get("/loggedIn", function (data) {
-//         console.log(data);
-//         if (data.loggedIn) {
-//             var tempEmail = data.uniqueID[0];
-//             var tempID = data.uniqueID[1];
-//             var tempRating = data.uniqueID[2];
-
-//             sessionStorage.email = tempEmail;
-//             sessionStorage.userID = tempID;
-//             sessionStorage.rating = tempRating;
-
-//             userCredentials.push(sessionStorage);
-//             console.log(userCredentials);
-//             updateGameData(tempEmail, tempID, tempRating);
-//         }
-//     });
-// }
-
-
-
-// function updateGameData(email, userID, rating) {
-//     if (gameDataArray[0].playersJoined === 0) {
-//         gameDataArray[0].playerOne.email = email;
-//         gameDataArray[0].playerOne.username = userID;
-//         gameDataArray[0].playerOne.rating = rating;
-//         gameDataArray[0].playersJoined = 1;
-//         console.log(gameDataArray);
-//         $.post("/game", {
-//             gameDataArray
-//         }).done(checkPost);
-
-
-//     } else {
-//         gameDataArray[0].playerTwo.email = email;
-//         gameDataArray[0].playerTwo.username = userID;
-//         gameDataArray[0].playerTwo.rating = rating;
-//         gameDataArray[0].playersJoined = 2;
-//         console.log(gameDataArray);
-//         $.post("/game", {
-//             gameDataArray
-//         }).done(checkPost);
-//     }
-
-
-// }
-
-// function checkPost() {
-//     $.get("/game", function (data) {
-//         console.log("hello postman");
-//         console.log(data);
-//     })
-// }
-
-// function checkIfReady() {
-//     if (gameDataArray[0].playerOne.ready === true && gameDataArray[0].playerTwo.ready === true) {
-//         $("body").append("We are ready");
-//     } else {
-//         $("body").append("Waiting for the other player");
-//     }
-// }
 
 socket.on('move', function (msg) {
-    console.log("movesocket");
+    
     game.move(msg);
     board.position(game.fen());
-
-
-
 });
 
+
+
+
+
+function configBoard() {
+    if (userColor === "white") {
+        var cfg = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            orientation: 'white',
+            onSnapEnd: onSnapEnd
+        };
+    } else {
+        var cfg = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            orientation: 'black',
+            onSnapEnd: onSnapEnd
+        };
+    }
+    startGame();
+    board = ChessBoard('board', cfg);
+}
 
 function startGame() {
     gameStart = true;
@@ -327,19 +276,7 @@ var onDrop = function (source, target) {
     console.log("San move: " + uMove);
 
 
-    // whiteSanMove = move.san;
-    // movePar = $("<div class='movePar'>");
-    // var whiteMoveSpan = $("<p class='whiteMove'>");
-    // whiteMoveSpan.text(moveCounter + ") " + whiteSanMove);
 
-    // movePar.append(whiteMoveSpan);
-    // $(".panelMainNotate").append(movePar);
-
-
-
-
-    // make random legal move for black
-    // window.setTimeout(makeRandomMove, 250);
 };
 
 // update the board position after the piece snap
@@ -348,27 +285,3 @@ var onSnapEnd = function () {
     board.position(game.fen());
 
 };
-
-function configBoard() {
-    if (whiteBoolClient === true && whiteBoolServer === true) {
-        var cfg = {
-            draggable: true,
-            position: 'start',
-            onDragStart: onDragStart,
-            onDrop: onDrop,
-            orientation: 'white',
-            onSnapEnd: onSnapEnd
-        };
-    } else {
-        var cfg = {
-            draggable: true,
-            position: 'start',
-            onDragStart: onDragStart,
-            onDrop: onDrop,
-            orientation: 'black',
-            onSnapEnd: onSnapEnd
-        };
-    }
-    startGame();
-    board = ChessBoard('board', cfg);
-}

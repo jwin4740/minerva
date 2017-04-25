@@ -33,13 +33,13 @@ app.use(bodyParser.json({
 }));
 app.use(expressValidator());
 app.use(express.static(path.join(__dirname, "./public")));
-require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 
 
-// Import routes and give the server access to them.
-// require("./routes/api-routes.js")(app);
+
+
 
 
 
@@ -68,21 +68,31 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
-       socket.on('start game click', function (data) {
-        console.log(data);
-        io.sockets.emit('game started', {
-            msg: data,
-            whiteBoolServer : false
-        });
+    socket.on('white player click', function (data) {
+        socket.broadcast.emit('white player click', data);
     });
 
-// ply move
-    socket.on('move', function(msg) {
-         console.log("movesocket");
+    socket.on('black player click', function (data) {
+        socket.broadcast.emit('black player click', data);
+    });
+
+      socket.on('game started', function (data) {
+        // console.log(data);
+        socket.broadcast.emit('game started', data);
+
+     
+    });
+
+    // ply move
+    socket.on('move', function (msg) {
+        console.log("movesocket");
         socket.broadcast.emit('move', msg);
-        
+
         console.log(msg);
     });
+
+ 
+
 
 
 

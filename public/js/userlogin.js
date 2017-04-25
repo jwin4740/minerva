@@ -11,9 +11,6 @@ $(document).ready(function () {
             sessionStorage.email = data.uniqueID[0];
             sessionStorage.userID = data.uniqueID[1];
             sessionStorage.rating = data.uniqueID[2];
-            console.log(sessionStorage);
-          
-
         }
 
     });

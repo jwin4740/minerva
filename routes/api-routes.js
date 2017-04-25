@@ -9,7 +9,7 @@
 var db = require("../models");
 var path = require("path");
 var sessions = require("express-session");
-var CryptoJS = require('crypto-js');
+
 var moment = require('moment');
 var passhash = require('password-hash-and-salt');
 var security;
@@ -169,6 +169,7 @@ module.exports = function (app) {
         email: email
       }
     }).then(function (data) {
+    
 
       var parsedKey = data.dataValues.security;
       var userName = data.dataValues.username;
@@ -188,7 +189,7 @@ module.exports = function (app) {
           session.uniqueID = [data.dataValues.email, data.dataValues.username, data.dataValues.rating];
           console.log(session.uniqueID);
           console.log(session);
-          res.redirect('/');
+          res.redirect('/minervaplay');
           console.log("you have successfully logged in");
         }
       });
