@@ -132,7 +132,7 @@ $('#whiteGuy').on("click", function () {
     whitePlayerID = sessionStorage.userID;
     whitePlayerRating = sessionStorage.rating;
     userColor = "white";
-    delete sessionStorage.color;
+
 
 
     socket.emit('white player click', sessionStorage);
@@ -144,7 +144,7 @@ $('#blackGuy').on("click", function () {
     blackPlayerID = sessionStorage.userID;
     blackPlayerRating = sessionStorage.rating;
     userColor = "black";
-    delete sessionStorage.color;
+  
 
 
     socket.emit('black player click', sessionStorage);
@@ -156,7 +156,7 @@ socket.on('white player click', function (data) {
 
     sessionStorage.whitePlayerID = data.whitePlayerID;
     sessionStorage.whitePlayerRating = data.rating;
-    delete sessionStorage.rating;
+ 
     localData = sessionStorage;
     console.log(sessionStorage);
 });
@@ -165,7 +165,7 @@ socket.on('black player click', function (data) {
     console.log("I got black's data");
     sessionStorage.blackPlayerID = data.blackPlayerID;
     sessionStorage.blackPlayerRating = data.rating;
-    delete sessionStorage.rating;
+
     localData = sessionStorage;
     console.log(sessionStorage);
 });
@@ -187,32 +187,38 @@ socket.on('game started', function (data) {
 sendChat.on("keypress", function () {
     if (event.keyCode === 13) {
         console.log('submitted');
+        $(".panelMainChat").append("<h5>" + userID + ": </h5><div class='well'>" + sendChat.val() + "</div>")
         socket.emit('send message', sendChat.val());
         sendChat.val("");
     }
 });
 socket.on('new message', function (data) {
-    $(".panelMainChat").append("<div class='well'>" + data.msg + "</div>");
+
+    if (userID === localData.whitePlayerID) {
+        $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
+    } else {
+        $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
+    }
 });
 
-userForm.submit(function (e) {
-    e.preventDefault();
-    console.log('submitted');
-    socket.emit('new user', username.val(), function (data) {
-        if (data) {
-            userFormArea.hide();
-            messageArea.show();
-        }
-    });
-    username.val("");
-});
+// userForm.submit(function (e) {
+//     e.preventDefault();
+//     console.log('submitted');
+//     socket.emit('new user', username.val(), function (data) {
+//         if (data) {
+//             userFormArea.hide();
+//             messageArea.show();
+//         }
+//     });
+//     username.val("");
+// });
 
 // chat -----------------------------------------------------------
 
 
 
 socket.on('move', function (msg) {
-    
+
     game.move(msg);
     board.position(game.fen());
 });
