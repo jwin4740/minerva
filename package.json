@@ -10,6 +10,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+    "engines": {
+    "node": "6.9.4",
+    "npm": "4.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jwin4740/minerva.git"
