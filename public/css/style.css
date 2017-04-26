@@ -30,7 +30,7 @@ button {
 
 #board {
     float: left;
-    width: 88%;
+    width: 84%;
     text-align: center;
     border: solid 2px black;
     margin: 0px;
@@ -138,7 +138,7 @@ input:focus {
 }
 
 .flank{
-    width: 100px;
+    width: 300px;
     height: 600px;
 }
 

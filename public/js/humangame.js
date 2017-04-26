@@ -283,7 +283,7 @@ sendChat.on("keypress", function () {
         var messagi = $("#sendChat").val();
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='userColor'>");
-        spanElement.text(userID + ": ");
+        spanElement.text(localGameObject.userID + ": ");
         entry.append(spanElement);
         entry.append(messagi);
         $(".panelMainChat").append(entry);
@@ -300,14 +300,16 @@ socket.on('new message', function (data) {
     // }
 
 
-    if (userID === localData.whitePlayerID) {
-        var tempID = sessionStorage.blackPlayerID;
+    if (localGameObject.userID === gameObject.whitePlayerData.whitePlayerID) {
+        var tempID = gameObject.blackPlayerData.blackPlayerID;
 
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
 
     } else {
-        var tempID = sessionStorage.whitePlayerID;
+        var tempID = gameObject.whitePlayerData.whitePlayerID;
+
+
 
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
@@ -340,7 +342,7 @@ socket.on('move', function (msg) {
 
 
 function configBoard() {
-    if (userColor === "white") {
+    if (localGameObject.color === "white") {
         var cfg = {
             draggable: true,
             position: 'start',
