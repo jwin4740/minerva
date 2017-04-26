@@ -70,7 +70,9 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
- 
+     socket.on('players confirmed', function (data) {
+        socket.broadcast.emit('players confirmed', data);
+    });
 
     socket.on('white player click', function (data) {
         socket.broadcast.emit('white player click', data);

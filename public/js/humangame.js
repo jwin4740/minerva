@@ -103,9 +103,6 @@ var whitePlayerID;
 var blackPlayerID;
 var userColor;
 var sessionStorage;
-
-var userID;
-
 var gameObject = {
     gameCreated: false,
     gameID: "",
@@ -119,43 +116,12 @@ var gameObject = {
         blackPlayerRating: "x"
     }
 };
-$.get("/gameCreated", function (data) {
-    console.log(data);
-    gameObject = data;
+var localGameObject = {
+    color: "",
+    userID: "",
+    rating: ""
+}
 
-}).done(function () {
-    if (gameObject.gameCreated != "true") {
-        $('#myModal').modal('show');
-    } else {
-        if (gameObject.whitePlayerData.whitePlayerID === "x") {
-
-            gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
-            gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
-
-        } else {
-            gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
-            gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
-        }
-    }
-});
-
-$("#setSides").on("click", function () {
-    gameObject.gameCreated = true;
-    var sideColor = $("#sideColor").val();
-    if (sideColor === "white") {
-        gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
-        gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
-
-    } else {
-        gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
-        gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
-
-
-    }
-
-    $.post("/gameCreated", gameObject);
-
-});
 // on page load -----------------------
 defaultLayout();
 
@@ -178,16 +144,75 @@ var momentElement = $("#timeMoment");
 momentElement.append(moment);
 $(".panelMainChat").append(momentElement);
 
-// create game modal
 
 
 
 
+$(document).ready(function () {
+    // sets sides and game object data
+    $.get("/gameCreated", function () {
+        console.log("good");
 
 
 
-// on page load -----------------------
+    }).done(function (data) {
+        gameObject = data;
+        if (gameObject.gameCreated != "true") {
+            $('#myModal').modal('show');
+        } else {
+            if (gameObject.whitePlayerData.whitePlayerID === "x") {
+                gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
+                gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
+                localGameObject.userID = sessionStorage.userID;
+                localGameObject.rating = sessionStorage.rating;
+                localGameObject.color = "white";
+                socket.emit("players confirmed", gameObject);
+            } else {
+                gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
+                gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
+                localGameObject.userID = sessionStorage.userID;
+                localGameObject.rating = sessionStorage.rating;
+                localGameObject.color = "black";
+                socket.emit("players confirmed", gameObject);
 
+
+            }
+        }
+    });
+});
+
+$("#setSides").on("click", function () {
+    gameObject.gameCreated = true;
+    var sideColor = $("#sideColor").val();
+    if (sideColor === "white") {
+        localGameObject.userID = sessionStorage.userID;
+        localGameObject.rating = sessionStorage.rating;
+        localGameObject.color = "white";
+        gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
+        gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
+
+    } else {
+        localGameObject.userID = sessionStorage.userID;
+        localGameObject.rating = sessionStorage.rating;
+        localGameObject.color = "black";
+        gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
+        gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
+
+
+    }
+
+    $.post("/gameCreated", gameObject);
+
+});
+
+// sets sides and game object data
+socket.on("players confirmed", function (data) {
+    gameObject = data;
+    console.log("sock it to me");
+    console.log(gameObject);
+
+
+});
 
 $('#whiteGuy').on("click", function () {
 
