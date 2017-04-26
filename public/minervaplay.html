@@ -49,7 +49,7 @@
                             <br>
                             <br>
                             <span class="label label-default">Time Settings</span>
-                            <select name="time">
+                            <select name="time" id="timeSelection">
                                     <option value="60min5delay">60min </option>
                                     <option value="30min5delay">30min</option>
                                     <option value="15min">15min</option>
@@ -143,31 +143,6 @@
     <script src="./js/humangame.js"></script>
     <script>
 
-        var userID;
-        var gameObject = {
-            gameCreated: false,
-            whitePlayerID: "",
-            blackPlayerID: "",
-            gameID: "",
-            whitePlayerRating: "",
-            blackPlayerRating: "",
-            gameStarted : false
-
-        };
-        $.get("/gameCreated", function (data) {
-            console.log(data);
-            gameObject.gameCreated = data.gameCreated;
-        }).done(function () {
-            if (gameObject.gameCreated != "true") {
-                $('#myModal').modal('show');
-            }
-        })
-
-        $("#setSides").on("click", function () {
-            gameObject.gameCreated = true;
-            $.post("/gameCreated", gameObject);
-
-        })
     </script>
 
 

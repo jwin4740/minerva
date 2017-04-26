@@ -20,12 +20,16 @@ var session;
 
 var gameObject = {
   gameCreated: false,
-  whitePlayerID: "",
-  blackPlayerID: "",
   gameID: "",
-  whitePlayerRating: "",
-  blackPlayerRating: "",
-  gameStarted: false
+  gameStarted: false,
+  whitePlayerData: {
+    whitePlayerID: "x",
+    whitePlayerRating: "x"
+  },
+  blackPlayerData: {
+    blackPlayerID: "x",
+    blackPlayerRating: "x"
+  }
 
 };
 
@@ -187,7 +191,8 @@ module.exports = function (app) {
   });
   var created;
   app.post("/gameCreated", function (req, res) {
-    gameObject.gameCreated = req.body.gameCreated;
+    gameObject = req.body;
+
     console.log(gameObject.gameCreated);
 
     res.json(gameObject);

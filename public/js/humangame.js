@@ -95,7 +95,6 @@ var connections = 0;
 var whiteBoolClient = false;
 var whiteBoolServer = true;
 var game;
-var userID;
 var whitePlayerID;
 var blackPlayerID;
 var whitePlayerRating;
@@ -104,9 +103,59 @@ var whitePlayerID;
 var blackPlayerID;
 var userColor;
 var sessionStorage;
-var gameCreated = false;
+
+var userID;
+
+var gameObject = {
+    gameCreated: false,
+    gameID: "",
+    gameStarted: false,
+    whitePlayerData: {
+        whitePlayerID: "x",
+        whitePlayerRating: "x"
+    },
+    blackPlayerData: {
+        blackPlayerID: "x",
+        blackPlayerRating: "x"
+    }
+};
+$.get("/gameCreated", function (data) {
+    console.log(data);
+    gameObject = data;
+
+}).done(function () {
+    if (gameObject.gameCreated != "true") {
+        $('#myModal').modal('show');
+    } else {
+        if (gameObject.whitePlayerData.whitePlayerID === "x") {
+
+            gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
+            gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
+
+        } else {
+            gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
+            gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
+        }
+    }
+});
+
+$("#setSides").on("click", function () {
+    gameObject.gameCreated = true;
+    var sideColor = $("#sideColor").val();
+    if (sideColor === "white") {
+        gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
+        gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
+
+    } else {
+        gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
+        gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
 
 
+    }
+
+    $.post("/gameCreated", gameObject);
+
+});
 // on page load -----------------------
 defaultLayout();
 
@@ -124,14 +173,14 @@ function defaultLayout() {
 }
 
 
-    var moment = moment().format("MMMM Do YYYY, h:mm:ss a");
-    var momentElement = $("#timeMoment");
-    momentElement.append(moment);
-    $(".panelMainChat").append(momentElement);
+var moment = moment().format("MMMM Do YYYY, h:mm:ss a");
+var momentElement = $("#timeMoment");
+momentElement.append(moment);
+$(".panelMainChat").append(momentElement);
 
-    // create game modal
+// create game modal
 
-    
+
 
 
 
@@ -205,7 +254,7 @@ sendChat.on("keypress", function () {
         // $(".panelMainChat").append("<h5>" + userID + ": </h5><div class='well'>" + sendChat.val() + "</div>")
         // socket.emit('send message', sendChat.val());
         // sendChat.val("");
-      
+
         var messagi = $("#sendChat").val();
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='userColor'>");
@@ -228,13 +277,13 @@ socket.on('new message', function (data) {
 
     if (userID === localData.whitePlayerID) {
         var tempID = sessionStorage.blackPlayerID;
-      
+
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
 
     } else {
         var tempID = sessionStorage.whitePlayerID;
-   
+
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
     }
