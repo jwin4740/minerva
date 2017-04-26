@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-     
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>-->
@@ -17,7 +17,7 @@
     <!--<link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">-->
     <!--<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">-->
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
 
     <title> Minerva Multiplayer </title>
@@ -26,11 +26,12 @@
 <body>
     <div class="totusTuus">
         <section id="gameModal">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>-->
             <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
             <button type="button" class="btn btn-primary" id="whiteGuy">I'm white</button>
             <button type="button" class="btn btn-primary" id="blackGuy">I'm black</button>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -140,6 +141,35 @@
     <script src="./js/chess.js"></script>
     <script src="./js/chessboard.js"></script>
     <script src="./js/humangame.js"></script>
+    <script>
+
+        var userID;
+        var gameObject = {
+            gameCreated: false,
+            whitePlayerID: "",
+            blackPlayerID: "",
+            gameID: "",
+            whitePlayerRating: "",
+            blackPlayerRating: "",
+            gameStarted : false
+
+        };
+        $.get("/gameCreated", function (data) {
+            console.log(data);
+            gameObject.gameCreated = data.gameCreated;
+        }).done(function () {
+            if (gameObject.gameCreated != "true") {
+                $('#myModal').modal('show');
+            }
+        })
+
+        $("#setSides").on("click", function () {
+            gameObject.gameCreated = true;
+            $.post("/gameCreated", gameObject);
+
+        })
+    </script>
+
 
 
 </body>

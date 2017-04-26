@@ -103,9 +103,11 @@ var blackPlayerRating;
 var whitePlayerID;
 var blackPlayerID;
 var userColor;
-
 var sessionStorage;
+var gameCreated = false;
 
+
+// on page load -----------------------
 defaultLayout();
 
 function defaultLayout() {
@@ -127,9 +129,15 @@ function defaultLayout() {
     momentElement.append(moment);
     $(".panelMainChat").append(momentElement);
 
+    // create game modal
+
+    
 
 
 
+
+
+// on page load -----------------------
 
 
 $('#whiteGuy').on("click", function () {

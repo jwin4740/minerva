@@ -16,32 +16,18 @@ var security;
 var userArray = [];
 var session;
 
-function UserConstruct(username, email) {
-  this.username = username;
-  this.email = email;
-}
 
 
-var gameObjectArray = [{
-  gameStart: false,
-  timeSettings: "none",
-  playersJoined: 0,
-  playerOne: {
-    email: "",
-    username: "playerOne",
-    color: "",
-    rating: "",
-    ready: false
-  },
-  playerTwo: {
-    email: "",
-    username: "playerTwo",
-    color: "",
-    rating: "",
-    ready: false
-  }
-}];
+var gameObject = {
+  gameCreated: false,
+  whitePlayerID: "",
+  blackPlayerID: "",
+  gameID: "",
+  whitePlayerRating: "",
+  blackPlayerRating: "",
+  gameStarted: false
 
+};
 
 
 
@@ -68,7 +54,7 @@ module.exports = function (app) {
   //   truncate: true 
   // });
 
-  
+
   // posts username/email object to the route
   app.post("/api/users", function (req, res) {
     db.User.findAll({})
@@ -169,7 +155,7 @@ module.exports = function (app) {
         email: email
       }
     }).then(function (data) {
-    
+
 
       var parsedKey = data.dataValues.security;
       var userName = data.dataValues.username;
@@ -199,15 +185,16 @@ module.exports = function (app) {
   app.get("/loggedIn", function (req, res) {
     res.json(req.session);
   });
+  var created;
+  app.post("/gameCreated", function (req, res) {
+    gameObject.gameCreated = req.body.gameCreated;
+    console.log(gameObject.gameCreated);
 
-  app.post("/game", function (req, res) {
-    var joined = req.body;
-    console.log(joined)
-    res.json(joined);
+    res.json(gameObject);
   });
 
 
-  app.get("/game", function (req, res) {
+  app.get("/gameCreated", function (req, res) {
 
     res.json(gameObject);
   });

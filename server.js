@@ -70,6 +70,8 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
+ 
+
     socket.on('white player click', function (data) {
         socket.broadcast.emit('white player click', data);
     });
