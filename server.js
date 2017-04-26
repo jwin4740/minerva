@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
+
 var path = require("path");
 var app = express();
 var server = require('http').Server(app);
@@ -17,7 +18,8 @@ app.use(expressSession({
     saveUninitialized: false,
     //If resave is set to true it will save our session after each request
     //false will only save if we change something
-    resave: false
+    resave: false,
+
 }));
 
 
@@ -76,11 +78,11 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('black player click', data);
     });
 
-      socket.on('game started', function (data) {
+    socket.on('game started', function (data) {
         // console.log(data);
         socket.broadcast.emit('game started', data);
 
-     
+
     });
 
     // ply move
@@ -91,7 +93,7 @@ io.sockets.on('connection', function (socket) {
         console.log(msg);
     });
 
- 
+
 
 
 

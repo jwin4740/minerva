@@ -176,11 +176,15 @@ var cfg = {
     position: 'start',
     onDragStart: onDragStart,
     onDrop: onDrop,
-    orientation: 'black',
+    orientation: 'white',
     onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
 $('#clearBtn').on('click', board.clear);
 $('#startBtn').on('click', board.start);
 
-console.log(GameBoard.posKey)
+console.log(GameBoard.posKey);
+
+
+
+

@@ -106,23 +106,30 @@ var userColor;
 
 var sessionStorage;
 
+defaultLayout();
+
+function defaultLayout() {
+    var cfg = {
+        draggable: false,
+        position: 'start',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        orientation: 'white',
+        onSnapEnd: onSnapEnd
+    };
+
+    board = ChessBoard('board', cfg);
+}
 
 
-// $("#sendChat").on("keypress", function (event) {
-//     if (event.keyCode === 13) {
-//         // var upperUser = userName.toUpperCase();
-//         // var message = $("#sendChat").val();
-//         // var entry = $("<p class='userEntry'>");
-//         // var spanElement = $("<span class='userColor'>");
-//         // spanElement.text(upperUser + ": ");
-//         // entry.append(spanElement);
-//         // entry.append(message);
-//         // $(".panelMainChat").append(entry);
-//         $("#sendChat").val("");
-//     }
-// });
+    var moment = moment().format("MMMM Do YYYY, h:mm:ss a");
+    var momentElement = $("#timeMoment");
+    momentElement.append(moment);
+    $(".panelMainChat").append(momentElement);
 
-// ---------------------------------------------
+
+
+
 
 
 $('#whiteGuy').on("click", function () {
@@ -144,7 +151,7 @@ $('#blackGuy').on("click", function () {
     blackPlayerID = sessionStorage.userID;
     blackPlayerRating = sessionStorage.rating;
     userColor = "black";
-  
+
 
 
     socket.emit('black player click', sessionStorage);
@@ -156,7 +163,7 @@ socket.on('white player click', function (data) {
 
     sessionStorage.whitePlayerID = data.whitePlayerID;
     sessionStorage.whitePlayerRating = data.rating;
- 
+
     localData = sessionStorage;
     console.log(sessionStorage);
 });
@@ -186,32 +193,55 @@ socket.on('game started', function (data) {
 // chat -----------------------------------------------------------
 sendChat.on("keypress", function () {
     if (event.keyCode === 13) {
-        console.log('submitted');
-        $(".panelMainChat").append("<h5>" + userID + ": </h5><div class='well'>" + sendChat.val() + "</div>")
-        socket.emit('send message', sendChat.val());
-        sendChat.val("");
+
+        // $(".panelMainChat").append("<h5>" + userID + ": </h5><div class='well'>" + sendChat.val() + "</div>")
+        // socket.emit('send message', sendChat.val());
+        // sendChat.val("");
+      
+        var messagi = $("#sendChat").val();
+        var entry = $("<p class='userEntry'>");
+        var spanElement = $("<span class='userColor'>");
+        spanElement.text(userID + ": ");
+        entry.append(spanElement);
+        entry.append(messagi);
+        $(".panelMainChat").append(entry);
+        socket.emit('send message', messagi);
+        $("#sendChat").val("");
     }
 });
 socket.on('new message', function (data) {
 
+    // if (userID === localData.whitePlayerID) {
+    //     $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
+    // } else {
+    //     $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
+    // }
+
+
     if (userID === localData.whitePlayerID) {
-        $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
+        var tempID = sessionStorage.blackPlayerID;
+      
+        var entry = $("<p class='userEntry'>");
+        var spanElement = $("<span class='otherColor'>");
+
     } else {
-        $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
+        var tempID = sessionStorage.whitePlayerID;
+   
+        var entry = $("<p class='userEntry'>");
+        var spanElement = $("<span class='otherColor'>");
     }
+
+
+    spanElement.text(tempID + ": ");
+    entry.append(spanElement);
+    entry.append(data.msg);
+    $(".panelMainChat").append(entry);
+
 });
 
-// userForm.submit(function (e) {
-//     e.preventDefault();
-//     console.log('submitted');
-//     socket.emit('new user', username.val(), function (data) {
-//         if (data) {
-//             userFormArea.hide();
-//             messageArea.show();
-//         }
-//     });
-//     username.val("");
-// });
+
+
+
 
 // chat -----------------------------------------------------------
 

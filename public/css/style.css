@@ -106,6 +106,10 @@ input:focus {
     color: green;
 }
 
+.otherColor{
+    color: blue;
+}
+
 .opponentEntry {
     color: blue;
     margin: 0px;
