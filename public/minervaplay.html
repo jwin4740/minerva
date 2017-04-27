@@ -24,10 +24,10 @@
 </head>
 
 <body>
-    <div class="totusTuus">
+    <div class="container">
         <section id="gameModal">
             <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>-->
-            <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
+
 
             <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -70,12 +70,22 @@
 
 
         <div class="row">
-            <div class="col-sm-1">
-                <img class="flank" src="./img/spear.png">
-
-
+            <div id='leftNavBar' class="col-sm-1">
+                <div class="navContainer">
+                    <ul>
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <br>
+                        <br>
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <br><br><br> <br><br><br> <br><br><br>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xs-4 smallpad">
+            <div class="col-xs-5 smallpad">
                 <div id="gameContainer">
                     <div class="playerInfo">
                         <h4 class="nameAndRating">
@@ -104,6 +114,7 @@
             </div>
             <div class="col-xs-4">
                 <section id="chatAndNotate">
+                    <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
 
                     <div id="panelNotate" class="panel panel-default">
                         <div class="panel-heading">
@@ -131,8 +142,8 @@
                     </div>
                 </section>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <img class="flank" src="./img/column3.png">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                
             </div>
         </div>
 
