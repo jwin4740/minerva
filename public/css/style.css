@@ -10,10 +10,13 @@ body {
     background-color: transparent;
     font-family: 'Righteous', cursive;
 }
+
+
 /*.totusTuus{
     background-image: url("../img/column3.png");
     background-size: cover;
 }*/
+
 #headercontainer {
     margin: 5px 0px 15px 0px;
 }
@@ -27,10 +30,9 @@ button {
     border-radius: 2px;
 }
 
-
 #board {
     float: left;
-    width: 84%;
+    width: 100%;
     text-align: center;
     border: solid 2px black;
     margin: 0px;
@@ -97,6 +99,27 @@ input:focus {
     font-size: 11px;
 }
 
+.playerInfo {
+    float: left;
+    width: 100%;
+    height: 30px;
+    background-color: black;
+}
+
+.nameAndRating {
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
+    color: white;
+}
+
+.timerAndTurn {
+    float: right;
+    margin-top: 5px;
+    margin-right: 15px;
+    color: white;
+}
+
 .userEntry {
     margin: 0px;
 }
@@ -106,7 +129,7 @@ input:focus {
     color: green;
 }
 
-.otherColor{
+.otherColor {
     color: blue;
 }
 
@@ -137,12 +160,12 @@ input:focus {
     margin-bottom: 0px;
 }
 
-.flank{
+.flank {
     width: 300px;
     height: 600px;
 }
 
-.errorHeader{
+.errorHeader {
     background-color: lightcoral;
     padding: 10px;
     border-radius: 3px;
