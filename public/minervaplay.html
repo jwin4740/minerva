@@ -101,29 +101,7 @@
 
                 </div>
             </div>
-            <div class="col-xs-5 smallpad">
-                <section id="mainBoardArea">
-                    <div class="playerInfo">
-                        <p class='nameAndRating'>
-                            player1 (1543)
-                        </p>
-                        <p class="timerAndTurn" id='pOne'>
-                            <span id="playerOneTimer">10:00</span><span id='playerOneLight'></span>
-                        </p>
-                    </div>
-                    <div id="board">
-                    </div>
-                    <div class="playerInfo">
-                        <p class='nameAndRating'>
-                            player2 (1332)
-                        </p>
-                        <p class="timerAndTurn" id='pTwo'>
-                            <span id="playerTwoTimer">10:00<span id='playerTwoLight'></span></span>
-                        </p>
 
-                    </div>
-                </section>
-            </div>
             <div class="col-xs-4">
                 <section id="chatAndNotate">
                     <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
@@ -154,7 +132,31 @@
                     </div>
                 </section>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="col-xs-5 smallpad">
+                <section id="mainBoardArea">
+                    <div id="playerInfoTop">
+                        <p class='nameAndRating' id='topNameAndRating'>
+                            <img class='userIcon' src='/img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                            (1543)
+                        </p>
+                        <p class="timerAndTurn" id='topTimerAndTurn'>
+                            <span id="playerTopTimer">10:00<span id='playerTopLight'></span></span>
+                        </p>
+                    </div>
+                    <div id="board">
+                    </div>
+                    <div id="playerInfoBottom">
+                        <p class='nameAndRating' id='bottomNameAndRating'>
+                            <img class='userIcon' src='/img/bluepawn.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                            (1332)
+                        </p>
+                        <p class="timerAndTurn" id='bottomTimerAndTurn'>
+                            <span id="playerBottomTimer">10:00<span id='playerBottomLight'></span></span>
+                        </p>
+
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style='padding-left: 0px;'>
+                <img class='flankRight' src='/img/soldier.png'>
             </div>
         </div>
     </div>

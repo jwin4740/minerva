@@ -16,8 +16,8 @@
 /* board */
 .board-b72b1 {
 
-  border: 1px solid goldenrod;
-
+  border: 2px solid goldenrod;
+    border-radius: 3px;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }

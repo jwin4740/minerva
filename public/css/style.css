@@ -3,7 +3,7 @@
 }
 
 html {
-    background-color: #6F7070;
+    background-image: url('../img/marble.jpg');
     height: 100vh;
 }
 
@@ -94,10 +94,15 @@ a:hover {
     height: 250px;
 }*/
 
+.smallpad {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 #mainBoardArea {
     margin: auto;
     width: 90%;
-    margin-top: 5.5vh;
+    margin-top: 3vh;
 }
 
 #timeMoment {
@@ -105,7 +110,12 @@ a:hover {
     font-size: 11px;
 }
 
-.playerInfo {
+#playerInfoTop {
+    width: 99.5%;
+    height: 40px;
+}
+
+#playerInfoBottom {
     width: 99.5%;
     height: 40px;
 }
@@ -113,11 +123,12 @@ a:hover {
 .nameAndRating {
     float: left;
     height: 100%;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     margin-bottom: 0px;
     padding: 10px;
-    color: white;
     font-size: 16px;
+    background-color: gray;
+    border-radius: 3px;
 }
 
 .timerAndTurn {
@@ -129,6 +140,7 @@ a:hover {
     margin-bottom: 0px;
     color: white;
     float: right;
+    border-radius: 3px;
 }
 
 .greenLight {
@@ -142,6 +154,19 @@ a:hover {
     width: 100%;
     text-align: center;
     margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+.userName{
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+.userIcon{
+    height: 25px;
+    width: 25px;
+    padding: 3px;
 }
 
 .panelMainChat {
@@ -220,11 +245,12 @@ input:focus {
     margin-bottom: 0px;
 }
 
-
-/*.flank {
-    width: 300px;
-    height: 600px;
-}*/
+.flankRight {
+    position: relative;
+    top: 65px;
+    width: 210px;
+    height: 515px;
+}
 
 .errorHeader {
     background-color: lightcoral;

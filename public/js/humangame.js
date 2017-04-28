@@ -104,6 +104,7 @@ var blackPlayerID;
 var userColor;
 var sessionStorage;
 var gameObject = {
+    playerOne: "white",
     gameCreated: false,
     gameID: "",
     gameStarted: false,
@@ -120,6 +121,7 @@ var localGameObject = {
     color: "",
     userID: "",
     rating: ""
+
 }
 
 // on page load -----------------------
@@ -152,9 +154,6 @@ $(document).ready(function () {
     // sets sides and game object data
     $.get("/gameCreated", function () {
         console.log("good");
-
-
-
     }).done(function (data) {
         gameObject = data;
         if (gameObject.gameCreated != "true") {
@@ -166,14 +165,21 @@ $(document).ready(function () {
                 localGameObject.userID = sessionStorage.userID;
                 localGameObject.rating = sessionStorage.rating;
                 localGameObject.color = "white";
+                gameObject.playerOne = "black";
+
                 socket.emit("players confirmed", gameObject);
+
             } else {
                 gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
                 gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
+
                 localGameObject.userID = sessionStorage.userID;
                 localGameObject.rating = sessionStorage.rating;
                 localGameObject.color = "black";
+                gameObject.playerOne = "white";
+
                 socket.emit("players confirmed", gameObject);
+
 
 
             }
@@ -188,16 +194,21 @@ $("#setSides").on("click", function () {
         localGameObject.userID = sessionStorage.userID;
         localGameObject.rating = sessionStorage.rating;
         localGameObject.color = "white";
+        gameObject.playerOne = "white";
+
+
         gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
         gameObject.whitePlayerData.whitePlayerRating = sessionStorage.rating;
+
 
     } else {
         localGameObject.userID = sessionStorage.userID;
         localGameObject.rating = sessionStorage.rating;
         localGameObject.color = "black";
+        gameObject.playerOne = "black";
+
         gameObject.blackPlayerData.blackPlayerID = sessionStorage.userID;
         gameObject.blackPlayerData.blackPlayerRating = sessionStorage.rating;
-
 
     }
 
@@ -208,10 +219,7 @@ $("#setSides").on("click", function () {
 // sets sides and game object data
 socket.on("players confirmed", function (data) {
     gameObject = data;
-    console.log("sock it to me");
     console.log(gameObject);
-
-
 });
 
 $('#whiteGuy').on("click", function () {
@@ -264,11 +272,26 @@ $('#startGame').on("click", function () {
     gameStart = true;
     socket.emit('game started', gameStart);
     configBoard();
+    if (gameObject.playerOne === localGameObject.color) {
+        $("#playerTopName").html(gameObject.blackPlayerData.blackPlayerID);
+        $("#playerBottomName").html(gameObject.whitePlayerData.whitePlayerID);
+    } else {
+        $("#playerTopName").html(gameObject.whitePlayerData.whitePlayerID);
+        $("#playerBottomName").html(gameObject.blackPlayerData.blackPlayerID);
+    }
 });
 
 socket.on('game started', function (data) {
     console.log(data);
     configBoard();
+    if (gameObject.playerOne === localGameObject.color) {
+        $("#playerTopName").html(gameObject.blackPlayerData.blackPlayerID);
+        $("#playerBottomName").html(gameObject.whitePlayerData.whitePlayerID);
+    } else {
+        $("#playerTopName").html(gameObject.whitePlayerData.whitePlayerID);
+        $("#playerBottomName").html(gameObject.blackPlayerData.blackPlayerID);
+    }
+
 });
 
 // $("#playerOneLight").append("<img class='greenLight' src='/img/greenlight.png'>");
