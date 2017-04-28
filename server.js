@@ -85,15 +85,17 @@ io.sockets.on('connection', function (socket) {
     socket.on('game start', function (data) {
         // console.log(data);
         socket.broadcast.emit('game start', data);
-
-
     });
+
+    socket.on('sync', function (data) {
+        // console.log(data);
+        socket.broadcast.emit('sync', data);
+    });
+
 
     socket.on('game has started', function (data) {
         // console.log(data);
         socket.broadcast.emit('game has started', data);
-
-
     });
 
     // ply move

@@ -68,7 +68,7 @@ var sanTo120 = {
 
 
 
-
+var runTime;
 var bottomMinutes = $("#playerBottomTimerMinutes");
 var bottomSeconds = $("#playerBottomTimerSeconds");
 var topMinutes = $("#playerTopTimerMinutes");
@@ -120,18 +120,22 @@ var gameObject = {
     whitePlayerData: {
         whitePlayerID: "x",
         whitePlayerRating: "x",
+        whitePlayerTotalTime: "x",
         whitePlayerTimeMinutes: "x",
         whitePlayerTimeSeconds: "x"
     },
     blackPlayerData: {
         blackPlayerID: "x",
         blackPlayerRating: "x",
+        blackPlayerTotalTime: "x",
         blackPlayerTimeMinutes: "x",
         blackPlayerTimeSeconds: "x"
     }
 };
 var localGameObject = {
     gameStarted: 0,
+    blackTotalTime: "",
+    whiteTotalTime: "",
     blackTimeMinutes: "",
     whiteTimeMinutes: "",
     blackTimeSeconds: "",
@@ -399,16 +403,22 @@ function timeControl() {
     setInitialTime(tempTime);
 
     function setInitialTime(tempTime) {
+        var totalTime = parseInt(gameObject.gameTime) * 60;
         gameObject.whitePlayerData.whitePlayerTimeMinutes = tempTime;
         gameObject.whitePlayerData.whitePlayerTimeMinutes = 0;
         gameObject.blackPlayerData.blackPlayerTimeMinutes = tempTime;
         gameObject.blackPlayerData.blackPlayerTimeSeconds = 0;
+        gameObject.whitePlayerData.whitePlayerTotalTime = totalTime;
+        gameObject.blackPlayerData.blackPlayerTotalTime = totalTime;
         localGameObject.whiteTimeMinutes = tempTime;
         localGameObject.whiteTimeSeconds = 0;
         localGameObject.blackTimeMinutes = tempTime;
         localGameObject.blackTimeSeconds = 0;
+        localGameObject.whiteTotalTime = totalTime;
+        localGameObject.blackTotalTime = totalTime;
 
         if (gameObject.playerOne === "white") {
+
             bottomMinutes.html(localGameObject.whiteTimeMinutes);
             bottomMinutes.html(localGameObject.whiteTimeMinutes);
             topMinutes.html(localGameObject.blackTimeMinutes);
@@ -420,16 +430,25 @@ function timeControl() {
             topMinutes.html(localGameObject.whiteTimeMinutes);
         }
 
+        syncRequest();
+
     }
 }
 
-socket.on('move', function (msg) {
+function syncRequest() {
+    socket.emit("sync", gameObject);
 
-    game.move(msg);
-    board.position(game.fen());
+}
+
+socket.on("sync", function (data) {
+    gameObject = data;
 });
 
+function runningTime() {
+    localGameObject.whiteTotalTime = parseInt(gameObject.gameTime) * 60;
 
+    // runTime = setInterval(function () {}, 1000);
+}
 
 
 
@@ -483,8 +502,13 @@ var onDrop = function (source, target) {
 
     // illegal move
     if (move === null) return 'snapback';
-    socket.emit('move', move);
-    socket.emit('timer change', gameObject);
+
+    if (localGameObject.userID === gameObject.whitePlayerData.whitePlayerID) {
+        socket.emit('move', move);
+        socket.emit('timer change', gameObject);
+
+    }
+
     uMove = move.from + move.to;
     console.log("San move: " + uMove);
 
@@ -501,4 +525,10 @@ var onSnapEnd = function () {
 
 socket.on('timer change', function (data) {
     gameObject = data;
-})
+});
+
+socket.on('move', function (msg) {
+
+    game.move(msg);
+    board.position(game.fen());
+});
