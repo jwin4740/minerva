@@ -48,11 +48,11 @@
                             <br>
                             <span class="label label-default">Time Settings</span>
                             <select name="time" id="timeSelection">
-                                    <option value="60min5delay">60min </option>
-                                    <option value="30min5delay">30min</option>
-                                    <option value="15min">15min</option>
-                                    <option value="5min">5min</option>
-                                    <option value="1min">1min</option>
+                                    <option value="60">60min </option>
+                                    <option value="30">30min</option>
+                                    <option value="15">15min</option>
+                                    <option value="5">5min</option>
+                                    <option value="1">1min</option>
                                         <option value="60min5delay">no time limit </option>
                                 </select>
                             <br><br>
@@ -139,7 +139,7 @@
                             <img class='userIcon' src='/img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                            (1543)
                         </p>
                         <p class="timerAndTurn" id='topTimerAndTurn'>
-                            <span id="playerTopTimer">10:00<span id='playerTopLight'></span></span>
+                            <span id="playerTopTimerMinutes">60</span>:<span id=playerTopTimerSeconds>00</span><span id='playerTopLight'></span>
                         </p>
                     </div>
                     <div id="board">
@@ -149,9 +149,9 @@
                             <img class='userIcon' src='/img/bluepawn.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                            (1332)
                         </p>
                         <p class="timerAndTurn" id='bottomTimerAndTurn'>
-                            <span id="playerBottomTimer">10:00<span id='playerBottomLight'></span></span>
+                            <span id="playerBottomTimerMinutes">60</span>:<span id=playerBottomTimerSeconds>00</span>
+                            <span id='playerBottomLight'></span>
                         </p>
-
                     </div>
                 </section>
             </div>

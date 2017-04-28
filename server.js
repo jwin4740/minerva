@@ -70,7 +70,7 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
-     socket.on('players confirmed', function (data) {
+    socket.on('players confirmed', function (data) {
         socket.broadcast.emit('players confirmed', data);
     });
 
@@ -95,6 +95,11 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('move', msg);
 
         console.log(msg);
+    });
+
+    socket.on('timer change', function (data) {
+
+        socket.broadcast.emit('timer change', data);
     });
 
 
