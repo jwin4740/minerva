@@ -131,9 +131,23 @@ a:hover {
     border-radius: 3px;
 }
 
+.timerDiv {
+    float: right;
+    width: 130px;
+}
+
+.clockIcon {
+    padding-top: 6px;
+    margin-left: 5px;
+    float: right;
+    height: 35px;
+    width: 35px;
+}
+
 .timerAndTurn {
-    letter-spacing: 2px;
-    width: 115px;
+    padding: 7px 10px 5px 10px;
+    margin-bottom: 0px;
+    float: right;
     background: linear-gradient(to right, black, #31302E);
     font-size: 20px;
     padding: 7px 10px 5px 10px;
@@ -151,19 +165,21 @@ a:hover {
 }
 
 #board {
+    clear: both;
     width: 100%;
     text-align: center;
     margin: 0px;
     padding-top: 5px;
     padding-bottom: 5px;
-
 }
-.userName{
+
+.userName {
     font-size: 13px;
     letter-spacing: 1px;
     font-weight: bolder;
 }
-.userIcon{
+
+.userIcon {
     height: 25px;
     width: 25px;
     padding: 3px;
