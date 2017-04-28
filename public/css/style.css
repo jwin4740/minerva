@@ -62,8 +62,8 @@ button {
 
 .navIcon {
     margin-right: 5px;
-    height: 18px;
-    width: 18px;
+    height: 23px;
+    width: 23px;
 }
 
 .titleNav {
@@ -74,18 +74,18 @@ button {
 
 a:hover {
     text-decoration: none;
-
 }
 
 .linkLeft {
     color: darkgray;
-   padding-left: 7px;
-    padding-top: 10px;    
+    padding-left: 7px;
+    padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 0px;
+    font-size: 14px;
 }
 
-.linkLeft:hover{
+.linkLeft:hover {
     background-color: black;
 }
 
