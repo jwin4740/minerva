@@ -40,21 +40,21 @@
 .white-1e1d7 {
   background-color: white;
   color: green;
-  border: solid 1px goldenrod;
+
 }
 
 /* black square */
 .black-3c85d {
   background-color: green;
   color: white;
-   border: solid 1px goldenrod;
+
 }
 
 /* highlighted square */
 .highlight1-32417, .highlight2-9c5d2 {
-  -webkit-box-shadow: inset 0 0 3px 3px goldenrod;
-  -moz-box-shadow: inset 0 0 3px 3px goldenrod;
-  box-shadow: inset 0 0 3px 3px goldenrod;
+  -webkit-box-shadow: inset 0 0 5px 5px yellow;
+  -moz-box-shadow: inset 0 0 5px 5px yellow;
+  box-shadow: inset 0 0 5px 5px yellow;
 }
 
 /* notation */

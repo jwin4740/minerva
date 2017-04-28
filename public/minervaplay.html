@@ -26,8 +26,8 @@
 <body>
     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>-->
     <div class="container" style='margin-right: 0px;'>
-        <!--<div id="gameModal">
-   
+        <div id="gameModal">
+
             <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -63,8 +63,8 @@
                     </div>
                 </div>
             </div>
-        </div>-->
-        <!--end modal-->
+        </div>
+
 
 
 
@@ -107,11 +107,9 @@
                         <p class='nameAndRating'>
                             player1 (1543)
                         </p>
-                        <p class="timerAndTurn">
-                            10:00
+                        <p class="timerAndTurn" id='pOne'>
+                            <span id="playerOneTimer">10:00</span><span id='playerOneLight'></span>
                         </p>
-
-
                     </div>
                     <div id="board">
                     </div>
@@ -119,8 +117,8 @@
                         <p class='nameAndRating'>
                             player2 (1332)
                         </p>
-                        <p class="timerAndTurn">
-                            10:00
+                        <p class="timerAndTurn" id='pTwo'>
+                            <span id="playerTwoTimer">10:00<span id='playerTwoLight'></span></span>
                         </p>
 
                     </div>

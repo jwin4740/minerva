@@ -118,13 +118,24 @@ a:hover {
     padding: 10px;
     color: white;
     font-size: 16px;
-    background: linear-gradient(to right, black, #31302E);
 }
 
 .timerAndTurn {
-    margin-right: 15px;
+    letter-spacing: 2px;
+    width: 115px;
+    background: linear-gradient(to right, black, #31302E);
+    font-size: 20px;
+    padding: 7px 10px 5px 10px;
+    margin-bottom: 0px;
     color: white;
     float: right;
+}
+
+.greenLight {
+    margin-left: 10px;
+    margin-bottom: 3px;
+    height: 20px;
+    width: 20px;
 }
 
 #board {

@@ -158,7 +158,7 @@ $(document).ready(function () {
     }).done(function (data) {
         gameObject = data;
         if (gameObject.gameCreated != "true") {
-            // $('#myModal').modal('show');
+            $('#myModal').modal('show');
         } else {
             if (gameObject.whitePlayerData.whitePlayerID === "x") {
                 gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;
@@ -270,6 +270,9 @@ socket.on('game started', function (data) {
     console.log(data);
     configBoard();
 });
+
+// $("#playerOneLight").append("<img class='greenLight' src='/img/greenlight.png'>");
+$("#playerTwoLight").append("<img class='greenLight' src='/img/greenlight.png'>");
 
 
 // chat -----------------------------------------------------------
