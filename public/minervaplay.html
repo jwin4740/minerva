@@ -24,11 +24,10 @@
 </head>
 
 <body>
-    <div class="container">
-        <section id="gameModal">
-            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>-->
-
-
+    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Game</button>-->
+    <div class="container" style='margin-right: 0px;'>
+        <!--<div id="gameModal">
+   
             <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -44,7 +43,7 @@
                             <select name="side" id="sideColor">
                                     <option id ="whiteSide" value="white">white</option>
                                     <option id ="blackSide" value="black">black</option>
-                                </select>
+                            </select>
                             <br>
                             <br>
                             <span class="label label-default">Time Settings</span>
@@ -64,7 +63,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>-->
         <!--end modal-->
 
 
@@ -72,45 +71,60 @@
         <div class="row">
             <div id='leftNavBar' class="col-sm-1">
                 <div class="navContainer">
-                    <ul>
-                        <li class="active">
-                            <a href="#">Home</a>
-                        </li>
-                        <br>
-                        <br>
-                        <li>
-                            <a href="#">Link</a>
-                        </li>
-                        <br><br><br> <br><br><br> <br><br><br>
-                    </ul>
+                    <div class='picDiv'>
+                        <p class="titleNav">
+                            MINERVA
+                        </p>
+                        <img class='leftPic' src='/img/minerva.png'>
+                        <p class="titleNav">
+                            CHESS
+                        </p>
+                    </div>
+                    <a class='navLink' href='/'>
+                        <p class="linkLeft">
+                            <img class='navIcon' src='/img/minerva.png'> HOME
+                        </p>
+                    </a>
+                    <a lass='navLink' href='/mineraengine'>
+
+                        <p class="linkLeft">
+                            <img class='navIcon' src='/img/engine.png'> ENGINE
+
+                        </p>
+                    </a>
+                    <a lass='navLink' href='/minervaplay'>
+                        <p class="linkLeft">
+                            <img class='navIcon' src='/img/chessboard.jpg'> PLAY
+                        </p>
+                    </a>
+
+
                 </div>
             </div>
             <div class="col-xs-5 smallpad">
-                <div id="gameContainer">
+                <section id="mainBoardArea">
                     <div class="playerInfo">
-                        <h4 class="nameAndRating">
-                            player2 (1278)
-                        </h4>
-                        <h4 class="timerAndTurn">
-                            10:00
-                        </h4>
-                    </div>
-                    <div id="board"></div>
-                    <div class="playerInfo">
-                        <h4 class="nameAndRating">
+                        <p class='nameAndRating'>
                             player1 (1543)
-                        </h4>
-                        <h4 class="timerAndTurn">
+                        </p>
+                        <p class="timerAndTurn">
                             10:00
-                        </h4>
+                        </p>
+
+
                     </div>
-                </div>
+                    <div id="board">
+                    </div>
+                    <div class="playerInfo">
+                        <p class='nameAndRating'>
+                            player2 (1332)
+                        </p>
+                        <p class="timerAndTurn">
+                            10:00
+                        </p>
 
-                <!--<input type="button" id="startBtn" value="Start" />
-                        <input type="button" id="clearBtn" value="Clear" />
-                        <input type="button" id="resetBtn" value="Reset" />-->
-
-
+                    </div>
+                </section>
             </div>
             <div class="col-xs-4">
                 <section id="chatAndNotate">
@@ -143,12 +157,8 @@
                 </section>
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                
             </div>
         </div>
-
-
-
     </div>
 
     <!--<script src="./js/enginescripts/defs.js"></script>

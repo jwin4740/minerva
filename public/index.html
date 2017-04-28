@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <title> Minerva Home</title>
@@ -14,38 +14,47 @@
 
 <body>
     <div class="totusTuus">
-        
-
-
-<div class="navbar">
-    <a class="navbar-brand" href="#">Title</a>
-    <ul class="nav navbar-nav">
-        <li class="active">
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="#">Link</a>
-        </li>
-        
-        <p class="navbar-text pull-right">
-            <a href="#" class="navbar-link">Links</a>
-        </p>
-        
-    </ul>
-</div>
 
 
 
+
+
+
+       
 
         
-        <h1> MINERVA CHESS HOMEPAGE </h1>
+        <div id='leftNavBar' class="col-sm-1">
+            <div class="navContainer">
+                <div class='picDiv'>
+                    <img class='leftPic' src='/img/athena.png'>
+                </div>
+                <br>
+                <a href='/'>
+                    <p class="linkLeft">
+                        HOME
+                    </p>
+                </a>
+                <a>
+                    <p class="linkLeft">
+                        ENGINE
+                    </p>
+                </a>
+                    <a href='/minervaplay'>
+                    <p class="linkLeft">
+                        PLAY
+                    </p>
+                </a>
+
+
+            </div>
+        </div>
 
 
 
         <a href="/register" class="btn btn-primary" id="createAccount">CREATE ACCOUNT</a>
 
         <a class="btn btn-primary" data-toggle="modal" href='#loginModal'>Login</a>
-         <a class="btn btn-primary" id="logoutButton" href='/'>Logout</a>
+        <a class="btn btn-primary" id="logoutButton" href='/'>Logout</a>
         <div id="loginModal" class="modal fade text-center" role="dialog">
             <div class="modal-dialog">
                 <!-- Login Modal content-->
@@ -78,8 +87,7 @@
         </div>
     </div>
 
- <script type="text/javascript">
-
+    <script type="text/javascript">
         // ---------------------------------------------
 
         $("#logButton").on("click", function () {
@@ -87,25 +95,23 @@
             var passVal = $("#password").val();
             var username = {
                 username: userVal,
-                password : passVal
+                password: passVal
             };
             console.log("clicked");
             $.post("/login", username);
         });
-      
+
 
         // function getSessionId() {
 
         //     $.get("/loggedIn", function (data) {
-            
+
         //         clientSession = data;
         //         console.log(clientSession);
         //     });
 
         // }
-
-
- </script>
+    </script>
 
 
 </body>
