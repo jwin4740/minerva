@@ -82,9 +82,16 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('black player click', data);
     });
 
-    socket.on('game started', function (data) {
+    socket.on('game start', function (data) {
         // console.log(data);
-        socket.broadcast.emit('game started', data);
+        socket.broadcast.emit('game start', data);
+
+
+    });
+
+    socket.on('game has started', function (data) {
+        // console.log(data);
+        socket.broadcast.emit('game has started', data);
 
 
     });

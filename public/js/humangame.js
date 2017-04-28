@@ -76,6 +76,7 @@ var topSeconds = $("#playerTopTimerSeconds");
 var board;
 var blueMove;
 var game = new Chess();
+var gameStart = false;
 var whiteSanMove;
 var blackSanMove;
 var userColor;
@@ -114,7 +115,7 @@ var gameObject = {
     gameCreated: false,
     gameID: "",
     gameTime: "",
-    gameStarted: false,
+    gameStarted: 0,
     gameTurn: "white",
     whitePlayerData: {
         whitePlayerID: "x",
@@ -130,6 +131,7 @@ var gameObject = {
     }
 };
 var localGameObject = {
+    gameStarted: 0,
     blackTimeMinutes: "",
     whiteTimeMinutes: "",
     blackTimeSeconds: "",
@@ -287,8 +289,9 @@ socket.on('black player click', function (data) {
 
 
 $('#startGame').on("click", function () {
-    gameStart = true;
-    socket.emit('game started', gameStart);
+    localGameObject.gameStarted = 1;
+    gameObject.gameStarted = 1;
+    socket.emit('game start', gameObject);
     configBoard();
     if (gameObject.playerOne === localGameObject.color) {
         $("#playerTopName").html(gameObject.blackPlayerData.blackPlayerID);
@@ -300,7 +303,11 @@ $('#startGame').on("click", function () {
     timeControl();
 });
 
-socket.on('game started', function (data) {
+socket.on('game start', function (data) {
+    gameObject.gameStarted = true;
+    localGameObject.gameStarted = true;
+    $('#startGame').hide();
+    $('#confirmGameStart').modal('show');
     console.log(data);
     configBoard();
     timeControl();
@@ -311,8 +318,20 @@ socket.on('game started', function (data) {
         $("#playerTopName").html(gameObject.whitePlayerData.whitePlayerID);
         $("#playerBottomName").html(gameObject.blackPlayerData.blackPlayerID);
     }
-
 });
+
+$("#confirmStartButton").on("click", function () {
+
+    gameStart = true;
+    socket.emit("game has started", gameObject);
+});
+
+socket.on("game has started", function (data) {
+    gameObject = data;
+    localGameObject.gameStarted = true;
+    gameStart = true;
+});
+
 
 // $("#playerOneLight").append("<img class='greenLight' src='/img/greenlight.png'>");
 $("#playerTwoLight").append("<img class='greenLight' src='/img/greenlight.png'>");
