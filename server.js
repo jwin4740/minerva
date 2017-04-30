@@ -1,7 +1,9 @@
 var express = require("express");
+var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
+
 
 var path = require("path");
 var app = express();
@@ -16,13 +18,14 @@ app.use(expressSession({
     secret: 'secret code',
     //If saveUnitialized is set to true it will save a session to our session storage even if it is not initialized 
     saveUninitialized: false,
+    cookie: {maxAge: 6 * 1000 * 1000 * 1000 * 1000},
+    proxy: true,
     //If resave is set to true it will save our session after each request
     //false will only save if we change something
-    resave: false,
+    resave: true
 
 }));
-
-
+app.use(cookieParser());
 
 var db = require("./models");
 app.use(bodyParser.json());
@@ -37,11 +40,6 @@ app.use(expressValidator());
 app.use(express.static(path.join(__dirname, "./public")));
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-
-
-
-
-
 
 
 

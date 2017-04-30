@@ -64,7 +64,7 @@ module.exports = function (app) {
     db.User.findAll({})
       .then(function (data) {
         var n = data.length;
-        console.log(data[0].dataValues.username);
+        console.log(data);
         for (var i = 0; i < n; i++) {
           var newUser = new UserConstruct(data[i].dataValues.username, data[i].dataValues.email);
           userArray.push(newUser);
@@ -135,6 +135,7 @@ module.exports = function (app) {
               account_created: created
             }).then(function (result) {
               // redirect to user.html with username in welcome message
+              result
               req.session.newRegister = true;
               res.redirect('/');
             });
