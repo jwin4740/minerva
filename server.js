@@ -18,7 +18,7 @@ app.use(expressSession({
     secret: 'secret code',
     //If saveUnitialized is set to true it will save a session to our session storage even if it is not initialized 
     saveUninitialized: false,
-    cookie: {maxAge: 6 * 1000 * 1000 * 1000 * 1000},
+    cookie: {maxAge: 6 * 1000 * 1000 * 1000 * 1000 * 1000},
     proxy: true,
     //If resave is set to true it will save our session after each request
     //false will only save if we change something
