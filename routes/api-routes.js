@@ -151,22 +151,31 @@ module.exports = function (app) {
     var session = req.session;
     var email = req.body.logEmail;
     var password = req.body.logPassword;
-    console.log(session);
 
+    var parsedKey = '';
+    var userName = '';
+    var userEmail = '';
+    var userRating = '';
     session.newRegister = false;
     //checks hash against hash for entry validation
     db.User.findOne({
       where: {
         email: email
       }
-    }).then(function (data) {
+    }).then(function (user) {
+      if (user == null) {
+        return;
+      }
+      userEmail = user.email;
+      userName = user.username;
+      parsedKey = user.security;
+      userRating = user.rating;
+      verifyPassword();
+    });
 
 
-      var parsedKey = data.dataValues.security;
-      var userName = data.dataValues.username;
-
-
-      // Verifying a hash 
+    // Verifying a hash 
+    function verifyPassword() {
       passhash(password).verifyAgainst(parsedKey, function (error, verified) {
         if (error) {
 
@@ -177,15 +186,15 @@ module.exports = function (app) {
         } else {
           session.loggedIn = true;
 
-          session.uniqueID = [data.dataValues.email, data.dataValues.username, data.dataValues.rating];
-          console.log(session.uniqueID);
-          console.log(session);
+          session.uniqueID = [userEmail, userName, userRating];
+
           res.redirect('/minervaplay');
           console.log("you have successfully logged in");
         }
       });
-    });
+    }
   });
+
 
   app.get("/loggedIn", function (req, res) {
     res.json(req.session);
