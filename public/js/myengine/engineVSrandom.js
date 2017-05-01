@@ -3,94 +3,243 @@
 //     $("#gameStatus").html("");
 //     game.reset();
 // })
-
+var playerMove;
+var drawCount = 0;
+var whiteWinCount = 0;
+var blackWinCount = 0;
+var drawReason;
+var insufficientMaterialCount = 0;
+var whiteStalemateCount = 0;
+var blackStalemateCount = 0;
+var threefoldCount = 0;
 // do not pick up pieces if the game is over
 // only pick up pieces for White
+var color;
 var motion = true;
-var myFen = '8/7K/8/8/8/8/7k/8 w - 1 1';
-// var game = new Chess('8/7K/8/8/8/8/7k/8 w - 1 1');
+var startPos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+
+
 var cfg = {
     position: 'start',
-    orientation: 'white'
+    orientation: 'white',
+
+
 };
 board = ChessBoard('board', cfg);
 
 
 $("#start").on('click', function () {
-    randomMove();
+    var turn = game.turn();
+    if (turn === 'w') {
+        randomWhiteMove();
+
+
+    } else {
+        makeEngineMove();
+    }
 });
 
 
 $("#pause").on('click', function () {
-   motion = false;
+    motion = false;
 });
 
-function randomMove() {
+function randomWhiteMove() {
+
+    var legalMoves = game.moves({
+        verbose: true
+    });
     var randomIndex = Math.floor(Math.random() * legalMoves.length);
     var randMove = legalMoves[randomIndex];
-    var move = game.move(randMove);
+    var source = randMove.from;
+    var target = randMove.to;
+
+
+    var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q'
+    });
 
     playerMove = move;
-    // console.log(game.fen());
-    // board.position(game.fen());
-    console.log(game.insufficient_material());
-    checkDraw();
-    setTimeout(function () {
-        makeEngineMove(playerMove);
-    }, 10);
+    board.position(game.fen());
+    color = "white";
+    checkStatus(color);
+
+
 
 };
 
 
 
 
-var makeEngineMove = function (playerMove) {
-
-    var legalMoves = game.moves();
+var makeEngineMove = function () {
     var captureArray = [];
+    var tempMoves = game.moves();
+ 
+    var legalMoves = game.moves({
+        verbose: true
+    });
 
-    console.log(legalMoves);
+
 
     // game over
-    if (legalMoves.length === 0) {
-        $("#gameStatus").html("GAME OVER");
-        return;
-    };
-    var randomIndex = Math.floor(Math.random() * legalMoves.length);
-    var engineMove = legalMoves[randomIndex];
+
     var n = legalMoves.length;
+    
     for (var i = 0; i < n; i++) {
-        if (legalMoves[i].includes("x")) {
+        if (legalMoves[i].flags.includes("c")) {
             captureArray.push(legalMoves[i]);
         }
     }
+    
 
     if (captureArray.length != 0) {
         var randomIndex = Math.floor(Math.random() * captureArray.length);
         var engineMove = captureArray[randomIndex];
+        var source = engineMove.from;
+        var target = engineMove.to;
     } else {
         var randomIndex = Math.floor(Math.random() * legalMoves.length);
         var engineMove = legalMoves[randomIndex];
+        var source = engineMove.from;
+        var target = engineMove.to;
 
     }
-
-    var blackMove = game.move(engineMove, {
-        sloppy: true
+    var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q'
     });
     board.position(game.fen());
-    if (motion === true) {
-        setTimeout(randomMove, 10);
-    }
-
+    color = 'black';
+    checkStatus(color);
 };
 
-function checkDraw() {
+function checkStatus(color) {
     switch (true) {
-        case game.insufficient_material():
-            console.log('its true');
+        case game.game_over():
+            motion = false;
+            setTimeout(function () {
+                gameOverReason(color);
+            }, 1000);
             break;
+        case color === 'white':
+            
+            if (motion === true) {
+                setTimeout(function () {
+                    makeEngineMove();
+                }, 50);
+            }
+
+            break;
+        case color === 'black':
+           
+            if (motion === true) {
+                setTimeout(randomWhiteMove, 50);
+            }
+            break;
+
         default:
-            console.log('game is not a draw');
+            break;
     }
 
 }
+
+function gameOverReason(color) {
+    switch (true) {
+        case game.in_stalemate():
+            reason = 'stalemate';
+            appendResult(color, reason);
+            break;
+        case game.in_threefold_repetition():
+            reason = '3 fold rep';
+            appendResult(color, reason);
+            break;
+        case game.insufficient_material():
+
+            reason = 'insufficient material';
+            appendResult(color, reason);
+            break;
+        case game.in_checkmate():
+            reason = 'checkmate'
+            appendResult(color, reason);
+            break;
+    }
+
+}
+
+function appendResult(color, reason) {
+    switch (reason) {
+        case 'stalemate':
+            console.log(reason);
+            drawCount++;
+            if (color === 'white') {
+                whiteStalemateCount++;
+                $("#draws").html(drawCount);
+                $("#whiteStalemate").html(whiteStalemateCount);
+
+            } else {
+                blackStalemateCount++;
+                $("#draws").html(drawCount);
+                $("#blackStalemate").html(blackStalemateCount);
+            }
+            break;
+        case '3 fold rep':
+            console.log(reason);
+            drawCount++;
+            threefoldCount++;
+            $("#draws").html(drawCount);
+            $("#threefold").html(threefoldCount);
+            break;
+        case 'insufficient material':
+            console.log(reason);
+            drawCount++;
+            insufficientMaterialCount++;
+            $("#draws").html(drawCount);
+            $("#insufficient").html(insufficientMaterialCount);
+            break;
+        case 'checkmate':
+            if (color === 'white') {
+                whiteWinCount++;
+                $("#whiteWins").html(whiteWinCount);
+            } else {
+                blackWinCount++;
+                $("#blackWins").html(blackWinCount);
+            }
+            console.log(reason);
+            break;
+    }
+    newGameAgain();
+}
+
+function newGameAgain() {
+    board.clear();
+    game = new Chess();
+
+    board.start();
+    motion = true;
+    setTimeout(randomWhiteMove, 50);
+
+
+
+
+}
+
+$('#setFen').on('click', function () {
+
+    var fenVal = $('#fenInput').val().trim();
+    game = new Chess(fenVal);
+    board.position(fenVal);
+    startPos = fenVal;
+
+    var move = game.move({
+        from: 'h4',
+        to: 'g4',
+        promotion: 'q'
+    });
+    board.position(game.fen());
+    $('#fenInput').val('');
+
+
+});

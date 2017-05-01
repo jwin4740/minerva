@@ -1,5 +1,3 @@
-
-
 // $('#resetBtn').on("click", function () {
 //     console.log("clicked");
 //     $("#gameStatus").html("");
@@ -8,7 +6,9 @@
 
 // do not pick up pieces if the game is over
 // only pick up pieces for White
+
 var game = new Chess();
+var startPos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 var onDragStart = function (source, piece, position, orientation) {
     if (game.in_checkmate() === true || game.in_draw() === true ||
         piece.search(/^b/) !== -1) {
@@ -23,7 +23,7 @@ var onDrop = function (source, target) {
     var move = game.move({
         from: source,
         to: target,
-        promotion: 'n'
+        promotion: 'q'
     });
     console.log(move);
     // illegal move
@@ -46,7 +46,9 @@ var onSnapEnd = function () {
 
 var makeEngineMove = function (playerMove) {
 
-    var legalMoves = game.moves();
+    var legalMoves = game.moves({
+        verbose: true
+    });
     var captureArray = [];
 
     console.log(legalMoves);
@@ -58,24 +60,30 @@ var makeEngineMove = function (playerMove) {
     };
     var randomIndex = Math.floor(Math.random() * legalMoves.length);
     var engineMove = legalMoves[randomIndex];
-        var n = legalMoves.length;
+
+    var n = legalMoves.length;
     for (var i = 0; i < n; i++) {
-        if (legalMoves[i].includes("x")) {
+        if (legalMoves[i].san.includes("x")) {
             captureArray.push(legalMoves[i]);
         }
     }
 
     if (captureArray.length != 0) {
         var randomIndex = Math.floor(Math.random() * captureArray.length);
-        var engineMove = captureArray[randomIndex];
+         console.log(engineMove.piece);
+        var engineMove = captureArray[randomIndex].san;
+    
     } else {
         var randomIndex = Math.floor(Math.random() * legalMoves.length);
-        var engineMove = legalMoves[randomIndex];
+         console.log(engineMove.piece);
+        var engineMove = legalMoves[randomIndex].san;
+       
 
     }
 
     var blackMove = game.move(engineMove, {
-        sloppy: true
+        san: engineMove
+
     });
     board.position(game.fen());
 
@@ -84,12 +92,22 @@ var makeEngineMove = function (playerMove) {
 
 var cfg = {
     draggable: true,
-    position: 'start',
+    position: startPos,
     onDragStart: onDragStart,
     onDrop: onDrop,
     orientation: 'white',
     onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
-$('#clearBtn').on('click', board.clear);
-$('#startBtn').on('click', board.start);
+
+
+
+$('#setFen').on('click', function () {
+
+    var fenVal = $('#fenInput').val().trim();
+    game = new Chess(fenVal);
+    board.position(fenVal);
+    startPos = fenVal;
+    $('#fenInput').val('');
+
+});
