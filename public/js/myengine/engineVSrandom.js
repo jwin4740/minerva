@@ -76,7 +76,7 @@ function randomWhiteMove() {
 var makeEngineMove = function () {
     var captureArray = [];
     var tempMoves = game.moves();
- 
+
     var legalMoves = game.moves({
         verbose: true
     });
@@ -86,13 +86,13 @@ var makeEngineMove = function () {
     // game over
 
     var n = legalMoves.length;
-    
+
     for (var i = 0; i < n; i++) {
         if (legalMoves[i].flags.includes("c")) {
             captureArray.push(legalMoves[i]);
         }
     }
-    
+
 
     if (captureArray.length != 0) {
         var randomIndex = Math.floor(Math.random() * captureArray.length);
@@ -120,23 +120,23 @@ function checkStatus(color) {
     switch (true) {
         case game.game_over():
             motion = false;
-            setTimeout(function () {
-                gameOverReason(color);
-            }, 1000);
+
+            gameOverReason(color);
+
             break;
         case color === 'white':
-            
+
             if (motion === true) {
                 setTimeout(function () {
                     makeEngineMove();
-                }, 50);
+                }, 10);
             }
 
             break;
         case color === 'black':
-           
+
             if (motion === true) {
-                setTimeout(randomWhiteMove, 50);
+                setTimeout(randomWhiteMove, 10);
             }
             break;
 
@@ -219,7 +219,7 @@ function newGameAgain() {
 
     board.start();
     motion = true;
-    setTimeout(randomWhiteMove, 50);
+    randomWhiteMove();
 
 
 
