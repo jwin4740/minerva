@@ -1,5 +1,3 @@
-
-
 // $('#resetBtn').on("click", function () {
 //     console.log("clicked");
 //     $("#gameStatus").html("");
@@ -8,39 +6,41 @@
 
 // do not pick up pieces if the game is over
 // only pick up pieces for White
-var game = new Chess();
-var onDragStart = function (source, piece, position, orientation) {
-    if (game.in_checkmate() === true || game.in_draw() === true ||
-        piece.search(/^b/) !== -1) {
-        return false;
-    }
+var motion = true;
+var myFen = '8/7K/8/8/8/8/7k/8 w - 1 1';
+// var game = new Chess('8/7K/8/8/8/8/7k/8 w - 1 1');
+var cfg = {
+    position: 'start',
+    orientation: 'white'
 };
+board = ChessBoard('board', cfg);
 
 
+$("#start").on('click', function () {
+    randomMove();
+});
 
-var onDrop = function (source, target) {
-    // see if the move is legal
-    var move = game.move({
-        from: source,
-        to: target,
-        promotion: 'n'
-    });
-    console.log(move);
-    // illegal move
-    if (move === null) return 'snapback';
+
+$("#pause").on('click', function () {
+   motion = false;
+});
+
+function randomMove() {
+    var randomIndex = Math.floor(Math.random() * legalMoves.length);
+    var randMove = legalMoves[randomIndex];
+    var move = game.move(randMove);
 
     playerMove = move;
+    // console.log(game.fen());
+    // board.position(game.fen());
+    console.log(game.insufficient_material());
+    checkDraw();
     setTimeout(function () {
         makeEngineMove(playerMove);
-    }, 500);
-};
-
-// update the board position after the piece snap
-// for castling, en passant, pawn promotion
-var onSnapEnd = function () {
-    board.position(game.fen());
+    }, 10);
 
 };
+
 
 
 
@@ -58,7 +58,7 @@ var makeEngineMove = function (playerMove) {
     };
     var randomIndex = Math.floor(Math.random() * legalMoves.length);
     var engineMove = legalMoves[randomIndex];
-        var n = legalMoves.length;
+    var n = legalMoves.length;
     for (var i = 0; i < n; i++) {
         if (legalMoves[i].includes("x")) {
             captureArray.push(legalMoves[i]);
@@ -78,18 +78,19 @@ var makeEngineMove = function (playerMove) {
         sloppy: true
     });
     board.position(game.fen());
+    if (motion === true) {
+        setTimeout(randomMove, 10);
+    }
 
 };
 
+function checkDraw() {
+    switch (true) {
+        case game.insufficient_material():
+            console.log('its true');
+            break;
+        default:
+            console.log('game is not a draw');
+    }
 
-var cfg = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    orientation: 'white',
-    onSnapEnd: onSnapEnd
-};
-board = ChessBoard('board', cfg);
-$('#clearBtn').on('click', board.clear);
-$('#startBtn').on('click', board.start);
+}
