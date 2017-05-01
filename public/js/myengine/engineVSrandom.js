@@ -62,7 +62,7 @@ function randomWhiteMove() {
     });
 
     playerMove = move;
-    board.position(game.fen());
+    // board.position(game.fen());
     color = "white";
     checkStatus(color);
 
@@ -111,7 +111,7 @@ var makeEngineMove = function () {
         to: target,
         promotion: 'q'
     });
-    board.position(game.fen());
+    // board.position(game.fen());
     color = 'black';
     checkStatus(color);
 };
@@ -120,26 +120,22 @@ function checkStatus(color) {
     switch (true) {
         case game.game_over():
             motion = false;
-
             gameOverReason(color);
-
             break;
         case color === 'white':
-
             if (motion === true) {
                 setTimeout(function () {
                     makeEngineMove();
                 }, 10);
             }
-
             break;
         case color === 'black':
-
             if (motion === true) {
-                setTimeout(randomWhiteMove, 10);
+                setTimeout(function () {
+                    randomWhiteMove();
+                }, 10);
             }
             break;
-
         default:
             break;
     }
@@ -153,7 +149,7 @@ function gameOverReason(color) {
             appendResult(color, reason);
             break;
         case game.in_threefold_repetition():
-            reason = '3 fold rep';
+            reason = 'threeFoldRep';
             appendResult(color, reason);
             break;
         case game.insufficient_material():
@@ -185,7 +181,7 @@ function appendResult(color, reason) {
                 $("#blackStalemate").html(blackStalemateCount);
             }
             break;
-        case '3 fold rep':
+        case 'threeFoldRep':
             console.log(reason);
             drawCount++;
             threefoldCount++;
@@ -220,6 +216,7 @@ function newGameAgain() {
     board.start();
     motion = true;
     randomWhiteMove();
+    return;
 
 
 
@@ -238,7 +235,7 @@ $('#setFen').on('click', function () {
         to: 'g4',
         promotion: 'q'
     });
-    board.position(game.fen());
+    // board.position(game.fen());
     $('#fenInput').val('');
 
 
