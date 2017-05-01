@@ -93,7 +93,7 @@
   var RANK_8 = 0;
 
   function validMove(move) {
-    console.log(move);
+    // console.log(move);
     // move should be a string
     if (typeof move !== 'string') return false;
 
@@ -181,7 +181,7 @@
   // convert FEN string to position object
   // returns false if the FEN string is invalid
   function fenToObj(fen) {
-    console.log(fen);
+    // console.log(fen);
     if (validFen(fen) !== true) {
       return false;
     }
@@ -216,13 +216,13 @@
       currentRow--;
     }
     debugBoard(fen);
-    console.log(position);
+    // console.log(position);
     return position;
   }
   // 49 through 57 is ascii codes for numbers
   function debugBoard(fen) {
 
-    console.log(fen.length);
+    // console.log(fen.length);
     var counter = 0;
     var line = '';
     var res = "";
@@ -232,7 +232,7 @@
         {
           res =+ fen[counter].replace("/", "g");
         }
-      console.log(res);
+      // console.log(res);
       }
     }
   }
@@ -402,9 +402,9 @@
       if (cfg.showErrors === 'console' &&
         typeof console === 'object' &&
         typeof console.log === 'function') {
-        console.log(errorText);
+        // console.log(errorText);
         if (arguments.length >= 2) {
-          console.log(obj);
+          // console.log(obj);
         }
         return;
       }
@@ -994,7 +994,7 @@
       // make copies of both
       pos1 = deepCopy(pos1);
       pos2 = deepCopy(pos2);
-      console.log(pos1);
+      // console.log(pos1);
 
       var animations = [];
       var squaresMovedTo = {};

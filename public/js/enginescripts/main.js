@@ -1,6 +1,6 @@
 $(function() {
     init();
-    console.log("Main Init Called");
+    // console.log("Main Init Called");
 
     // unique? 
     // Piece on Sq
@@ -18,10 +18,10 @@ $(function() {
     var piece2 = RAND_32();
     var piece3 = RAND_32();
     var piece4 = RAND_32();
-    console.log(piece1);
-    console.log(piece2);
-    console.log(piece3);
-    console.log(piece4);
+    // console.log(piece1);
+    // console.log(piece2);
+    // console.log(piece3);
+    // console.log(piece4);
 
     var key = 0; // key represents a position with four pieces on it
     key ^= piece1;
@@ -29,21 +29,21 @@ $(function() {
     key ^= piece3;
     key ^= piece4;
 
-    console.log(key);
-    // consolelog in hex format
-    console.log("hex key: " + key.toString(16));
+    // console.log(key);
+
+    // console.log("hex key: " + key.toString(16));
 
     // if piece one got captured the new key will be generated as follows
 
     key ^= piece1;
-    console.log("piece1 out key: " + key.toString(16));
+    // console.log("piece1 out key: " + key.toString(16));
 
     // the above is the exact same as this
     key = 0;
     key ^= piece2;
     key ^= piece3;
     key ^= piece4;
-    console.log("build no piece1 key: " + key.toString(16));
+    // console.log("build no piece1 key: " + key.toString(16));
 
 //-----------Even if pieces are out of order it returns same result
     var key = 0; // key represents a position with four pieces on it
@@ -51,14 +51,14 @@ $(function() {
     key ^= piece2;
     key ^= piece3;
     key ^= piece4;
-    console.log("hex key: " + key.toString(16));
+    // console.log("hex key: " + key.toString(16));
 
     var key = 0; // key represents a position with four pieces on it
     key ^= piece2;
     key ^= piece4;
     key ^= piece1;
     key ^= piece3;
-    console.log("hex key: " + key.toString(16));
+    // console.log("hex key: " + key.toString(16));
 //-------------------------------------------------------------------------
 
     NewGame(START_FEN);
@@ -208,7 +208,7 @@ function InitBoardSquares() {
 }
 
 function init() {
-    console.log("init() called");
+    // console.log("init() called");
     InitFilesRanksBrd();
     InitHashKeys();
     InitSq120To64();

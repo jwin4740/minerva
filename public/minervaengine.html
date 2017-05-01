@@ -20,42 +20,58 @@
         </div>
         <div class="row">
 
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 
-            <div id="board" style="width: 500px"></div>
-            <input type="button" id="startBtn" value="Start" />
-            <input type="button" id="clearBtn" value="Clear" />
-            <input type="button" id="resetBtn" value="Reset" />
-            <div id="setpos">
-                <h3> SET POSITION </h3>
-                <input type="text" id="fenInput">
-                <button id=setFen>Set Fen</button>
+
+            </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div id="board" style="width: 500px"></div>
+
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Chat</h3>
-                </div>
-                <div class="panel-body">
-                    Panel content
-                </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
+
             </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Game stats</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4>WHITE WINS: <span id='whiteWins'></span></h4>
+                        <h4>BLACK WINS: <span id='blackWins'></span></h4>
+                        <h4>DRAWS: <span id='draws'></span></h4>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="./js/enginescripts/defs.js"></script>
-        <script src="./js/enginescripts/io.js"></script>
-        <script src="./js/enginescripts/board.js"></script>
-        <script src="./js/enginescripts/movegen.js"></script>
-        <script src="./js/enginescripts/makemove.js"></script>
-        <script src="./js/enginescripts/evaluate.js"></script>
-        <script src="./js/enginescripts/pvtable.js"></script>
-        <script src="./js/enginescripts/search.js"></script>
-        <script src="./js/enginescripts/perft.js"></script>
-        <script src="./js/enginescripts/gui.js"></script>
-        <script src="./js/enginescripts/main.js"></script>
-        <script src="./js/chess.js"></script>
-        <script src="./js/chessboard.js"></script>
-        <script src="./js/myengine/mydefs.js"></script>
-        <script src="./js/myengine/enginegame.js"></script>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="./js/enginescripts/defs.js"></script>
+    <script src="./js/enginescripts/io.js"></script>
+    <script src="./js/enginescripts/board.js"></script>
+    <script src="./js/enginescripts/movegen.js"></script>
+    <script src="./js/enginescripts/makemove.js"></script>
+    <script src="./js/enginescripts/evaluate.js"></script>
+    <script src="./js/enginescripts/pvtable.js"></script>
+    <script src="./js/enginescripts/search.js"></script>
+    <script src="./js/enginescripts/perft.js"></script>
+    <script src="./js/enginescripts/gui.js"></script>
+    <script src="./js/enginescripts/main.js"></script>
+    <script src="./js/chess.js"></script>
+    <script src="./js/chessboard.js"></script>
+    <script src="./js/myengine/mydefs.js"></script>
+    <script src="./js/myengine/enginegame.js"></script>
+    <!--<script src="./js/enginescripts/minervaWithBLue.js"></script>-->
 </body>
 
 </html>
