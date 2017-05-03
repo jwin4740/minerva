@@ -183,7 +183,7 @@ board = ChessBoard('board', cfg);
 $('#clearBtn').on('click', board.clear);
 $('#startBtn').on('click', board.start);
 
-console.log(GameBoard.posKey);
+
 
 
 

@@ -135,7 +135,7 @@ function AddBlackPawnQuietMove(from, to) {
     say ply 1 loop all moves 
     for (index = GameBoard.moveListStart[1]; index < GameBoard.moveListStart[2]; ++index) 
     {
-    	move = moevList[index];
+    	move = moveList[index];
 
     	... use move
 

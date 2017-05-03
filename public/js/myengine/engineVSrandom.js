@@ -62,7 +62,7 @@ function randomWhiteMove() {
     });
 
     playerMove = move;
-    // board.position(game.fen());
+    board.position(game.fen());
     color = "white";
     checkStatus(color);
 
@@ -111,8 +111,9 @@ var makeEngineMove = function () {
         to: target,
         promotion: 'q'
     });
-    // board.position(game.fen());
+    board.position(game.fen());
     color = 'black';
+    console.log(game.history());
     checkStatus(color);
 };
 
@@ -126,14 +127,14 @@ function checkStatus(color) {
             if (motion === true) {
                 setTimeout(function () {
                     makeEngineMove();
-                }, 10);
+                }, 1000);
             }
             break;
         case color === 'black':
             if (motion === true) {
                 setTimeout(function () {
                     randomWhiteMove();
-                }, 10);
+                }, 1000);
             }
             break;
         default:
@@ -212,15 +213,10 @@ function appendResult(color, reason) {
 function newGameAgain() {
     board.clear();
     game = new Chess();
-
     board.start();
     motion = true;
-    randomWhiteMove();
+    setTimeout(randomWhiteMove, 2000);
     return;
-
-
-
-
 }
 
 $('#setFen').on('click', function () {
@@ -235,8 +231,6 @@ $('#setFen').on('click', function () {
         to: 'g4',
         promotion: 'q'
     });
-    // board.position(game.fen());
+    board.position(game.fen());
     $('#fenInput').val('');
-
-
 });
