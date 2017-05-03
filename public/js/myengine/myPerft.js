@@ -1,79 +1,29 @@
 var game = new Chess();
-// right now for a depth of three it won't be able to check 3 rep 
-console.log(game.fen());
+
 // establish a Perft (Performance test)
-
+var possibleMoves;
+var n;
+var ply = 1;
+var whiteCounter = 0;
+var blackCounter = 0;
 var perftLeafNodes = 0; // will keep track of the total leaf nodes visited
-
-var plyOne;
-var plyOneCounter = 0;
-var plyOneLegalMoves;
-var plyOneLegalMovesLength = 0;
-
-var plyTwo;
-var plyTwoCounter = 0;
-var plyTwoLegalMoves;
-var plyTwoLegalMovesLength = 0;
+var rootLegalMoves;
 
 
+getRootLegalMoves();
 
-
-PerftTest();
-
-function PerftTest() {
-	getPlyOneLegalMoves();
-}
-
-function getPlyOneLegalMoves() {
-	plyOneLegalMoves = game.moves({
+function getRootLegalMoves() {
+	rootLegalMoves = game.moves({
 		verbose: true
 	});
-	plyOneLegalMovesLength = plyOneLegalMoves.length;
-	console.log(plyOneLegalMoves);
-	plyOneMove();
+	whiteMove();
 
 }
 
-function plyOneMove() {
+function whiteMove() {
 
-	var listMove = plyOneLegalMoves[plyOneCounter];
-	var source = listMove.from;
-	var target = listMove.to;
-	var move = game.move({
-		from: source,
-		to: target,
-		promotion: 'q'
-	});
-
-
-
-	if (plyOneCounter < plyOneLegalMovesLength) {
-
-		getPlyTwoLegalMoves();
-	}
-	plyOneCounter++;
-	logNodes();
-
-
-
-}
-
-
-function getPlyTwoLegalMoves() {
-	plyTwoLegalMoves = game.moves({
-		verbose: true
-	});
-	plyTwoLegalMovesLength = plyTwoLegalMoves.length;
-	plyTwoMove();
-}
-
-
-
-function plyTwoMove() {
-
-	plyTwoCounter = 0;
-	while (plyTwoCounter < plyTwoLegalMovesLength) {
-		var listMove = plyTwoLegalMoves[plyTwoCounter];
+	while (whiteCounter < rootLegalMoves.length) {
+		var listMove = rootLegalMoves[whiteCounter];
 		var source = listMove.from;
 		var target = listMove.to;
 		var move = game.move({
@@ -81,61 +31,69 @@ function plyTwoMove() {
 			to: target,
 			promotion: 'q'
 		});
-		plyTwoCounter++;
-		perftLeafNodes++;
-		takeBackMove();
 
+		// console.log(move);
+		// console.log(game.ascii());
+		whiteCounter++;
+		// perftLeafNodes++;
+		// console.log(move.san);
+		console.log(game.fen());
+		blackMove();
 	}
 
-	takeBackMove();
-	plyOneMove();
 
 }
 
+function blackMove() {
+	var legalMoves = game.moves({
+		verbose: true
+	});
+	// console.log(legalMoves);
+	do {
+
+		var listMove = legalMoves[blackCounter];
+		var source = listMove.from;
+		var target = listMove.to;
 
 
+		var move = game.move({
+			from: source,
+			to: target,
+			promotion: 'q'
+		});
+		blackCounter++;
+		perftLeafNodes++;
+		// console.log(move.san);
+		// console.log(game.fen());
 
-
-// while (plyTwoCounter < plyTwoLength) {
-// 	takeBackMove();
-
-
-// }
-
-
-
-
-
-
-
-// function depthThreeMove() {
-// 	var legalMoves = game.moves({
-// 		verbose: true
-// 	});
-
-// 	var plyThreeLength = legalMoves.length;
-// 	var listMove = legalMoves[plyThreeCounter];
-// 	var source = listMove.from;
-// 	var target = listMove.to;
-// 	var move = game.move({
-// 		from: source,
-// 		to: target,
-// 		promotion: 'q'
-// 	});
-// 	plyThreeCounter++;
-// 	perftLeafNodes++;
-// 	logNodes();
-// }
-
-function logNodes() {
+		takeBackMove();
+	}
+	while (blackCounter < legalMoves.length);
+	blackCounter = 0;
 	console.log('nodes visited: ' + perftLeafNodes);
+	takeBackMove();
+	// console.log(game.fen());
+	whiteMove();
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 function takeBackMove() {
 	var undoPosition = game.undo();
-
+	// console.log(undoPosition);
 
 }
