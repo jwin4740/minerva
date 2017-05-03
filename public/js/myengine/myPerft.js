@@ -1,80 +1,94 @@
-var game = new Chess('r3kb1r/1pBnp1pp/p4p2/1N1n1b2/2BP4/5NP1/P4P1P/R1R3K1 w kq - 0 17');
-
+var game = new Chess();
+// right now for a depth of three it won't be able to check 3 rep 
+console.log(game.fen());
 // establish a Perft (Performance test)
-var possibleMoves;
-var n;
-var ply = 1;
-var whiteCounter = 0;
-var blackCounter = 0;
+
 var perftLeafNodes = 0; // will keep track of the total leaf nodes visited
-var rootLegalMoves;
+
+var plyOne;
+var plyOneCounter = 0;
+var plyOneLegalMoves;
+var plyOneLegalMovesLength = 0;
+
+var plyTwo;
+var plyTwoCounter = 0;
+var plyTwoLegalMoves;
+var plyTwoLegalMovesLength = 0;
 
 
-getRootLegalMoves();
 
-function getRootLegalMoves() {
-	rootLegalMoves = game.moves({
+
+PerftTest();
+
+function PerftTest() {
+	getPlyOneLegalMoves();
+}
+
+function getPlyOneLegalMoves() {
+	plyOneLegalMoves = game.moves({
 		verbose: true
 	});
-	whiteMove();
+	plyOneLegalMovesLength = plyOneLegalMoves.length;
+	console.log(plyOneLegalMoves);
+	plyOneMove();
 
 }
 
-function whiteMove() {
+function plyOneMove() {
 
-	while (whiteCounter < rootLegalMoves.length - 1) {
-		var listMove = rootLegalMoves[whiteCounter];
-		var source = listMove.from;
-		var target = listMove.to;
-		var move = game.move({
-			from: source,
-			to: target,
-			promotion: 'q'
-		});
+	var listMove = plyOneLegalMoves[plyOneCounter];
+	var source = listMove.from;
+	var target = listMove.to;
+	var move = game.move({
+		from: source,
+		to: target,
+		promotion: 'q'
+	});
 
-		// console.log(move);
-		// console.log(game.ascii());
-		whiteCounter++;
-		perftLeafNodes++;
-		// console.log(move.san);
-		console.log(game.fen());
-		blackMove();
+
+
+	if (plyOneCounter < plyOneLegalMovesLength) {
+
+		getPlyTwoLegalMoves();
 	}
+	plyOneCounter++;
+	logNodes();
+
 
 
 }
 
-function blackMove() {
-	var legalMoves = game.moves({
+
+function getPlyTwoLegalMoves() {
+	plyTwoLegalMoves = game.moves({
 		verbose: true
 	});
-	// console.log(legalMoves);
-	do {
+	plyTwoLegalMovesLength = plyTwoLegalMoves.length;
+	plyTwoMove();
+}
 
-		var listMove = legalMoves[blackCounter];
+
+
+function plyTwoMove() {
+
+	plyTwoCounter = 0;
+	while (plyTwoCounter < plyTwoLegalMovesLength) {
+		var listMove = plyTwoLegalMoves[plyTwoCounter];
 		var source = listMove.from;
 		var target = listMove.to;
-
-
 		var move = game.move({
 			from: source,
 			to: target,
 			promotion: 'q'
 		});
-		blackCounter++;
+		plyTwoCounter++;
 		perftLeafNodes++;
-		// console.log(move.san);
-		// console.log(game.fen());
-
 		takeBackMove();
-	}
-	while (blackCounter < legalMoves.length);
-	blackCounter = 0;
-	console.log('nodes visited: ' + perftLeafNodes);
-	takeBackMove();
-	// console.log(game.fen());
-	whiteMove();
 
+	}
+
+	takeBackMove();
+	plyOneMove();
 
 }
 
@@ -82,18 +96,46 @@ function blackMove() {
 
 
 
+// while (plyTwoCounter < plyTwoLength) {
+// 	takeBackMove();
+
+
+// }
 
 
 
 
 
 
+
+// function depthThreeMove() {
+// 	var legalMoves = game.moves({
+// 		verbose: true
+// 	});
+
+// 	var plyThreeLength = legalMoves.length;
+// 	var listMove = legalMoves[plyThreeCounter];
+// 	var source = listMove.from;
+// 	var target = listMove.to;
+// 	var move = game.move({
+// 		from: source,
+// 		to: target,
+// 		promotion: 'q'
+// 	});
+// 	plyThreeCounter++;
+// 	perftLeafNodes++;
+// 	logNodes();
+// }
+
+function logNodes() {
+	console.log('nodes visited: ' + perftLeafNodes);
+}
 
 
 
 
 function takeBackMove() {
 	var undoPosition = game.undo();
-	// console.log(undoPosition);
+
 
 }

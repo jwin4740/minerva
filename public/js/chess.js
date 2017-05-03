@@ -1743,7 +1743,6 @@ var Chess = function (fen) {
     },
 
     ascii: function () {
-      console.log(ascii());
       return ascii();
     },
 
