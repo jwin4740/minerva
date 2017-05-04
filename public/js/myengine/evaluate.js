@@ -1,6 +1,6 @@
 var engineSource;
 var engineTarget;
-
+var roundedScore;
 var game = new Chess();
 
 const pieceObject = {
@@ -54,13 +54,35 @@ const pieceObject = {
         value: 1
     }
 };
+
+
 var GameScore = {};
+
+GameScore.blackMaterial = 0;
+GameScore.whiteMaterial = 0;
 GameScore.startingScore = 0;
 GameScore.currentScore = 0;
 GameScore.captureScore = 0;
 GameScore.mvvLvaScores = []; // every combination of victim and attacker will have their individual index
 
-const pieceValues = [0, ]
+function updateMaterial(captured) {
+
+    if (captured.includes("w")) {
+
+        GameScore.blackMaterial += pieceObject[captured].value;
+
+    } else {
+        GameScore.whiteMaterial += pieceObject[captured].value;
+    }
+    updateCurrentScore();
+}
+
+function updateCurrentScore() {
+    GameScore.currentScore = (GameScore.whiteMaterial - GameScore.blackMaterial) / 100;
+    roundedScore = GameScore.currentScore.toFixed(2);
+    $("#scoreRunway").html(roundedScore);
+}
+
 
 
 
@@ -71,28 +93,26 @@ const pieceValues = [0, ]
 const mvvLvaValue = [0, 100, 300, 300, 500, 500, 600, 100, 200, 300, 400, 500, 600];
 
 
-function InitMvvLva() {
-    var Attacker;
-    var Victim;
-    for (Attacker = PIECES.wP; Attacker <= PIECES.bK; ++Attacker) {
-        for (Victim = PIECES.wP; Victim <= PIECES.bK; ++Victim) {
-            MvvLvaScores[Victim * 14 + Attacker] = MvvLvaValue[Victim] + 6 - (MvvLvaValue[Attacker] / 100);
-            // example: pawn captures queen       506 - 100/100 = 505
-        }
-    }
+// function InitMvvLva() {
+//     var Attacker;
+//     var Victim;
+//     for (Attacker = PIECES.wP; Attacker <= PIECES.bK; ++Attacker) {
+//         for (Victim = PIECES.wP; Victim <= PIECES.bK; ++Victim) {
+//             MvvLvaScores[Victim * 14 + Attacker] = MvvLvaValue[Victim] + 6 - (MvvLvaValue[Attacker] / 100);
+//             // example: pawn captures queen       506 - 100/100 = 505
+//         }
+//     }
 
-}
-
-
+// }
 
 // employ mvv-lva heuristic
 function captureBest() {
 
 }
 
-function calcGameScore() {
 
-}
+
+
 
 
 function getEngineMove() {

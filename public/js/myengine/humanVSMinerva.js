@@ -66,17 +66,30 @@ var cfg = {
 board = ChessBoard('board', cfg);
 
 function checkStatus(move, color) {
-
-
-    console.log(move.captured);
-
     if (move.flags.includes("c") || move.flags.includes("e")) {
+        var capturedColor;
         var shortColor;
+        var shortCapturedColor;
+        var shortNotation;
         var lowerPiece = move.captured;
         var piece = lowerPiece.toUpperCase();
         var imageOutput;
         var pieceType;
 
+        if (color === "white") {
+            capturedColor = "black";
+            shortCapturedColor = "b";
+        } else {
+            capturedColor = "white";
+            shortCapturedColor = "w";
+        }
+
+        shortNotation = shortCapturedColor + piece;
+        updateMaterial(shortNotation);
+
+
+        
+ 
         if (piece === 'P') {
             pieceType = "Pawn";
         } else {
