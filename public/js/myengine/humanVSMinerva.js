@@ -1,101 +1,59 @@
-// $('#resetBtn').on("click", function () {
-//     console.log("clicked");
-//     $("#gameStatus").html("");
-//     game.reset();
-// })
-var playerMove;
-var drawCount = 0;
-var whiteWinCount = 0;
-var blackWinCount = 0;
-var drawReason;
-var insufficientMaterialCount = 0;
-var whiteStalemateCount = 0;
-var blackStalemateCount = 0;
-var threefoldCount = 0;
+var game = new Chess();
+
+
+$('#resetBtn').on("click", function () {
+    console.log("clicked");
+    $("#gameStatus").html("");
+    game.reset();
+});
+
+
+
+
 // do not pick up pieces if the game is over
 // only pick up pieces for White
-var color;
-var motion = true;
-var startPos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-
-
-var cfg = {
-    position: 'start',
-    orientation: 'white',
-
-
-};
-board = ChessBoard('board', cfg);
-
-
-$("#start").on('click', function () {
-    var turn = game.turn();
-    if (turn === 'w') {
-        randomWhiteMove();
-
-
-    } else {
-        makeEngineMove();
+var onDragStart = function (source, piece, position, orientation) {
+    if (game.in_checkmate() === true || game.in_draw() === true ||
+        piece.search(/^b/) !== -1) {
+        return false;
     }
-});
+};
 
-
-$("#pause").on('click', function () {
-    motion = false;
-});
-
-function randomWhiteMove() {
-
-    var legalMoves = game.moves({
-        verbose: true
-    });
-    var randomIndex = Math.floor(Math.random() * legalMoves.length);
-    var randMove = legalMoves[randomIndex];
-    var source = randMove.from;
-    var target = randMove.to;
-
-
+var onDrop = function (source, target) {
+    // see if the move is legal
     var move = game.move({
         from: source,
         to: target,
-        promotion: 'q'
+        promotion: 'n'
     });
-
-    playerMove = move;
-    board.position(game.fen());
-    color = "white";
-    checkStatus(color);
-
-
-
+    console.log(move);
+    // illegal move
+    if (move === null) return 'snapback';
+    window.setTimeout(makeEngineMove, 500);
 };
 
 
+var onSnapEnd = function () {
+    board.position(game.fen());
+};
 
-
-var makeEngineMove = function () {
+function makeEngineMove() {
+    console.log("move it");
     var captureArray = [];
     var tempMoves = game.moves();
 
     var legalMoves = game.moves({
         verbose: true
     });
-
-
-
-    // game over
-
     var n = legalMoves.length;
 
     for (var i = 0; i < n; i++) {
-     // TODO: add heuristics (mvv-lva, ...)
+        // TODO: add heuristics (mvv-lva, ...)
         if (legalMoves[i].flags.includes("c")) {
             captureArray.push(legalMoves[i]);
         }
         // TODO: function*(move) -> generate fen, calculate value of board
     }
-
-
     if (captureArray.length != 0) {
         var randomIndex = Math.floor(Math.random() * captureArray.length);
         var engineMove = captureArray[randomIndex];
@@ -117,27 +75,23 @@ var makeEngineMove = function () {
     color = 'black';
     console.log(game.history());
     checkStatus(color);
+}
+
+var cfg = {
+    draggable: true,
+    position: 'start',
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    orientation: 'white',
+    onSnapEnd: onSnapEnd
 };
+board = ChessBoard('board', cfg);
 
 function checkStatus(color) {
     switch (true) {
         case game.game_over():
             motion = false;
             gameOverReason(color);
-            break;
-        case color === 'white':
-            if (motion === true) {
-                setTimeout(function () {
-                    makeEngineMove();
-                }, 1000);
-            }
-            break;
-        case color === 'black':
-            if (motion === true) {
-                setTimeout(function () {
-                    randomWhiteMove();
-                }, 1000);
-            }
             break;
         default:
             break;
@@ -217,7 +171,6 @@ function newGameAgain() {
     game = new Chess();
     board.start();
     motion = true;
-    setTimeout(randomWhiteMove, 2000);
     return;
 }
 
