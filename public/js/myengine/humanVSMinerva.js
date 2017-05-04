@@ -45,6 +45,10 @@ function makeEngineMove() {
         to: engineTarget,
         promotion: 'q'
     });
+
+
+
+
     board.position(game.fen());
     color = 'black';
     console.log(move.flags);
@@ -63,9 +67,45 @@ board = ChessBoard('board', cfg);
 
 function checkStatus(move, color) {
 
-    if (move.flags.includes("c")) {
 
-        $('#' + color + 'Captured').append("<img class='capturedPiece' alt='capturedPiece' src='sfsdf'>");
+    console.log(move.captured);
+
+    if (move.flags.includes("c") || move.flags.includes("e")) {
+        var shortColor;
+        var lowerPiece = move.captured;
+        var piece = lowerPiece.toUpperCase();
+        var imageOutput;
+
+constructImageOutput()
+        function constructImageOutput() {
+            if (color === "white") {
+                shortColor = 'b';
+            } else {
+                shortColor = 'w';
+            }
+
+            switch (piece) {
+                case 'P':
+                    imageOutput = shortColor + 'P';
+                    break;
+                case 'N':
+                    imageOutput = shortColor + 'N';
+                    break;
+                case 'B':
+                    imageOutput = shortColor + 'B';
+                    break;
+                case 'R':
+                    imageOutput = shortColor + 'R';
+                    break;
+                case 'Q':
+                    imageOutput = shortColor + 'Q';
+                    break;
+            }
+            console.log(imageOutput);
+
+        }
+
+        // $('#' + color + 'Captured').append("<img class='capturedPiece' alt='capturedPiece' src='sfsdf'>");
 
     }
 
