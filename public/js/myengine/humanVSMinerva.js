@@ -1,6 +1,3 @@
-var game = new Chess();
-
-
 $('#resetBtn').on("click", function () {
     console.log("clicked");
     $("#gameStatus").html("");
@@ -21,15 +18,19 @@ var onDragStart = function (source, piece, position, orientation) {
 
 var onDrop = function (source, target) {
     // see if the move is legal
+    color = 'white';
     var move = game.move({
         from: source,
         to: target,
         promotion: 'n'
     });
+
     console.log(move);
     // illegal move
     if (move === null) return 'snapback';
-    window.setTimeout(makeEngineMove, 500);
+
+    checkStatus(move, color);
+
 };
 
 
@@ -38,43 +39,16 @@ var onSnapEnd = function () {
 };
 
 function makeEngineMove() {
-    console.log("move it");
-    var captureArray = [];
-    var tempMoves = game.moves();
-
-    var legalMoves = game.moves({
-        verbose: true
-    });
-    var n = legalMoves.length;
-
-    for (var i = 0; i < n; i++) {
-        // TODO: add heuristics (mvv-lva, ...)
-        if (legalMoves[i].flags.includes("c")) {
-            captureArray.push(legalMoves[i]);
-        }
-        // TODO: function*(move) -> generate fen, calculate value of board
-    }
-    if (captureArray.length != 0) {
-        var randomIndex = Math.floor(Math.random() * captureArray.length);
-        var engineMove = captureArray[randomIndex];
-        var source = engineMove.from;
-        var target = engineMove.to;
-    } else {
-        var randomIndex = Math.floor(Math.random() * legalMoves.length);
-        var engineMove = legalMoves[randomIndex];
-        var source = engineMove.from;
-        var target = engineMove.to;
-
-    }
+    getEngineMove();
     var move = game.move({
-        from: source,
-        to: target,
+        from: engineSource,
+        to: engineTarget,
         promotion: 'q'
     });
     board.position(game.fen());
     color = 'black';
-    console.log(game.history());
-    checkStatus(color);
+    console.log(move.flags);
+    checkStatus(move, color);
 }
 
 var cfg = {
@@ -87,11 +61,21 @@ var cfg = {
 };
 board = ChessBoard('board', cfg);
 
-function checkStatus(color) {
+function checkStatus(move, color) {
+
+    if (move.flags.includes("c")) {
+
+        $('#' + color + 'Captured').append("<img class='capturedPiece' alt='capturedPiece' src='sfsdf'>");
+
+    }
+
     switch (true) {
         case game.game_over():
             motion = false;
             gameOverReason(color);
+            break;
+        case color === "white":
+            window.setTimeout(makeEngineMove, 750);
             break;
         default:
             break;

@@ -1,6 +1,6 @@
 var board;
 var blueMove;
-var game = new Chess();
+
 var whiteSanMove;
 var blackSanMove;
 var movePar;

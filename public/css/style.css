@@ -19,6 +19,35 @@ body {
     width: 100vw;
 }
 
+#headerEngineContainer {
+    margin: 5px;
+}
+
+#engineTitle {
+    float: left;
+    margin-right: 50px;
+}
+
+#gameScore {
+    font-size: 18px;
+    float: right;
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 100px;
+}
+
+#scoreRunway {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.pieceDock {
+    clear: both;
+    border: solid 2px black;
+    height: 25px;
+    width: 500px;
+}
+
 
 /*.totusTuus{
     background-image: url("../img/column3.png");
@@ -52,6 +81,12 @@ button {
     padding-top: 5px;
     text-align: center;
     margin-bottom: 40px;
+}
+
+.capturedPiece {
+    height: 20px;
+    width: 20px;
+    margin: 2px;
 }
 
 .leftPic {
