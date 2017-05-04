@@ -75,14 +75,22 @@ function checkStatus(move, color) {
         var lowerPiece = move.captured;
         var piece = lowerPiece.toUpperCase();
         var imageOutput;
+        var pieceType;
 
-constructImageOutput()
+        if (piece === 'P') {
+            pieceType = "Pawn";
+        } else {
+            pieceType = "Other";
+        }
+        constructImageOutput()
+
         function constructImageOutput() {
             if (color === "white") {
                 shortColor = 'b';
             } else {
                 shortColor = 'w';
             }
+
 
             switch (piece) {
                 case 'P':
@@ -105,7 +113,7 @@ constructImageOutput()
 
         }
 
-        // $('#' + color + 'Captured').append("<img class='capturedPiece' alt='capturedPiece' src='sfsdf'>");
+        $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
 
     }
 

@@ -43,8 +43,7 @@ body {
 
 .pieceDock {
     clear: both;
-    border: solid 2px black;
-    height: 25px;
+    height: 30px;
     width: 500px;
 }
 
@@ -84,9 +83,9 @@ button {
 }
 
 .capturedPiece {
-    height: 20px;
-    width: 20px;
-    margin: 2px;
+    height: 22px;
+    width: 22px;
+    margin: 0px;
 }
 
 .leftPic {
