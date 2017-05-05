@@ -85,7 +85,7 @@ button {
 .capturedPiece {
     height: 22px;
     width: 22px;
-    margin: 0px;
+    margin: -2px;
 }
 
 .leftPic {

@@ -1,9 +1,7 @@
-
-
 // most valuable victim and least valuable attacker
-    // so any moves that capture a queen searched first, then rook ...
-    // those moves themselves are searched against the least valuable attacker i.e. pawn capture queen
-    // pawn is 100   knight 200   bishop 300   rook 400   queen 500   king 600
+// so any moves that capture a queen searched first, then rook ...
+// those moves themselves are searched against the least valuable attacker i.e. pawn capture queen
+// pawn is 100   knight 200   bishop 300   rook 400   queen 500   king 600
 var MvvLvaValue = [0, 100, 200, 300, 400, 500, 600, 100, 200, 300, 400, 500, 600];
 var MvvLvaScores = new Array(14 * 14); // every combination of victim and attacker will have their individual index
 
@@ -51,15 +49,16 @@ function AddCaptureMove(move) {
     GameBoard.moveList[GameBoard.moveListStart[GameBoard.ply + 1]] = move;
     GameBoard.moveScores[GameBoard.moveListStart[GameBoard.ply + 1]++] =
         MvvLvaScores[CAPTURED(move) * 14 + GameBoard.pieces[FROMSQ(move)]] + 1000000;
-        // (victim * 14 + piece on from square) gives us index
+    // (victim * 14 + piece on from square) gives us index
+   
 }
 
 function AddQuietMove(move) {
     GameBoard.moveList[GameBoard.moveListStart[GameBoard.ply + 1]] = move;
     GameBoard.moveScores[GameBoard.moveListStart[GameBoard.ply + 1]] = 0;
 
-// if move equals first killer move set to 900000
-// if move equals second killer move set to 800000
+    // if move equals first killer move set to 900000
+    // if move equals second killer move set to 800000
 
     if (move == GameBoard.searchKillers[GameBoard.ply]) {
         GameBoard.moveScores[GameBoard.moveListStart[GameBoard.ply + 1]] = 900000;

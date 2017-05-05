@@ -16,10 +16,11 @@
 /* board */
 .board-b72b1 {
 
-  border: 2px solid goldenrod;
-    border-radius: 3px;
+  border: 4px solid goldenrod;
+    border-radius: 5px;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
+  opacity: 0.9;
 }
 
 /* square */

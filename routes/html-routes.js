@@ -24,6 +24,10 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../public/minervaplay.html"));
     });
 
+        app.get("/minervaengine", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/minervaengine.html"));
+    });
+
 
            app.get("/register", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/register.html"));

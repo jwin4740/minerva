@@ -1369,6 +1369,7 @@ var Chess = function (fen) {
 
     for (var i = 0, len = moves.length; i < len; i++) {
       make_move(moves[i]);
+      // console.warn(moves[i]);
       if (!king_attacked(color)) {
         if (depth - 1 > 0) {
           var child_nodes = perft(depth - 1);

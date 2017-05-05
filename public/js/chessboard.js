@@ -685,7 +685,7 @@
       }
 
       var squareColor = 'white';
-      var countersix = 91;
+      var countersix = 0;
       for (var i = 0; i < 8; i++) {
         html += '<div class="' + CSS.row + '">';
 
@@ -730,7 +730,7 @@
         } else {
           row++;
         }
-        countersix -= 18;
+        countersix += 8;
       }
 
       return html;

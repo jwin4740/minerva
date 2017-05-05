@@ -2,7 +2,7 @@ var engineSource;
 var engineTarget;
 var roundedScore;
 var game = new Chess();
-
+var board;
 const pieceObject = {
     empty: 0,
     wP: {
@@ -109,8 +109,57 @@ const mvvLvaValue = [0, 100, 300, 300, 500, 500, 600, 100, 200, 300, 400, 500, 6
 function captureBest() {
 
 }
+var lineArray = [];
+var line = "";
+var startingDepthArray = [];
+var initCounter = 0;
+
+function evaluateLines(depth) {
+
+    if (startingDepthArray.length < 1) {
+        startingDepthArray.push(depth);
 
 
+    }
+    var legalMoves = game.moves();
+    var len = legalMoves.length;
+    var nodes = 0;
+    var color = game.turn();
+
+
+
+    //TODO: why is it taking longer to calculate
+    for (var i = 0; i < len; i++) {
+        game.move(legalMoves[i]);
+
+        line += " " + legalMoves[i];
+        if (depth === 1) {
+            line += " " + legalMoves[i];
+            lineArray.push(line);
+            line = "";
+        }
+
+
+
+        // console.warn(moves[i]);
+        //   if (!king_attacked(color)) {
+        if (depth - 1 > 0) {
+            var child_nodes = evaluateLines(depth - 1);
+            nodes += child_nodes;
+        } else {
+            nodes++;
+        }
+        //   }
+
+
+        game.undo();
+
+
+    }
+
+    return nodes;
+    initCounter = 0;
+}
 
 
 
