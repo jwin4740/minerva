@@ -67,7 +67,7 @@ var sanTo120 = {
 
 
 
-
+var filter = require("swearjar");
 var runTime;
 var bottomMinutes = $("#playerBottomTimerMinutes");
 var bottomSeconds = $("#playerBottomTimerSeconds");

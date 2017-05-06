@@ -1,14 +1,8 @@
-$('#resetBtn').on("click", function () {
-    console.log("clicked");
-    $("#gameStatus").html("");
-    game.reset();
-});
-
-
-
-
 // do not pick up pieces if the game is over
 // only pick up pieces for White
+
+
+
 var onDragStart = function (source, piece, position, orientation) {
     if (game.in_checkmate() === true || game.in_draw() === true ||
         piece.search(/^b/) !== -1) {
@@ -19,7 +13,7 @@ var onDragStart = function (source, piece, position, orientation) {
 var onDrop = function (source, target) {
     // see if the move is legal
     color = 'white';
-    var move = game.move({
+    move = game.move({
         from: source,
         to: target,
         promotion: 'n'
@@ -31,6 +25,7 @@ var onDrop = function (source, target) {
 
     checkStatus(move, color);
 
+
 };
 
 
@@ -40,7 +35,7 @@ var onSnapEnd = function () {
 
 function makeEngineMove() {
     getEngineMove();
-    var move = game.move({
+    move = game.move({
         from: engineSource,
         to: engineTarget,
         promotion: 'q'
@@ -55,79 +50,69 @@ function makeEngineMove() {
     checkStatus(move, color);
 }
 
-var cfg = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    orientation: 'white',
-    onSnapEnd: onSnapEnd
-};
-board = ChessBoard('board', cfg);
+
+
 
 function checkStatus(move, color) {
-    if (move.flags.includes("c") || move.flags.includes("e")) {
-        var capturedColor;
-        var shortColor;
-        var shortCapturedColor;
-        var shortNotation;
-        var lowerPiece = move.captured;
-        var piece = lowerPiece.toUpperCase();
-        var imageOutput;
-        var pieceType;
 
-        if (color === "white") {
-            capturedColor = "black";
-            shortCapturedColor = "b";
-        } else {
-            capturedColor = "white";
-            shortCapturedColor = "w";
-        }
+    if (color === "white") {
+        if (move.flags.includes("c") || move.flags.includes("e")) {
+            var capturedColor;
+            var shortColor;
+            var shortCapturedColor;
+            var shortNotation;
+            var lowerPiece = move.captured;
+            var piece = lowerPiece.toUpperCase();
+            var imageOutput;
+            var pieceType;
 
-        shortNotation = shortCapturedColor + piece;
-        updateMaterial(shortNotation);
-
-
-        
- 
-        if (piece === 'P') {
-            pieceType = "Pawn";
-        } else {
-            pieceType = "Other";
-        }
-        constructImageOutput()
-
-        function constructImageOutput() {
             if (color === "white") {
-                shortColor = 'b';
+                capturedColor = "black";
+                shortCapturedColor = "b";
             } else {
-                shortColor = 'w';
+                capturedColor = "white";
+                shortCapturedColor = "w";
+            }
+            shortNotation = shortCapturedColor + piece;
+            updateMaterial(shortNotation);
+            if (piece === 'P') {
+                pieceType = "Pawn";
+            } else {
+                pieceType = "Other";
+            }
+            constructImageOutput()
+
+            function constructImageOutput() {
+                if (color === "white") {
+                    shortColor = 'b';
+                } else {
+                    shortColor = 'w';
+                }
+
+
+                switch (piece) {
+                    case 'P':
+                        imageOutput = shortColor + 'P';
+                        break;
+                    case 'N':
+                        imageOutput = shortColor + 'N';
+                        break;
+                    case 'B':
+                        imageOutput = shortColor + 'B';
+                        break;
+                    case 'R':
+                        imageOutput = shortColor + 'R';
+                        break;
+                    case 'Q':
+                        imageOutput = shortColor + 'Q';
+                        break;
+                }
+                console.log(imageOutput);
+
             }
 
-
-            switch (piece) {
-                case 'P':
-                    imageOutput = shortColor + 'P';
-                    break;
-                case 'N':
-                    imageOutput = shortColor + 'N';
-                    break;
-                case 'B':
-                    imageOutput = shortColor + 'B';
-                    break;
-                case 'R':
-                    imageOutput = shortColor + 'R';
-                    break;
-                case 'Q':
-                    imageOutput = shortColor + 'Q';
-                    break;
-            }
-            console.log(imageOutput);
-
+            $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
         }
-
-        $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
-
     }
 
     switch (true) {
@@ -136,7 +121,8 @@ function checkStatus(move, color) {
             gameOverReason(color);
             break;
         case color === "white":
-            window.setTimeout(makeEngineMove, 750);
+
+            window.setTimeout(makeEngineMove, 1000);
             break;
         default:
             break;
@@ -234,3 +220,15 @@ $('#setFen').on('click', function () {
     board.position(game.fen());
     $('#fenInput').val('');
 });
+
+
+
+var cfg = {
+    draggable: true,
+    position: 'start',
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    orientation: 'white',
+    onSnapEnd: onSnapEnd
+};
+board = ChessBoard('board', cfg);

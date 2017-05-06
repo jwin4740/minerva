@@ -40,7 +40,10 @@
     "moment": "^2.18.1",
     "mysql": "^2.13.0",
     "password-hash-and-salt": "^0.1.4",
+    "profanity-filter": "^0.2.1",
+    "require": "^2.4.20",
     "sequelize": "^3.30.4",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "swearjar": "^0.2.0"
   }
 }
