@@ -67,7 +67,7 @@ var sanTo120 = {
 
 
 
-var filter = require("swearjar");
+
 var runTime;
 var bottomMinutes = $("#playerBottomTimerMinutes");
 var bottomSeconds = $("#playerBottomTimerSeconds");
@@ -354,7 +354,7 @@ sendChat.on("keypress", function () {
         var spanElement = $("<span class='userColor'>");
         spanElement.text(localGameObject.userID + ": ");
         entry.append(spanElement);
-        entry.append(messagi);
+        // entry.append(messagi);
         $(".panelMainChat").append(entry);
         socket.emit('send message', messagi);
         $("#sendChat").val("");
@@ -362,16 +362,15 @@ sendChat.on("keypress", function () {
 });
 socket.on('new message', function (data) {
 
-    // if (userID === localData.whitePlayerID) {
-    //     $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
-    // } else {
-    //     $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data.msg + "</div>");
-    // }
-
+    if (userID === localData.whitePlayerID) {
+        $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data + "</div>");
+    } else {
+        $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data + "</div>");
+    }
 
     if (localGameObject.userID === gameObject.whitePlayerData.whitePlayerID) {
         var tempID = gameObject.blackPlayerData.blackPlayerID;
-
+           
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
 

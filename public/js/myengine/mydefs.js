@@ -1,77 +1,174 @@
+var engineSource;
+var engineTarget;
+var roundedScore;
+var game = new Chess();
+var move;
 var board;
-var blueMove;
+var tempScoreArray = [];
+var tempMaterialArray = [];
+var GameScore = {};
+var positionCount = 0;
+GameScore.blackMaterial = 0;
+GameScore.whiteMaterial = 0;
+GameScore.startingScore = 0;
+GameScore.currentScore = 0;
+GameScore.searchScore = 0;
+GameScore.captureScore = 0;
+GameScore.mvvLvaScores = []; // every combination of victim and attacker will have their individual index
 
-var whiteSanMove;
-var blackSanMove;
-var movePar;
-var grayRow = 0;
-var sanTo120 = {
-    a8: 91,
-    b8: 92,
-    c8: 93,
-    d8: 94,
-    e8: 95,
-    f8: 96,
-    g8: 97,
-    h8: 98,
-    a7: 81,
-    b7: 82,
-    c7: 83,
-    d7: 84,
-    e7: 85,
-    f7: 86,
-    g7: 87,
-    h7: 88,
-    a6: 71,
-    b6: 72,
-    c6: 73,
-    d6: 74,
-    e6: 75,
-    f6: 76,
-    g6: 77,
-    h6: 78,
-    a5: 61,
-    b5: 62,
-    c5: 63,
-    d5: 64,
-    e5: 65,
-    f5: 66,
-    g5: 67,
-    h5: 68,
-    a4: 51,
-    b4: 52,
-    c4: 53,
-    d4: 54,
-    e4: 55,
-    f4: 56,
-    g4: 57,
-    h4: 58,
-    a3: 41,
-    b3: 42,
-    c3: 43,
-    d3: 44,
-    e3: 45,
-    f3: 46,
-    g3: 47,
-    h3: 48,
-    a2: 31,
-    b2: 32,
-    c2: 33,
-    d2: 34,
-    e2: 35,
-    f2: 36,
-    g2: 37,
-    h2: 38,
-    a1: 21,
-    b1: 22,
-    c1: 23,
-    d1: 24,
-    e1: 25,
-    f1: 26,
-    g1: 27,
-    h1: 28
+
+//         /*       A       B        C        D        E        F        G      H             */
+//         const blankTable = [
+// /*8*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*7*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*6*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*5*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*4*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*3*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*2*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+// /*1*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0
+//         ];
+
+
+const pieceObject = {
+    empty: 0,
+    wP: {
+        index: 1,
+        value: 100
+    },
+    wN: {
+        index: 2,
+        value: 300
+    },
+    wB: {
+        index: 3,
+        value: 300
+    },
+    wR: {
+        index: 4,
+        value: 500
+    },
+    wQ: {
+        index: 5,
+        value: 900
+    },
+    wK: {
+        index: 6,
+        value: 1
+    },
+    bP: {
+        index: 7,
+        value: 100
+    },
+    bN: {
+        index: 8,
+        value: 300
+    },
+    bB: {
+        index: 9,
+        value: 300
+    },
+    bR: {
+        index: 10,
+        value: 500
+    },
+    bQ: {
+        index: 11,
+        value: 900
+    },
+    bK: {
+        index: 12,
+        value: 1
+    }
 };
 
-var legalMoves = game.moves(); // holds all possible legals moves at a certain ply (depth 1)
-var playerMove; // INPUT move that engine takes in
-var engineMove; // OUTPUT move of engine;
+
+/*       A        B       C       D       E       F       G      H                  */
+        const whitePawnTable = [
+/*8*/    0   ,    0   ,   0    ,  0    ,  0    ,  0   ,   0   ,  0   ,     
+/*7*/    20  ,    20  ,   20   ,  30   ,  30   ,  20  ,   20  ,  20  ,
+/*6*/    10  ,    10  ,   10   ,  20   ,  20   ,  10  ,   10  ,  10  ,
+/*5*/    5   ,    5   ,   5    ,  10   ,  10   ,  5   ,   5   ,  5   ,
+/*4*/    0   ,    0   ,   10   ,  20   ,  20   ,  10  ,   0   ,  0   ,
+/*3*/    5   ,    0   ,   0    ,  5    ,  5    ,  0   ,   0   ,  5   ,
+/*2*/    10  ,    10  ,   0    , -10   , -10   ,  0   ,   10  ,  10  ,
+/*1*/    0   ,    0   ,   0    ,  0    ,  0    ,  0   ,   0   ,  0
+        ];
+
+
+/*       A        B       C       D       E        F       G       H            */
+        const whiteKnightTable = [
+/*8*/    0   ,    0   ,   0   ,   0    ,  0    ,   0    ,   0    ,  0   ,
+/*7*/    0   ,    0   ,   5   ,   10   ,  10   ,   5    ,   0    ,  0   ,
+/*6*/    5   ,    10  ,   10  ,   20   ,  20   ,   10   ,   10   ,  5   ,
+/*5*/    5   ,    10  ,   15  ,   20   ,  20   ,   15   ,   10   ,  5   ,
+/*4*/    0   ,    5   ,   10  ,   20   ,  20   ,   10   ,   0    ,  0   ,
+/*3*/    0   ,    0   ,   10  ,   10   ,  10   ,   10   ,   0    ,  0   ,
+/*2*/    0   ,    0   ,   0   ,   5    ,  5    ,   0    ,   0    ,  0   ,
+/*1*/    0   ,   -10  ,   0   ,   0    ,  0    ,   0    ,  -10   ,  0
+        ];
+
+
+/*       A        B        C       D        E        F       G      H            */
+        const blackPawnTable = [
+/*8*/    0   ,    0    ,   0   ,   0    ,   0    ,   0   ,   0   ,  0   ,
+/*7*/   10   ,    10   ,   0   ,  -10   ,  -10   ,   0   ,   10  ,  10  ,
+/*6*/    5   ,    0    ,   0   ,   5    ,   5    ,   0   ,   0   ,  5   ,
+/*5*/    0   ,    0    ,   10  ,   20   ,   20   ,   10  ,   0   ,  0   ,
+/*4*/    5   ,    5    ,   5   ,   10   ,   10   ,   5   ,   5   ,  5   ,
+/*3*/   10   ,    10   ,   10  ,   20   ,   20   ,   10  ,   10  ,  10  ,
+/*2*/   20   ,    20   ,   20  ,   30   ,   30   ,   20  ,   20  ,  20  ,
+/*1*/    0   ,    0    ,   0   ,   0    ,   0    ,   0   ,   0   ,  0
+        ];
+
+/*       A       B        C        D        E        F        G      H             */
+        const blackKnightTable = [
+/*8*/    0   ,  -10   ,   0    ,   0    ,   0    ,   0    ,  -10  ,  0    ,
+/*7*/    0   ,   0    ,   0    ,   5    ,   5    ,   0    ,   0   ,  0    ,
+/*6*/    0   ,   0    ,   10   ,   10   ,   10   ,   10   ,   0   ,  0    ,
+/*5*/    0   ,   0    ,   10   ,   20   ,   20   ,   10   ,   5   ,  0    ,
+/*4*/    5   ,   10    ,  15   ,   20   ,   20   ,   15   ,   10   , 5    ,
+/*3*/    5   ,   10   ,   10   ,   20   ,   20   ,   10   ,   10  ,  5    ,
+/*2*/    0   ,   0    ,   5    ,   10   ,   10   ,   5    ,   0   ,  0    ,
+/*1*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0   ,  0
+        ];
+
+
+/*       A       B        C        D        E        F        G      H             */
+        const blackQueenTable = [
+/*8*/    0   ,   0    ,   0    ,   100  ,   0    ,   0    ,   0  ,  0    ,
+/*7*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0    ,
+/*6*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0    ,
+/*5*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0    ,
+/*4*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0    ,
+/*3*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0    ,
+/*2*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0    ,
+/*1*/    0   ,   0    ,   0    ,   0    ,   0    ,   0    ,   0  ,  0
+        ];
+
+        /*       A       B        C        D        E        F        G      H             */
+        const whiteQueenTable = [
+/*8*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*7*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*6*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*5*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*4*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*3*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*2*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*1*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0
+        ];
+
+                /*       A       B        C        D        E        F        G      H             */
+        const blackKingTable = [
+/*8*/    0   ,   0    ,   0   ,   0    ,   0    ,  -200  ,   200 ,  0    ,
+/*7*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*6*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*5*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*4*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*3*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*2*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0    ,
+/*1*/    0   ,   0    ,   0   ,   0    ,   0    ,   0    ,   0   ,  0
+        ];
+        
+
+

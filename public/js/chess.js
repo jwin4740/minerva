@@ -249,7 +249,7 @@ var Chess = function (fen) {
    * starting position
    */
   if (typeof fen === 'undefined') {
-    load(DEFAULT_POSITION);  // starting fen
+    load(DEFAULT_POSITION); // starting fen
   } else {
     load(fen);
   }
@@ -814,7 +814,7 @@ var Chess = function (fen) {
 
       if (move.piece !== PAWN) {
         output += move.piece.toUpperCase() + disambiguator;
-    
+
       }
 
       if (move.flags & (BITS.CAPTURE | BITS.EP_CAPTURE)) {
@@ -834,7 +834,7 @@ var Chess = function (fen) {
     make_move(move);
     if (in_check()) {
       if (in_checkmate()) {
-         $("#gameStatus").html("GAME OVER");
+        $("#gameStatus").html("GAME OVER");
         output += '#';
       } else {
         output += '+';
@@ -1251,7 +1251,7 @@ var Chess = function (fen) {
     }
     s += '   +------------------------+\n';
     s += '     a  b  c  d  e  f  g  h\n';
-   
+
 
     return s;
   }
@@ -1452,6 +1452,11 @@ var Chess = function (fen) {
       return moves;
     },
 
+
+    ugly_moves: function (options) {
+      var ugly_moves = generate_moves(options);
+      return ugly_moves;
+    },
     in_check: function () {
       return in_check();
     },
@@ -1800,7 +1805,12 @@ var Chess = function (fen) {
 
       return pretty_move;
     },
-
+    
+    ugly_move: function (move_obj, options) {
+      var pretty_move = make_pretty(move_obj);
+      make_move(move_obj);
+      return pretty_move;
+    },
     undo: function () {
       var move = undo_move();
       return (move) ? make_pretty(move) : null;

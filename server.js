@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('send message', function (data) {
         var filtered = filter.censor(data);
         console.log(filtered);
-        socket.emit('new message', filtered);
+        socket.broadcast.emit('new message', filtered);
     });
 
     socket.on('players confirmed', function (data) {
