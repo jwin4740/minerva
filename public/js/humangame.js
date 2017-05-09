@@ -170,9 +170,6 @@ momentElement.append(moment);
 $(".panelMainChat").append(momentElement);
 
 
-
-
-
 $(document).ready(function () {
     // sets sides and game object data
     $.get("/gameCreated", function () {
@@ -201,9 +198,6 @@ $(document).ready(function () {
                 gameObject.playerOne = "white";
 
                 socket.emit("players confirmed", gameObject);
-
-
-
             }
         }
     });
@@ -212,7 +206,7 @@ $(document).ready(function () {
 $("#setSides").on("click", function () {
     gameObject.gameCreated = true;
     var sideColor = $("#sideColor").val();
-    gameTime = parseInt($("#timeSelection").val());
+    gameTime = "untimed"
     if (sideColor === "white") {
         localGameObject.gameTime = gameTime;
         gameObject.gameTime = gameTime;
@@ -246,50 +240,50 @@ socket.on("players confirmed", function (data) {
     console.log(gameObject);
 });
 
-$('#whiteGuy').on("click", function () {
+// $('#whiteGuy').on("click", function () {
 
-    sessionStorage.whitePlayerID = sessionStorage.userID;
-    userID = sessionStorage.userID;
-    whitePlayerID = sessionStorage.userID;
-    whitePlayerRating = sessionStorage.rating;
-    userColor = "white";
-
-
-
-    socket.emit('white player click', sessionStorage);
-});
-
-$('#blackGuy').on("click", function () {
-    sessionStorage.blackPlayerID = sessionStorage.userID;
-    userID = sessionStorage.userID;
-    blackPlayerID = sessionStorage.userID;
-    blackPlayerRating = sessionStorage.rating;
-    userColor = "black";
+//     sessionStorage.whitePlayerID = sessionStorage.userID;
+//     userID = sessionStorage.userID;
+//     whitePlayerID = sessionStorage.userID;
+//     whitePlayerRating = sessionStorage.rating;
+//     userColor = "white";
 
 
 
-    socket.emit('black player click', sessionStorage);
+//     socket.emit('white player click', sessionStorage);
+// });
 
-});
+// $('#blackGuy').on("click", function () {
+//     sessionStorage.blackPlayerID = sessionStorage.userID;
+//     userID = sessionStorage.userID;
+//     blackPlayerID = sessionStorage.userID;
+//     blackPlayerRating = sessionStorage.rating;
+//     userColor = "black";
 
-socket.on('white player click', function (data) {
-    console.log("I got white's data");
 
-    sessionStorage.whitePlayerID = data.whitePlayerID;
-    sessionStorage.whitePlayerRating = data.rating;
 
-    localData = sessionStorage;
-    console.log(sessionStorage);
-});
+//     socket.emit('black player click', sessionStorage);
 
-socket.on('black player click', function (data) {
-    console.log("I got black's data");
-    sessionStorage.blackPlayerID = data.blackPlayerID;
-    sessionStorage.blackPlayerRating = data.rating;
+// });
 
-    localData = sessionStorage;
-    console.log(sessionStorage);
-});
+// socket.on('white player click', function (data) {
+//     console.log("I got white's data");
+
+//     sessionStorage.whitePlayerID = data.whitePlayerID;
+//     sessionStorage.whitePlayerRating = data.rating;
+
+//     localData = sessionStorage;
+//     console.log(sessionStorage);
+// });
+
+// socket.on('black player click', function (data) {
+//     console.log("I got black's data");
+//     sessionStorage.blackPlayerID = data.blackPlayerID;
+//     sessionStorage.blackPlayerRating = data.rating;
+
+//     localData = sessionStorage;
+//     console.log(sessionStorage);
+// });
 
 
 $('#startGame').on("click", function () {
@@ -304,7 +298,7 @@ $('#startGame').on("click", function () {
         $("#playerTopName").html(gameObject.whitePlayerData.whitePlayerID);
         $("#playerBottomName").html(gameObject.blackPlayerData.blackPlayerID);
     }
-    timeControl();
+   
 });
 
 socket.on('game start', function (data) {
@@ -314,7 +308,7 @@ socket.on('game start', function (data) {
     $('#confirmGameStart').modal('show');
     console.log(data);
     configBoard();
-    timeControl();
+   
     if (gameObject.playerOne === localGameObject.color) {
         $("#playerTopName").html(gameObject.blackPlayerData.blackPlayerID);
         $("#playerBottomName").html(gameObject.whitePlayerData.whitePlayerID);
@@ -394,60 +388,6 @@ socket.on('new message', function (data) {
 
 // chat -----------------------------------------------------------
 
-function timeControl() {
-    var tempTime = parseInt(gameObject.gameTime);
-    setInitialTime(tempTime);
-
-    function setInitialTime(tempTime) {
-        var totalTime = parseInt(gameObject.gameTime) * 60;
-        gameObject.whitePlayerData.whitePlayerTimeMinutes = tempTime;
-        gameObject.whitePlayerData.whitePlayerTimeMinutes = 0;
-        gameObject.blackPlayerData.blackPlayerTimeMinutes = tempTime;
-        gameObject.blackPlayerData.blackPlayerTimeSeconds = 0;
-        gameObject.whitePlayerData.whitePlayerTotalTime = totalTime;
-        gameObject.blackPlayerData.blackPlayerTotalTime = totalTime;
-        localGameObject.whiteTimeMinutes = tempTime;
-        localGameObject.whiteTimeSeconds = 0;
-        localGameObject.blackTimeMinutes = tempTime;
-        localGameObject.blackTimeSeconds = 0;
-        localGameObject.whiteTotalTime = totalTime;
-        localGameObject.blackTotalTime = totalTime;
-
-        if (gameObject.playerOne === "white") {
-
-            bottomMinutes.html(localGameObject.whiteTimeMinutes);
-            bottomMinutes.html(localGameObject.whiteTimeMinutes);
-            topMinutes.html(localGameObject.blackTimeMinutes);
-            topMinutes.html(localGameObject.blackTimeMinutes);
-        } else {
-            bottomMinutes.html(localGameObject.blackTimeMinutes);
-            bottomMinutes.html(localGameObject.blackTimeMinutes);
-            topMinutes.html(localGameObject.whiteTimeMinutes);
-            topMinutes.html(localGameObject.whiteTimeMinutes);
-        }
-
-        syncRequest();
-
-    }
-}
-
-function syncRequest() {
-    socket.emit("sync", gameObject);
-
-}
-
-socket.on("sync", function (data) {
-    gameObject = data;
-});
-
-function runningTime() {
-    localGameObject.whiteTotalTime = parseInt(gameObject.gameTime) * 60;
-
-    // runTime = setInterval(function () {}, 1000);
-}
-
-
-
 function configBoard() {
     if (localGameObject.color === "white") {
         var cfg = {
@@ -499,11 +439,8 @@ var onDrop = function (source, target) {
     // illegal move
     if (move === null) return 'snapback';
 
-    if (localGameObject.userID === gameObject.whitePlayerData.whitePlayerID) {
         socket.emit('move', move);
-        socket.emit('timer change', gameObject);
-
-    }
+  
 
     uMove = move.from + move.to;
     console.log("San move: " + uMove);
@@ -519,12 +456,7 @@ var onSnapEnd = function () {
 
 };
 
-socket.on('timer change', function (data) {
-    gameObject = data;
-});
-
-socket.on('move', function (msg) {
-
+socket.on('moveresponse', function (msg) {
     game.move(msg);
     board.position(game.fen());
 });

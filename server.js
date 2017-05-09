@@ -100,16 +100,12 @@ io.sockets.on('connection', function (socket) {
 
     // ply move
     socket.on('move', function (msg) {
-        console.log("movesocket");
-        socket.broadcast.emit('move', msg);
-
+        // console.log("movesocket");
+        socket.broadcast.emit('moveresponse', msg);
         console.log(msg);
     });
 
-    socket.on('timer change', function (data) {
-
-        socket.broadcast.emit('timer change', data);
-    });
+ 
 
 
 

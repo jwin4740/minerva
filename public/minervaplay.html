@@ -66,12 +66,13 @@
                             <br>
                             <span class="label label-default">Time Settings</span>
                             <select name="time" id="timeSelection">
+                                 <option value="60min5delay">untimed</option>
                                     <option value="60">60min </option>
                                     <option value="30">30min</option>
                                     <option value="15">15min</option>
                                     <option value="5">5min</option>
                                     <option value="1">1min</option>
-                                        <option value="60min5delay">no time limit </option>
+                                       
                                 </select>
                             <br><br>
                         </div>
@@ -159,7 +160,7 @@
                         <div class='timerDiv'>
                             <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
                             <p class="timerAndTurn" id='topTimerAndTurn'>
-                                <span id="playerTopTimerMinutes">60</span> : <span id=playerTopTimerSeconds>00</span>
+                                <span id="playerTopTimerMinutes">untimed</span><span id=playerTopTimerSeconds></span>
                                 <span id='playerTopLight'></span>
                             </p>
 
@@ -174,7 +175,7 @@
                         <div class='timerDiv'>
                             <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
                             <p class="timerAndTurn" id='bottomTimerAndTurn'>
-                                <span id="playerBottomTimerMinutes">60</span> : <span id=playerBottomTimerSeconds>00</span>
+                                <span id="playerBottomTimerMinutes">untimed</span><span id=playerBottomTimerSeconds></span>
                                 <span id='playerBottomLight'></span>
                             </p>
                         </div>
