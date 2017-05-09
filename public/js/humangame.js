@@ -354,7 +354,7 @@ sendChat.on("keypress", function () {
         var spanElement = $("<span class='userColor'>");
         spanElement.text(localGameObject.userID + ": ");
         entry.append(spanElement);
-        // entry.append(messagi);
+        entry.append(messagi);
         $(".panelMainChat").append(entry);
         socket.emit('send message', messagi);
         $("#sendChat").val("");
@@ -362,11 +362,11 @@ sendChat.on("keypress", function () {
 });
 socket.on('new message', function (data) {
 
-    if (userID === localData.whitePlayerID) {
-        $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data + "</div>");
-    } else {
-        $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data + "</div>");
-    }
+    // if (userID === localData.whitePlayerID) {
+    //     $(".panelMainChat").append("<h5>" + sessionStorage.blackPlayerID + ": </h5><div class='well'>" + data + "</div>");
+    // } else {
+    //     $(".panelMainChat").append("<h5>" + sessionStorage.whitePlayerID + ": </h5><div class='well'>" + data + "</div>");
+    // }
 
     if (localGameObject.userID === gameObject.whitePlayerData.whitePlayerID) {
         var tempID = gameObject.blackPlayerData.blackPlayerID;
@@ -376,9 +376,6 @@ socket.on('new message', function (data) {
 
     } else {
         var tempID = gameObject.whitePlayerData.whitePlayerID;
-
-
-
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
     }
@@ -386,7 +383,7 @@ socket.on('new message', function (data) {
 
     spanElement.text(tempID + ": ");
     entry.append(spanElement);
-    entry.append(data.msg);
+    entry.append(data);
     $(".panelMainChat").append(entry);
 
 });
