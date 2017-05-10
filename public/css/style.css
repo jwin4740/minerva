@@ -134,9 +134,30 @@ a:hover {
 }
 
 #mainBoardArea {
-    margin: auto;
-    width: 90%;
-    margin-top: 3vh;
+    width: 60vw;
+    height: 87vh;
+    margin: 5vh;
+    border-radius: 5px;
+    background-image: url('../img/redoak.jpg');
+}
+
+#boardBorder {
+    width: 33vw;
+}
+
+.board-b72b1 {
+    padding: 0px;
+    border: solid 1px gray;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    opacity: 0.9;
+}
+
+#board {
+    clear: both;
+    padding: 4px;
+    width: 100%;
+    text-align: center;
 }
 
 #timeMoment {
@@ -198,15 +219,6 @@ a:hover {
     margin-bottom: 3px;
     height: 20px;
     width: 20px;
-}
-
-#board {
-    clear: both;
-    width: 100%;
-    text-align: center;
-    margin: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .userName {

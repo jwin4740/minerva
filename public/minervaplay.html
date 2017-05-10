@@ -83,12 +83,8 @@
                 </div>
             </div>
         </div>
-
-
-
-
         <div class="row">
-            <div id='leftNavBar' class="col-sm-1">
+            <div id='leftNavBar' class="col-sm-2">
                 <div class="navContainer">
                     <a class='headLink' href="/">
                         <div class='picDiv'>
@@ -120,73 +116,85 @@
 
                 </div>
             </div>
+            <div class="col-xs-9 smallpad">
+                <div class="row" id="woodContent">
+                    <main id="mainBoardArea">
 
-            <div class="col-xs-4">
-                <section id="chatAndNotate">
-                    <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 
-                    <div id="panelNotate" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Moves</h3>
+                            <section id="boardBorder">
+                                <div id="playerInfoTop">
+                                    <p class='nameAndRating' id='topNameAndRating'>
+                                        <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName'
+                                            id="playerTopName">player </span> (1543)
+                                    </p>
+                                    <div class='timerDiv'>
+                                        <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
+                                        <p class="timerAndTurn" id='topTimerAndTurn'>
+                                            <span id="playerTopTimerMinutes">untimed</span><span id=playerTopTimerSeconds></span>
+                                            <span id='playerTopLight'></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="board">
+                                </div>
+                                <div id="playerInfoBottom">
+                                    <p class='nameAndRating' id='bottomNameAndRating'>
+                                        <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName'
+                                            id="playerBottomName">player </span> (1332)
+                                    </p>
+                                    <div class='timerDiv'>
+                                        <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
+                                        <p class="timerAndTurn" id='bottomTimerAndTurn'>
+                                            <span id="playerBottomTimerMinutes">untimed</span><span id=playerBottomTimerSeconds></span>
+                                            <span id='playerBottomLight'></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
-                        <div class="panel-body">
-                            <div class="panelMainNotate">
-                            </div>
-                        </div>
-                    </div>
-                    <div id="panelChat" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Chat</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class='panelMainChat'>
-                                <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName"></span></p>
-                                <p class="welcomeChat" id="timeMoment"></p>
+                        <div class="col-xs-5">
+                            <section id="chatAndNotate">
+                                <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
 
-                            </div>
-                            <div id="chatField">
-                                <input class="chatInput" id="sendChat" placeholder="message">
-                            </div>
+                                <div id="panelNotate" class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Moves</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="panelMainNotate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="panelChat" class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Chat</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class='panelMainChat'>
+                                            <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName"></span></p>
+                                            <p class="welcomeChat" id="timeMoment"></p>
+                                        </div>
+                                        <div id="chatField">
+                                            <input class="chatInput" id="sendChat" placeholder="message">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
-                    </div>
-                </section>
+                    </main>
+                </div>
             </div>
-            <div class="col-xs-5 smallpad">
-                <section id="mainBoardArea">
-                    <div id="playerInfoTop">
-                        <p class='nameAndRating' id='topNameAndRating'>
-                            <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                            (1543)
-                        </p>
-                        <div class='timerDiv'>
-                            <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
-                            <p class="timerAndTurn" id='topTimerAndTurn'>
-                                <span id="playerTopTimerMinutes">untimed</span><span id=playerTopTimerSeconds></span>
-                                <span id='playerTopLight'></span>
-                            </p>
 
-                        </div>
-                    </div>
-                    <div id="board">
-                    </div>
-                    <div id="playerInfoBottom">
-                        <p class='nameAndRating' id='bottomNameAndRating'>
-                            <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                            (1332)
-                        </p>
-                        <div class='timerDiv'>
-                            <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
-                            <p class="timerAndTurn" id='bottomTimerAndTurn'>
-                                <span id="playerBottomTimerMinutes">untimed</span><span id=playerBottomTimerSeconds></span>
-                                <span id='playerBottomLight'></span>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style='padding-left: 0px;'>
-                <img class='flankRight' src='./img/soldier.png'>
-            </div>
+
         </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style='padding-left: 0px;'>
+            <!--<img class='flankRight' src='./img/soldier.png'>-->
+        </div>
+
     </div>
+    </div>
+
 
     <!--<script src="./js/enginescripts/defs.js"></script>
     <script src="./js/enginescripts/io.js"></script>
