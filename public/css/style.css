@@ -132,22 +132,23 @@ a:hover {
 .smallpad {
     padding-left: 0px;
     padding-right: 0px;
-      background-image: url('../img/mahogany.jpg');
+    margin: 25px;
+}
+
+#woodContent {
+    background-image: url('../img/mahogany.jpg');
+    border-radius: 5px;
 }
 
 #mainBoardArea {
- 
-    margin: 5vh;
-    width:50vw;
-    height: 100%;
+    margin: 7vh;
+    width: 35vw;
     border-radius: 5px;
-  
     display: inline-block;
 }
 
 #boardBorder {
     width: 100%;
-    padding: 5vh;
     display: grid;
 }
 
@@ -156,7 +157,6 @@ a:hover {
     width: inherit;
     text-align: center;
 }
-
 
 #timeMoment {
     font-weight: lighter;
@@ -232,15 +232,38 @@ a:hover {
     padding: 3px;
 }
 
-.panelMainChat {
-    height: 30vh;
-    overflow-y: scroll;
+#chatAndNotate {
+    margin-top: 20px;
+    position: relative;
+    height: 474px;
+    width: 474px;
+    top: -525px;
+    right: -550px;
 }
 
-.panelMainNotate {
-    height: 30vh;
-    overflow-y: scroll;
+#panelNotate {
+    width: 400px;
+    position: relative;
+    top: -47px;
+    left: 21px;
 }
+
+#panelChat {
+    width: 400px;
+    position: relative;
+    top: -47px;
+    left: 21px;
+}
+.panelMainNotate {
+    overflow-y: scroll;
+    height: 165px;
+}
+.panelMainChat {
+    overflow-y: scroll;
+    height: 180px;
+}
+
+
 
 #chatField {
     border-top: solid 1px lightgray;
