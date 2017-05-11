@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-image: url('../img/marble.jpg');
+    height: 100vh;
+}
+
+body {
+    background-color: transparent;
+    font-family: 'Righteous', cursive;
+    height: 100vh;
+}
+
+.container {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100vw;
+}
+
+
+#leftNavBar {
+    padding-left: 0px;
+    padding-right: 0px;
+    position: fixed;
+}
+
+h3 {
+    margin: 0px;
+}
+
+.navContainer {
+    padding-left: 0px;
+    background: linear-gradient(to right, black, #31302E);
+    height: 100vh;
+}
+
+button {
+    height: 1600px;
+    border-radius: 2px;
+}
+
+.picDiv {
+    padding-top: 5px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+
+.leftPic {
+    padding: 5px;
+    width: 80%;
+    height: 105px;
+}
+
+.navIcon {
+    margin-right: 5px;
+    height: 23px;
+    width: 23px;
+}
+
+.titleNav {
+    color: darkgray;
+    margin-bottom: 0px;
+    font-size: 18px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.linkLeft {
+    color: darkgray;
+    padding-left: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.linkLeft:hover {
+    background-color: black;
+}
+
+
+/*#panelNotate {
+    height: 250px;
+}*/
+
+
+
+

@@ -27,7 +27,7 @@
 
     <div class="container" style='margin-right: 0px;'>
         <!--confirmation modal-->
-        <div id="confirmGameStart" class="modal fade text-center" role="dialog">
+        <!--<div id="confirmGameStart" class="modal fade text-center" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -40,12 +40,11 @@
 
                 </div>
             </div>
-        </div>
+        </div>-->
         <!--confirmation modal-->
 
 
-        <div id="gameModal">
-
+        <!--<div id="gameModal">
             <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -82,9 +81,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="row">
-            <div id='leftNavBar' class="col-sm-2">
+            <div id='leftNavBar' class="col-sm-1">
                 <div class="navContainer">
                     <a class='headLink' href="/">
                         <div class='picDiv'>
@@ -112,83 +111,76 @@
                             <img class='navIcon' src='./img/chessboard.jpg'> PLAY
                         </p>
                     </a>
-
-
                 </div>
             </div>
-            <div class="col-xs-9 smallpad">
+            <div class="col-xs-10 smallpad">
                 <div class="row" id="woodContent">
-                    <main id="mainBoardArea">
-
-                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-
-                            <section id="boardBorder">
-                                <div id="playerInfoTop">
-                                    <p class='nameAndRating' id='topNameAndRating'>
-                                        <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName'
-                                            id="playerTopName">player </span> (1543)
+                    <div id="mainBoardArea" class="col-xs-8">
+                        <div id="boardBorder">
+                            <div id="playerInfoTop">
+                                <p class='nameAndRating' id='topNameAndRating'>
+                                    <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName'
+                                        id="playerTopName">player </span> (1543)
+                                </p>
+                                <div class='timerDiv'>
+                                    <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
+                                    <p class="timerAndTurn" id='topTimerAndTurn'>
+                                        <span id="playerTopTimerMinutes">untimed</span><span id=playerTopTimerSeconds></span>
+                                        <span id='playerTopLight'></span>
                                     </p>
-                                    <div class='timerDiv'>
-                                        <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
-                                        <p class="timerAndTurn" id='topTimerAndTurn'>
-                                            <span id="playerTopTimerMinutes">untimed</span><span id=playerTopTimerSeconds></span>
-                                            <span id='playerTopLight'></span>
-                                        </p>
-                                    </div>
                                 </div>
-                                <div id="board">
-                                </div>
-                                <div id="playerInfoBottom">
-                                    <p class='nameAndRating' id='bottomNameAndRating'>
-                                        <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName'
-                                            id="playerBottomName">player </span> (1332)
+                            </div>
+                            <div id="board">
+                            </div>
+                            <div id="playerInfoBottom">
+                                <p class='nameAndRating' id='bottomNameAndRating'>
+                                    <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName'
+                                        id="playerBottomName">player </span> (1332)
+                                </p>
+                                <div class='timerDiv'>
+                                    <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
+                                    <p class="timerAndTurn" id='bottomTimerAndTurn'>
+                                        <span id="playerBottomTimerMinutes">untimed</span><span id=playerBottomTimerSeconds></span>
+                                        <span id='playerBottomLight'></span>
                                     </p>
-                                    <div class='timerDiv'>
-                                        <img class='clockIcon' src='./img/clock.png' alt='clockIcon'>
-                                        <p class="timerAndTurn" id='bottomTimerAndTurn'>
-                                            <span id="playerBottomTimerMinutes">untimed</span><span id=playerBottomTimerSeconds></span>
-                                            <span id='playerBottomLight'></span>
-                                        </p>
-                                    </div>
                                 </div>
-                            </section>
+                            </div>
                         </div>
-                        <div class="col-xs-5">
-                            <section id="chatAndNotate">
-                                <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
 
-                                <div id="panelNotate" class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Moves</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="panelMainNotate">
-                                        </div>
-                                    </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div id="chatAndNotate">
+                        <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
+
+                        <div id="panelNotate" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Moves</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panelMainNotate">
                                 </div>
-                                <div id="panelChat" class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Chat</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class='panelMainChat'>
-                                            <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName"></span></p>
-                                            <p class="welcomeChat" id="timeMoment"></p>
-                                        </div>
-                                        <div id="chatField">
-                                            <input class="chatInput" id="sendChat" placeholder="message">
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                            </div>
                         </div>
-                    </main>
+                        <div id="panelChat" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Chat</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='panelMainChat'>
+                                    <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName"></span></p>
+                                    <p class="welcomeChat" id="timeMoment"></p>
+                                </div>
+                                <div id="chatField">
+                                    <input class="chatInput" id="sendChat" placeholder="message">
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style='padding-left: 0px;'>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style='padding-left: 0px;'>
             <!--<img class='flankRight' src='./img/soldier.png'>-->
         </div>
 

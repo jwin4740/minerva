@@ -17,6 +17,13 @@
 
 
 /* board */
+.board-b72b1 {
+    padding: 0px;
+    border: solid 1px gray;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    opacity: 0.9;
+}
 
 
 

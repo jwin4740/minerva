@@ -59,6 +59,7 @@ body {
 
 #leftNavBar {
     padding-left: 0px;
+    padding-right: 0px;
 }
 
 h3 {
@@ -131,49 +132,47 @@ a:hover {
 .smallpad {
     padding-left: 0px;
     padding-right: 0px;
+      background-image: url('../img/mahogany.jpg');
 }
 
 #mainBoardArea {
-    width: 60vw;
-    height: 87vh;
+ 
     margin: 5vh;
+    width:50vw;
+    height: 100%;
     border-radius: 5px;
-    background-image: url('../img/redoak.jpg');
+  
+    display: inline-block;
 }
 
 #boardBorder {
-    width: 33vw;
-}
-
-.board-b72b1 {
-    padding: 0px;
-    border: solid 1px gray;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    opacity: 0.9;
+    width: 100%;
+    padding: 5vh;
+    display: grid;
 }
 
 #board {
     clear: both;
-    padding: 4px;
-    width: 100%;
+    width: inherit;
     text-align: center;
 }
+
 
 #timeMoment {
     font-weight: lighter;
     font-size: 11px;
 }
 
-#playerInfoTop {
-    width: 99.5%;
+
+/*#playerInfoTop {
+
     height: 40px;
 }
 
 #playerInfoBottom {
-    width: 99.5%;
+ 
     height: 40px;
-}
+}*/
 
 .nameAndRating {
     float: left;
@@ -234,12 +233,12 @@ a:hover {
 }
 
 .panelMainChat {
-    height: 200px;
+    height: 30vh;
     overflow-y: scroll;
 }
 
 .panelMainNotate {
-    height: 225px;
+    height: 30vh;
     overflow-y: scroll;
 }
 
