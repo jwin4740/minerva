@@ -698,7 +698,7 @@
             'id="' + SQUARE_ELS_IDS[square] + '" ' +
             'data-number="' + countersix + '" ' +            
             'data-square="' + square + '">';
-          html += '<div class="rightNumber">' + countersix + '</div>';
+          // html += '<div class="rightNumber">' + countersix + '</div>';  // shows engine coordinate squares
 
 
           if (cfg.showNotation === true) {

@@ -17,14 +17,14 @@
 
 
 /* board */
-.board-b72b1 {
-    padding: 0px;
-    border: solid 1px gray;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    opacity: 0.9;
-}
 
+.board-b72b1 {
+  padding: 0px;
+  border: solid 1px black;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  opacity: 0.9;
+}
 
 
 /* square */
@@ -46,15 +46,17 @@
 
 .white-1e1d7 {
   background-color: white;
-  color: green;
+  color: black;
+  font-weight: bolder;
 }
 
 
 /* black square */
 
 .black-3c85d {
-  background-color: green;
-  color: white;
+  color: black;
+  background: linear-gradient(to right, #31302E, gray);
+  font-weight: bolder;
 }
 
 

@@ -19,27 +19,10 @@ body {
     width: 100vw;
 }
 
-#headerEngineContainer {
-    margin: 5px;
-}
 
-#engineTitle {
-    float: left;
-    margin-right: 50px;
-}
 
-#gameScore {
-    font-size: 18px;
-    float: right;
-    height: 30px;
-    margin-top: 5px;
-    margin-right: 100px;
-}
 
-#scoreRunway {
-    font-size: 16px;
-    font-weight: bolder;
-}
+
 
 .pieceDock {
     clear: both;
@@ -62,20 +45,13 @@ body {
     padding-right: 0px;
 }
 
-h3 {
-    margin: 0px;
-}
-
 .navContainer {
     padding-left: 0px;
     background: linear-gradient(to right, black, #31302E);
     height: 100vh;
 }
 
-button {
-    height: 30px;
-    border-radius: 2px;
-}
+
 
 .picDiv {
     padding-top: 5px;
@@ -137,14 +113,18 @@ a:hover {
 
 #woodContent {
     background-image: url('../img/mahogany.jpg');
-    border-radius: 5px;
+    border-radius: 10px;
+    height: 567px;
 }
 
 #mainBoardArea {
-    margin: 7vh;
+    position: relative;
+    margin: 10px;
     width: 35vw;
     border-radius: 5px;
     display: inline-block;
+    top: -9px;
+    right: -13px;
 }
 
 #boardBorder {
@@ -164,26 +144,31 @@ a:hover {
 }
 
 
-/*#playerInfoTop {
+#playerInfoTop {
 
-    height: 40px;
 }
 
 #playerInfoBottom {
  
-    height: 40px;
-}*/
+  
+}
+
+.playerInfo{
+    
+    background: linear-gradient(to right, gray, white);
+    width: 99.2%;
+}
 
 .nameAndRating {
     float: left;
     height: 100%;
     letter-spacing: 1px;
     margin-bottom: 0px;
-    padding: 10px;
+    padding: 2px;
     font-size: 16px;
     color: white;
-    background: linear-gradient(to right, black, #31302E);
-    border-radius: 3px;
+    /*background: linear-gradient(to right, black, #31302E);*/
+    
 }
 
 .timerDiv {
@@ -237,8 +222,8 @@ a:hover {
     position: relative;
     height: 474px;
     width: 474px;
-    top: -525px;
-    right: -550px;
+    top: -435px;
+    right: -498px;
 }
 
 #panelNotate {
@@ -254,16 +239,16 @@ a:hover {
     top: -47px;
     left: 21px;
 }
+
 .panelMainNotate {
     overflow-y: scroll;
     height: 165px;
 }
+
 .panelMainChat {
     overflow-y: scroll;
     height: 180px;
 }
-
-
 
 #chatField {
     border-top: solid 1px lightgray;
@@ -344,3 +329,4 @@ input:focus {
     border-radius: 3px;
     padding-left: 25px;
 }
+

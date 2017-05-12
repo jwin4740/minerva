@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>-->
+    <script src="./js/libraries/jQuerylib.js"></script>
+    <script src="./js/libraries/socket.io.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/chessboard-0.3.0.css">
+    <!--<link rel="stylesheet" href="./css/style.css">-->
+    <link rel="stylesheet" href="./css/multiplayer.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+
+    <title> Minerva Multiplayer </title>
+</head>
+
+<body>
+    <div id='leftNavBar'>
+        <div class="navContainer">
+            <a class='headLink' href="/">
+                <div class='picDiv'>
+                    <p class="titleNav">
+                        MINERVA
+                    </p>
+                    <img class='leftPic' src='./img/minerva.png'>
+                    <p class="titleNav">
+                        CHESS
+                    </p>
+                </div>
+            </a>
+            <a class='navLink' href='/'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/minerva.png'> HOME
+                </p>
+            </a>
+            <a lass='navLink' href='/minervaengine'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/engine.png'> ENGINE
+                </p>
+            </a>
+            <a lass='navLink' href='/minervaplay'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/chessboard.jpg'> PLAY
+                </p>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <main id="mainContainer">
+                    <div id='boardContainer'>
+                        <div id='board'>
+                          
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <h1> hello</h1>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <h1> hello</h1>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <script src="./js/userlogin.js"></script>
+    <script src="./js/libraries/chess.js"></script>
+    <script src="./js/libraries/chessboard.js"></script>
+    <script src="./js/humangame.js"></script>
+</body>
+
+</html>
