@@ -95,3 +95,31 @@ a:hover {
 #board{
     border-radius: 1px;
 }
+
+
+
+.nameAndRating {
+    height: 100%;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+    padding: 5px;
+    padding-top: 7px;
+    font-size: 16px;
+    color: white;
+    background: linear-gradient(to right, black, #31302E);
+    width: 10vw;
+    
+}
+
+
+.userName {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+
+.userIcon {
+    height: 25px;
+    width: 25px;
+    padding: 3px;
+}
