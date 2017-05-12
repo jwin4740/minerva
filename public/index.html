@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-    <link rel="stylesheet" href="./css/home.css">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <title> Minerva Home</title>
 </head>
@@ -49,15 +49,6 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
         <a href="/register" class="btn btn-primary" id="createAccount">CREATE ACCOUNT</a>
 
         <a class="btn btn-primary" data-toggle="modal" href='#loginModal'>Login</a>
@@ -96,7 +87,6 @@
 
     <script type="text/javascript">
         // ---------------------------------------------
-
         $("#logButton").on("click", function () {
             var userVal = $("#username").val();
             var passVal = $("#password").val();
@@ -107,16 +97,11 @@
             console.log("clicked");
             $.post("/login", username);
         });
-
-
         // function getSessionId() {
-
         //     $.get("/loggedIn", function (data) {
-
         //         clientSession = data;
         //         console.log(clientSession);
         //     });
-
         // }
     </script>
 

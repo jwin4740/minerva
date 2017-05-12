@@ -10,6 +10,7 @@ var whiteSanMove;
 var blackSanMove;
 var userColor;
 var movePar;
+var move;
 var grayRow = 0;
 var gameStart = false;
 var gameDataArray = [];
@@ -182,7 +183,7 @@ $('#startGame').on("click", function () {
         $("#playerTopName").html(gameObject.whitePlayerData.whitePlayerID);
         $("#playerBottomName").html(gameObject.blackPlayerData.blackPlayerID);
     }
-   
+
 });
 
 socket.on('game start', function (data) {
@@ -192,7 +193,7 @@ socket.on('game start', function (data) {
     $('#confirmGameStart').modal('show');
     console.log(data);
     configBoard();
-   
+
     if (gameObject.playerOne === localGameObject.color) {
         $("#playerTopName").html(gameObject.blackPlayerData.blackPlayerID);
         $("#playerBottomName").html(gameObject.whitePlayerData.whitePlayerID);
@@ -248,7 +249,7 @@ socket.on('new message', function (data) {
 
     if (localGameObject.userID === gameObject.whitePlayerData.whitePlayerID) {
         var tempID = gameObject.blackPlayerData.blackPlayerID;
-           
+
         var entry = $("<p class='userEntry'>");
         var spanElement = $("<span class='otherColor'>");
 
@@ -314,7 +315,7 @@ var moveCounter = 1;
 
 var onDrop = function (source, target) {
     // see if the move is legal
-    var move = game.move({
+   move = game.move({
         from: source,
         to: target,
         promotion: 'n'
@@ -323,8 +324,8 @@ var onDrop = function (source, target) {
     // illegal move
     if (move === null) return 'snapback';
 
-        socket.emit('move', move);
-  
+    socket.emit('move', move);
+
 
     uMove = move.from + move.to;
     console.log("San move: " + uMove);
@@ -337,6 +338,8 @@ var onDrop = function (source, target) {
 // for castling, en passant, pawn promotion
 var onSnapEnd = function () {
     board.position(game.fen());
+    color = localGameObject.color;
+    checkCapture(move, color);
 
 };
 
@@ -344,3 +347,58 @@ socket.on('moveresponse', function (msg) {
     game.move(msg);
     board.position(game.fen());
 });
+
+
+
+function checkCapture(move, color) {
+
+
+
+
+    if (move.flags.includes("c") || move.flags.includes("e")) {
+        var shortColor;
+        var lowerPiece = move.captured;
+        var piece = lowerPiece.toUpperCase();
+        var imageOutput;
+        var pieceType;
+
+        if (piece === 'P') {
+            pieceType = "Pawn";
+        } else {
+            pieceType = "Other";
+        }
+        constructImageOutput()
+
+        function constructImageOutput() {
+            if (color === "white") {
+                shortColor = 'b';
+            } else {
+                shortColor = 'w';
+            }
+
+
+            switch (piece) {
+                case 'P':
+                    imageOutput = shortColor + 'P';
+                    break;
+                case 'N':
+                    imageOutput = shortColor + 'N';
+                    break;
+                case 'B':
+                    imageOutput = shortColor + 'B';
+                    break;
+                case 'R':
+                    imageOutput = shortColor + 'R';
+                    break;
+                case 'Q':
+                    imageOutput = shortColor + 'Q';
+                    break;
+            }
+            console.log(imageOutput);
+
+        }
+
+        $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
+
+    }
+}

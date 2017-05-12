@@ -93,6 +93,7 @@ a:hover {
     width: 35vw;
 }
 #board{
+    clear: both;
     border-radius: 1px;
 }
 
@@ -101,13 +102,13 @@ a:hover {
 .nameAndRating {
     height: 100%;
     letter-spacing: 1px;
+    float: left;
     margin-bottom: 0px;
-    padding: 5px;
-    padding-top: 7px;
+    padding: 7px 7px 5px 5px;
     font-size: 16px;
     color: white;
     background: linear-gradient(to right, black, #31302E);
-    width: 10vw;
+
     
 }
 
@@ -121,5 +122,16 @@ a:hover {
 .userIcon {
     height: 25px;
     width: 25px;
+    padding: 3px;
+}
+
+.capturedPiece {
+    height: 22px;
+    width: 22px;
+    margin: -2px;
+}
+
+.pieceDock{
+    float: left;
     padding: 3px;
 }

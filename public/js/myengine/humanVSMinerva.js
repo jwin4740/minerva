@@ -24,6 +24,7 @@ var onDrop = function (source, target) {
 
 var onSnapEnd = function () {
     board.position(game.fen());
+    checkCapture(game, color);
     hisArray = game.history();
     setTimeout(makeEngineMove, 50);
 
@@ -44,6 +45,7 @@ function makeEngineMove() {
     }
 
     board.position(game.fen());
+    checkCapture(game, color);
 
 
 
@@ -59,3 +61,57 @@ var cfg = {
     onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
+
+
+function checkCapture(game, color) {
+
+
+    console.log(move.captured);
+
+    if (move.flags.includes("c") || move.flags.includes("e")) {
+        var shortColor;
+        var lowerPiece = move.captured;
+        var piece = lowerPiece.toUpperCase();
+        var imageOutput;
+        var pieceType;
+
+        if (piece === 'P') {
+            pieceType = "Pawn";
+        } else {
+            pieceType = "Other";
+        }
+        constructImageOutput()
+
+        function constructImageOutput() {
+            if (color === "white") {
+                shortColor = 'b';
+            } else {
+                shortColor = 'w';
+            }
+
+
+            switch (piece) {
+                case 'P':
+                    imageOutput = shortColor + 'P';
+                    break;
+                case 'N':
+                    imageOutput = shortColor + 'N';
+                    break;
+                case 'B':
+                    imageOutput = shortColor + 'B';
+                    break;
+                case 'R':
+                    imageOutput = shortColor + 'R';
+                    break;
+                case 'Q':
+                    imageOutput = shortColor + 'Q';
+                    break;
+            }
+            console.log(imageOutput);
+
+        }
+
+        $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
+
+    }
+}
