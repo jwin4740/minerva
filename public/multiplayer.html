@@ -53,84 +53,83 @@
                     <img class='navIcon' src='./img/chessboard.jpg'> PLAY
                 </p>
             </a>
-                <button id='startGame'> Start </button>
+            <button id='startGame'> Start </button>
         </div>
     </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <main id="mainContainer">
-
-                    <div class='playerInfo' id="playerInfoTop">
-                        <p class='nameAndRating' id='topNameAndRating'>
-                            <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                            (1543)
-                        </p>
-                        <div class='pieceDock' id='whiteCaptured'>
-                            <span id='whitePawn'></span> <span id='whiteOther'></span>
-                        </div>
-                    </div>
-                    <div id='boardContainer'>
-                        <div id='board'>
-                        </div>
-                    </div>
-                    <div class='playerInfo' id="playerInfoBottom">
-                        <p class='nameAndRating' id='bottomNameAndRating'>
-                            <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                            (1332)
-                        </p>
-                        <div class='pieceDock' id='blackCaptured'>
-                            <span id='blackPawn'></span> <span id='blackOther'></span>
-                        </div>
-                    </div>
-                </main>
+    <section class='totusTuus'>
+        <div class="boardColumn">
+            <div class='playerInfo' id="playerInfoTop">
+                <p class='nameAndRating' id='topNameAndRating'>
+                    <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                    (1543)
+                </p>
+                <div class='pieceDock' id='whiteCaptured'>
+                    <span id='whitePawn'></span> <span id='whiteOther'></span>
+                </div>
             </div>
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                <h1> hello</h1>
-            </div>
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                <h1> hello</h1>
-            </div>
-
-
-        </div>
-          <div id="confirmGameStart" class="modal fade text-center" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i></button>
-                        <h4 class="modal-title"> Your opponent is waiting for you to start the game</h4>
+            <main id="mainContainer">
+                <div id='boardContainer'>
+                    <div id='board'>
                     </div>
-                    <div class="modal-body">
-                        <button type="submit" id="confirmStartButton" data-dismiss="modal" class="btn btn-success green">START</button>
-                    </div>
-
+                </div>
+            </main>
+            <div class='playerInfo' id="playerInfoBottom">
+                <p class='nameAndRating' id='bottomNameAndRating'>
+                    <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                    (1332)
+                </p>
+                <div class='pieceDock' id='blackCaptured'>
+                    <span id='blackPawn'></span> <span id='blackOther'></span>
                 </div>
             </div>
         </div>
-        <!--confirmation modal-->
+
+        <div id='ad'>
+            <div id='adHam'><span id='exitAd' class="glyphicon glyphicon-remove-circle"></span>
+                <h4 id='myShot'>Do not throw away your shot</h4>
+            </div>
+            <img class='hamAdTemp' src='./img/hamcrop.jpg'>
+        </div>
 
 
-      <div id="gameModal">
-            <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    </section>
+
+    <div id="confirmGameStart" class="modal fade text-center" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i></button>
+                    <h4 class="modal-title"> Your opponent is waiting for you to start the game</h4>
+                </div>
+                <div class="modal-body">
+                    <button type="submit" id="confirmStartButton" data-dismiss="modal" class="btn btn-success green">START</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--confirmation modal-->
+
+
+    <div id="gameModal">
+        <div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                            <h4 class="modal-title" id="exampleModalLabel">New Game Settings</h5>
-                        </div>
-                        <div class="modal-body">
-                            <span class="label label-default">Choose Side</span>
-                            <select name="side" id="sideColor">
+                        <h4 class="modal-title" id="exampleModalLabel">New Game Settings</h5>
+                    </div>
+                    <div class="modal-body">
+                        <span class="label label-default">Choose Side</span>
+                        <select name="side" id="sideColor">
                                     <option id ="whiteSide" value="white">white</option>
                                     <option id ="blackSide" value="black">black</option>
                             </select>
-                            <br>
-                            <br>
-                            <span class="label label-default">Time Settings</span>
-                            <select name="time" id="timeSelection">
+                        <br>
+                        <br>
+                        <span class="label label-default">Time Settings</span>
+                        <select name="time" id="timeSelection">
                                  <option value="60min5delay">untimed</option>
                                     <option value="60">60min </option>
                                     <option value="30">30min</option>
@@ -139,16 +138,17 @@
                                     <option value="1">1min</option>
                                        
                                 </select>
-                            <br><br>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="setSides" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-                        </div>
+                        <br><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="setSides" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                     </div>
                 </div>
             </div>
-            
+        </div>
+
     </div>
+
     <script src="./js/userlogin.js"></script>
     <script src="./js/libraries/chess.js"></script>
     <script src="./js/libraries/chessboard.js"></script>

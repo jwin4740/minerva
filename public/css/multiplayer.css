@@ -3,8 +3,9 @@
 }
 
 html {
-    background-image: url('../img/marble.jpg');
     height: 100vh;
+    background: radial-gradient(black, white);
+    /* Standard syntax */
 }
 
 body {
@@ -13,11 +14,9 @@ body {
     height: 100vh;
 }
 
-.container {
-    padding-top: 7vh;
-    margin-left: 9vw;
-    padding-left: 2vw;
-    width: 91vw;
+.totusTuus {
+    height: 100vh;
+    margin-left: 11vw;
 }
 
 #leftNavBar {
@@ -82,36 +81,32 @@ a:hover {
 }*/
 
 #mainContainer {
-    padding: 10vh 6vh 10vh 6vh;
-    background-image: url('../img/mahogany.jpg');
-    border-radius: 1vh;
-    height: 85vh;
-    width: 95%;
+    background-image: url('../img/redmarble.jpg');
+    border-radius: 5px;
+    padding: 20px;
+    float: left;
+    /*width: 100%;*/
 }
 
 #boardContainer {
-    width: 35vw;
+    padding: 15px;
+    width: 37vw;
 }
-#board{
+
+#board {
     clear: both;
     border-radius: 1px;
 }
 
-
-
 .nameAndRating {
     height: 100%;
     letter-spacing: 1px;
-    float: left;
     margin-bottom: 0px;
     padding: 7px 7px 5px 5px;
     font-size: 16px;
     color: white;
     background: linear-gradient(to right, black, #31302E);
-
-    
 }
-
 
 .userName {
     font-size: 13px;
@@ -131,7 +126,46 @@ a:hover {
     margin: -2px;
 }
 
-.pieceDock{
-    float: left;
+.pieceDock {
     padding: 3px;
+}
+
+#ad {
+    float: right;
+    margin-right: 25px;
+}
+
+#adHam {
+    border-left: solid 3px white;
+    border-right: solid 3px white;
+    border-top: solid 3px white;
+    height: 140px;
+    margin-top: 50px;
+    width: 126px;
+    background-color: black;
+}
+
+#myShot {
+    text-align: center;
+    line-height: 25px;
+    padding: 6px;
+    padding-top: 3px;
+    clear: both;
+    color: white;
+}
+
+#exitAd {
+    float: right;
+    padding: 7px;
+    font-size: 23px;
+    color: white;
+}
+
+.hamAdTemp {
+    clear: both;
+    width: 126px;
+    height: 420px;
+    border-left: solid 3px white;
+    border-right: solid 3px white;
+    border-bottom: solid 3px white;
 }
