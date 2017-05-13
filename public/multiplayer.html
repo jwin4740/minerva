@@ -57,7 +57,7 @@
         </div>
     </div>
     <section class='totusTuus'>
-        <div class="boardColumn">
+        <main id="mainContainer">
             <div class='playerInfo' id="playerInfoTop">
                 <p class='nameAndRating' id='topNameAndRating'>
                     <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                    (1543)
@@ -66,12 +66,12 @@
                     <span id='whitePawn'></span> <span id='whiteOther'></span>
                 </div>
             </div>
-            <main id="mainContainer">
+            <div id="boardWrapper">
                 <div id='boardContainer'>
                     <div id='board'>
                     </div>
                 </div>
-            </main>
+            </div>
             <div class='playerInfo' id="playerInfoBottom">
                 <p class='nameAndRating' id='bottomNameAndRating'>
                     <img class='userIcon' src='./img/bluepawn.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                    (1332)
@@ -80,7 +80,9 @@
                     <span id='blackPawn'></span> <span id='blackOther'></span>
                 </div>
             </div>
-        </div>
+        </main>
+
+
 
         <div id='ad'>
             <div id='adHam'><span id='exitAd' class="glyphicon glyphicon-remove-circle"></span>
@@ -88,6 +90,34 @@
             </div>
             <img class='hamAdTemp' src='./img/hamcrop.jpg'>
         </div>
+     
+           <div id="chatAndNotate">
+                        <!--<button type="button" class="btn btn-primary" id="startGame">Start Game</button>-->
+
+                        <div id="panelNotate" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Moves</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panelMainNotate">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="panelChat" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Chat</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='panelMainChat'>
+                                    <p class="welcomeChat"> Welcome to Minerva Chess <span id="userName"></span></p>
+                                    <p class="welcomeChat" id="timeMoment"></p>
+                                </div>
+                                <div id="chatField">
+                                    <input class="chatInput" id="sendChat" placeholder="message">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
     </section>

@@ -81,11 +81,13 @@ a:hover {
 }*/
 
 #mainContainer {
+    float: left;
+}
+
+#boardWrapper {
     background-image: url('../img/redmarble.jpg');
     border-radius: 5px;
     padding: 20px;
-    float: left;
-    /*width: 100%;*/
 }
 
 #boardContainer {
@@ -168,4 +170,77 @@ a:hover {
     border-left: solid 3px white;
     border-right: solid 3px white;
     border-bottom: solid 3px white;
+}
+
+#chatAndNotate {
+    float: right;
+    margin-top: 45px;
+    margin-right: 60px;
+}
+
+
+#panelChat {
+    width: 400px;
+    position: relative;
+  
+}
+
+.panelMainNotate {
+    overflow-y: scroll;
+    height: 165px;
+}
+.welcomeChat{
+    font-size: 17px;
+    margin: 0px;
+}
+.panelMainChat {
+    overflow-y: scroll;
+    height: 180px;
+}
+
+#chatField {
+    border-top: solid 1px lightgray;
+}
+
+.chatInput {
+    border: transparent;
+    width: 100%;
+    padding: 2px;
+    height: 20px;
+}
+
+#panelNotate{
+    margin-bottom: 40px;
+}
+
+input:focus {
+    padding: 4px;
+    outline: none;
+}
+
+#userName {
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.userEntry {
+    margin: 0px;
+}
+
+.userColor {
+    font-size: 13px;
+    color: green;
+}
+
+.otherColor {
+    color: blue;
+}
+
+.opponentEntry {
+    color: blue;
+    margin: 0px;
+}
+
+#timeMoment{
+    font-size: 13px;
 }
