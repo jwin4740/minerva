@@ -4,7 +4,7 @@
 
 html {
     height: 100vh;
-    background: radial-gradient(black, white);
+    background-color: #C7C886;
     /* Standard syntax */
 }
 
@@ -30,7 +30,7 @@ h3 {
 
 .navContainer {
     padding-left: 0px;
-    background: linear-gradient(to right, black, #31302E);
+    background-color: #7C1C0C;
     height: 100vh;
 }
 
@@ -53,7 +53,7 @@ h3 {
 }
 
 .titleNav {
-    color: darkgray;
+    color: white;
     margin-bottom: 0px;
     font-size: 18px;
 }
@@ -63,7 +63,7 @@ a:hover {
 }
 
 .linkLeft {
-    color: darkgray;
+    color: white;
     padding-left: 7px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -81,12 +81,13 @@ a:hover {
 }*/
 
 #mainContainer {
+    margin-top: 10px;
     float: left;
 }
 
 #boardWrapper {
+    clear: both;
     background-image: url('../img/redmarble.jpg');
-    border-radius: 5px;
     padding: 20px;
 }
 
@@ -101,6 +102,7 @@ a:hover {
 }
 
 .nameAndRating {
+    float: left;
     height: 100%;
     letter-spacing: 1px;
     margin-bottom: 0px;
@@ -243,4 +245,22 @@ input:focus {
 
 #timeMoment{
     font-size: 13px;
+}
+
+#socialContainer{
+    margin-top: 150px;
+    margin-left: 10px;
+    width: 80%;
+    height: 50px;
+    background: solid 2px white;
+}
+
+.socialIcon{
+    height: 35px;
+    width: 35px;
+}
+
+div.panel-heading{
+    background-color: #7C1C0C !important;
+    color: white !important;
 }

@@ -54,8 +54,8 @@
 /* black square */
 
 .black-3c85d {
-  color: black;
-  background: linear-gradient(to right, #31302E, gray);
+  color: white;
+  background: linear-gradient(to right, #31302E, gray, darkgray);
   font-weight: bolder;
 }
 
