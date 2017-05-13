@@ -158,7 +158,7 @@ function getEngineMove() {
     }
     positionCount = 0;
     // GameScore.searchScore = GameScore.currentScore;
-    var bestMove = minimaxRoot(4, game, true);
+    var bestMove = minimaxRoot(3, game, true);
     GameScore.currentScore = GameScore.searchScore;
     console.log(GameScore.currentScore);
     console.log("nodes: " + positionCount);
