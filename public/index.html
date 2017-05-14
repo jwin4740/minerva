@@ -47,7 +47,7 @@
                     <img class='navIcon' src='./img/book.png'> LEARNING
                 </p>
             </a>
-            <button id='startGame'> Create Game </button>
+
             <div id='socialContainer'>
                 <a lass='navLink' href='/minervaengine'>
                     <p class="linkLeftBottom">
@@ -73,7 +73,24 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Basic panel example
+                    <button id='signUp'>CREATE ACCOUNT</button>
+                    <hr>
+
+                    <form id="loginForm" method="post" action="/login">
+                        <div class="input-group">
+                            <input id="email" type="text" class="form-control" name="logEmail">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <input id="password" type="password" class="form-control" name="logPassword">
+                        </div>
+
+                        <button type="submit" id="logButton" class="btn btn-success green">Login</button>
+                        <a href="/register" id="createAccount"> Don't have an account? Sign Up</a>
+
+
+                    </form>
+
                 </div>
             </div>
 
