@@ -14,11 +14,6 @@ body {
     height: 100vh;
 }
 
-.totusTuus {
-    height: 100vh;
-    margin-left: 11vw;
-}
-
 #leftNavBar {
     width: 9vw;
     position: fixed;
@@ -92,6 +87,25 @@ a:hover {
     margin-top: 90px;
 }
 
+#indexSection {
+    border: solid 2px black;
+    height: 100vh;
+    margin-left: 9vw;
+    padding: 5% 7.5% 0% 7.5%;
+}
+
+#columnOneContainer {
+    float: left;
+    width: 70%;
+    padding: 1%;
+}
+
+#columnTwoContainer {
+    float: left;
+    width: 30%;
+    padding: 1%;
+}
+
 #startGame {
     border-radius: 3px;
     padding: 5px;
@@ -110,11 +124,9 @@ a:hover {
     0% {
         border: 5px solid rgba(0, 255, 0, 1);
     }
- 
     50% {
         border: 5px solid rgba(0, 255, 0, 0.30);
     }
- 
     100% {
         border: 5px solid rgba(0, 255, 0, 1);
     }
@@ -214,9 +226,9 @@ a:hover {
     clear: both;
     width: 126px;
     height: 420px;
-    border-left: solid 3px white;
-    border-right: solid 3px white;
-    border-bottom: solid 3px white;
+    border-left: solid 3px black;
+    border-right: solid 3px black;
+    border-bottom: solid 3px black;
 }
 
 #chatAndNotate {
