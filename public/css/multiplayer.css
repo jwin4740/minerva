@@ -75,6 +75,23 @@ a:hover {
     background-color: black;
 }
 
+.linkLeftBottom {
+    color: white;
+    padding-left: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.linkLeftBottom:hover {
+    background-color: black;
+}
+
+#socialContainer {
+    margin-top: 100px;
+}
+
 
 /*#panelNotate {
     height: 250px;
@@ -180,21 +197,32 @@ a:hover {
     margin-right: 60px;
 }
 
-
 #panelChat {
     width: 400px;
     position: relative;
-  
+    border-left: solid 1px black;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+#panelNotate {
+    margin-bottom: 40px;
+    border-left: solid 1px black;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+    border-right: solid 1px black;
 }
 
 .panelMainNotate {
     overflow-y: scroll;
     height: 165px;
 }
-.welcomeChat{
+
+.welcomeChat {
     font-size: 17px;
     margin: 0px;
 }
+
 .panelMainChat {
     overflow-y: scroll;
     height: 180px;
@@ -209,10 +237,6 @@ a:hover {
     width: 100%;
     padding: 2px;
     height: 20px;
-}
-
-#panelNotate{
-    margin-bottom: 40px;
 }
 
 input:focus {
@@ -243,24 +267,11 @@ input:focus {
     margin: 0px;
 }
 
-#timeMoment{
+#timeMoment {
     font-size: 13px;
 }
 
-#socialContainer{
-    margin-top: 150px;
-    margin-left: 10px;
-    width: 80%;
-    height: 50px;
-    background: solid 2px white;
-}
-
-.socialIcon{
-    height: 35px;
-    width: 35px;
-}
-
-div.panel-heading{
+div.panel-heading {
     background-color: #7C1C0C !important;
     color: white !important;
 }
