@@ -92,13 +92,37 @@ function getMaterialScores(game) {
 
 
 var minimaxRoot = function (depth, game, isMaximisingPlayer) {
+    var captureArray = [];
+    var noCaptureArray = [];
 
     var newGameMoves = game.ugly_moves();
+    var x = newGameMoves.length;
+
+    for (var i = 0; i < x; i++) {
+        if (newGameMoves[i].flags === 2) {
+            captureArray.push(newGameMoves[i]);
+        } else {
+            noCaptureArray.push(newGameMoves[i]);
+        }
+    }
+
+    var n = noCaptureArray.length;
+
+    for (var i = 0; i < n; i++) {
+        captureArray.push(noCaptureArray[i]);
+    }
+
+
+    console.log(captureArray);
+
+    var moveLen = captureArray.length;
+
+
     var bestMove = -9999;
     var bestMoveFound;
 
-    for (var i = 0; i < newGameMoves.length; i++) {
-        var newGameMove = newGameMoves[i]
+    for (var i = 0; i < moveLen; i++) {
+        var newGameMove = captureArray[i];
         game.ugly_move(newGameMove);
         var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
         game.undo();
@@ -129,6 +153,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
             game.undo();
             alpha = Math.max(alpha, bestMove);
             if (beta <= alpha) {
+                console.log("alpha cutoff");
                 return bestMove;
             }
         }
@@ -141,6 +166,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
             game.undo();
             beta = Math.min(beta, bestMove);
             if (beta <= alpha) {
+                console.log("beta cutoff");
                 return bestMove;
             }
         }
@@ -158,12 +184,12 @@ function getEngineMove() {
     }
     positionCount = 0;
     // GameScore.searchScore = GameScore.currentScore;
-    var bestMove = minimaxRoot(3, game, true);
+    var bestMove = minimaxRoot(4, game, true);
     GameScore.currentScore = GameScore.searchScore;
     console.log(GameScore.currentScore);
     console.log("nodes: " + positionCount);
 
-    // console.log(positionCount);
+
     searchMode = false;
     return bestMove;
 }

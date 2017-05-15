@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="./js/jQueryLib.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
@@ -70,30 +71,22 @@
 
     <main id='indexSection'>
         <section id="columnOneContainer">
-
             <div class="panel panel-default">
+                <div class="panel-heading" id="loginHeading">
+                    <h5> RETURNING USER LOGIN </h5>
+                </div>
                 <div class="panel-body">
-                    <button id='signUp'>CREATE ACCOUNT</button>
-                    <hr>
-
-                    <form id="loginForm" method="post" action="/login">
-                        <div class="input-group">
-                            <input id="email" type="text" class="form-control" name="logEmail">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input id="password" type="password" class="form-control" name="logPassword">
-                        </div>
-
-                        <button type="submit" id="logButton" class="btn btn-success green">Login</button>
-                        <a href="/register" id="createAccount"> Don't have an account? Sign Up</a>
-
-
-                    </form>
-
+                    <div class='loginHousing'>
+                        <label> EMAIL </label>
+                        <input placeholder='email' id="email" type="text" class="form-control" name="logEmail">
+                    </div>
+                    <div class='loginHousing'>
+                        <label> PASSWORD </label>
+                        <input placeholder='password' id="password" type="password" class="form-control" name="logPassword">
+                    </div>
+                    <button id="signUp">Login</button>
                 </div>
             </div>
-
         </section>
         <section id="columnTwoContainer">
             <div class="panel panel-default">
@@ -116,10 +109,6 @@
 
 
 
-
-
-
-
     <a href="/register" class="btn btn-primary" id="createAccount">CREATE ACCOUNT</a>
 
     <a class="btn btn-primary" data-toggle="modal" href='#loginModal'>Login</a>
@@ -127,10 +116,10 @@
     <div id="loginModal" class="modal fade text-center" role="dialog">
         <div class="modal-dialog">
             <!-- Login Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content" id='loginModalStyle'>
+                <div class="modal-header" id='loginHeading'>
                     <button type="button" class="close" data-dismiss="modal"><i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i></button>
-                    <h4 class="modal-title">Returning User</h4>
+                    <h4 class="modal-title">Returning User Login</h4>
                 </div>
                 <div class="modal-body">
                     <form id="loginForm" method="post" action="/login">
@@ -144,13 +133,13 @@
                             <input id="password" type="password" class="form-control" name="logPassword">
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="logButton" class="btn btn-success green">Login</button>
+                            <!--<button type="submit" id="logButton" class="btn btn-success green">Login</button>-->
+                              <button type='submit' id="signUp">Login</button>
+                              <br>
                             <a href="/register" id="createAccount"> Don't have an account? Sign Up</a>
-
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
