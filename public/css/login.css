@@ -267,6 +267,7 @@ div.panel-heading {
 #loginModalStyle {
     width: 36vw;
     margin: auto;
+    margin-top: 150px;
     background-color: lightgray;
 }
 
@@ -282,3 +283,4 @@ div.panel-heading {
 .modal-footer {
     padding: 15px 0px 0px 0px;
 }
+

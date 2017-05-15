@@ -69,44 +69,37 @@
         </div>
     </div>
 
-
+    
 
     <a href="/register" class="btn btn-primary" id="createAccount">CREATE ACCOUNT</a>
 
-    <a class="btn btn-primary" data-toggle="modal" href='#registerModal'>Login</a>
+    <a class="btn btn-primary" data-toggle="modal" href='#loginModal'>Login</a>
     <a class="btn btn-primary" id="logoutButton" href='/'>Logout</a>
-    <div id="registerModal" class="modal fade text-center" role="dialog">
+    <div id="loginModal" class="modal fade text-center" role="dialog">
         <div class="modal-dialog">
             <!-- Login Modal content-->
             <div class="modal-content" id='loginModalStyle'>
                 <div class="modal-header" id='loginHeading'>
                     <button type="button" class="close" data-dismiss="modal"><i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i></button>
-                    <h4 class="modal-title">CREATE ACCOUNT</h4>
+                    <h4 class="modal-title">Returning User Login</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/users">
-                        <div id='credentialError'></div>
-                        <div class="input-group">
-                            <span class="input-group-addon">Username</span>
-                            <input id="email" type="text" class="form-control" name="logEmail">
-                        </div>
-                        <br>
+                    <form id="loginForm" method="post" action="/login">
                         <div class="input-group">
                             <span class="input-group-addon">Email</span>
-                            <input id="password" type="text" class="form-control" name="logPassword">
+                            <input id="email" type="text" class="form-control" name="logEmail">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">Password</span>
                             <input id="password" type="password" class="form-control" name="logPassword">
                         </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Confirm Password</span>
-                            <input id="password" type="password" class="form-control" name="logPassword">
+                        <div class="modal-footer">
+                            <!--<button type="submit" id="logButton" class="btn btn-success green">Login</button>-->
+                              <button type='submit' id="signUp">Login</button>
+                              <br>
+                            <a href="/register" id="createAccount"> Don't have an account? Sign Up</a>
                         </div>
-                        <button id="registerButton" type="submit" class="btn btn-success green" style='margin: 10px 0px 0px 0px; float: right;'>Submit</button>
-                    <br><br>
                     </form>
                 </div>
             </div>
@@ -115,7 +108,7 @@
     </div>
 
     <script type="text/javascript">
-        $('#registerModal').modal('show');
+    $('#loginModal').modal('show');
         // ---------------------------------------------
         $("#logButton").on("click", function () {
             var userVal = $("#username").val();
