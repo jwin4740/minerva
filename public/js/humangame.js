@@ -135,8 +135,11 @@ $(document).ready(function () {
 
 $("#setSides").on("click", function () {
     gameObject.gameCreated = true;
+    $('#createGame').hide();
+    $('#startGame').show();
+
     var sideColor = $("#sideColor").val();
-    gameTime = "untimed"
+    gameTime = "untimed";
     if (sideColor === "white") {
         localGameObject.gameTime = gameTime;
         gameObject.gameTime = gameTime;

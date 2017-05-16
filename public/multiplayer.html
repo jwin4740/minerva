@@ -59,7 +59,7 @@
                     <img class='navIcon' src='./img/book.png'> LEARNING
                 </p>
             </a>
-            <!--<button class='flashing' id='createGame'> Create Game </button>-->
+            <button class='flashing' id='createGame'> Create Game </button>
             <button id='startGame'> Start Game </button>
             <div id='socialContainer'>
                 <a lass='navLink' href='/minervaengine'>
@@ -117,8 +117,6 @@
         </div>
 
         <div id="chatAndNotate">
-            <!--<button type="button" class="btn btn-primary" id="startGame">Start Game</button>-->
-
             <div id="panelNotate" class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Moves</h3>
@@ -143,8 +141,6 @@
                 </div>
             </div>
         </div>
-
-
     </section>
 
     <div id="confirmGameStart" class="modal fade text-center" role="dialog">
@@ -209,6 +205,10 @@
     <script src="./js/libraries/chessboard.js"></script>
     <script src="./js/humangame.js"></script>
     <script>
+         $('#startGame').hide();
+        $('#createGame').on('click', function () {
+            $('#myModal').modal('show');
+        });
     </script>
 </body>
 
