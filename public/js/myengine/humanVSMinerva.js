@@ -87,3 +87,14 @@ var cfg = {
     onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
+
+$('#setFen').on("click", function () {
+    var fenVal = $('#fenInput').val().trim();
+    console.log(fenVal);
+    game = new Chess(fenVal);
+    board.position(game.fen());
+    // startPos = fenVal;
+    // cfg.position = startPos;
+    // board = ChessBoard('board', cfg);
+    $('#fenInput').val('');
+});
