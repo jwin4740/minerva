@@ -94,13 +94,8 @@
 
     </div>
     <main class='totusTuus'>
-        <!--<div style='margin-left: 200px; clear:both;' id='fenDiv'>
-            <h2> SET FEN </h2>
-            <input id="fenInput">
-            <button id="setFen">SET FEN</button>
-        </div>-->
-        <section id='leftInfo'>
-        </section>
+
+
         <section id="mainContainer">
             <!--<div class='playerInfo' id="playerInfoTop">
                   <p class='nameAndRating' id='bottomNameAndRating'>
@@ -123,6 +118,63 @@
                     <span id='blackPawn'></span> <span id='blackOther'></span>
                 </div>
             </div>-->
+        </section>
+        <section id='rightInfo'>
+
+            <div class="panel panel-default" id='engineWhitePanel'>
+                <div class="panel-heading" id='engineWhiteHeader'>
+                    <h3 class="panel-title">WHITE</h3>
+                </div>
+                <div class="panel-body">
+                    <div class='playerInfo' id="playerInfoBottom">
+                        <p class='nameAndRating' id='bottomNameAndRating'>
+                            <img class='engineIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                            (1332)
+                        </p>
+
+                        <div class='pieceDock' id='blackCaptured'>
+                            <span id='blackPawn'></span> <span id='blackOther'></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id='engineBlackPanel'>
+                <div class="panel-heading" id='engineBlackHeader'>
+                    <h3 class="panel-title">BLACK</h3>
+                </div>
+                <div class="panel-body">
+                    <div class='playerInfo' id="playerInfoTop">
+                        <p class='nameAndRating' id='bottomNameAndRating'>
+                            <img class='engineIcon' src='./img/engine.png' alt='userIcon'> <span class='userName' id="playerBottomName">MINERVA v2.0.5 </span>
+                        </p>
+                        <div class='pieceDock' id='whiteCaptured'>
+                            <span id='whitePawn'></span> <span id='whiteOther'></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel panel-default widePanel" id='moveList'>
+                <div class="panel-heading blackHeader">
+                    <h3 class="panel-title">MOVE LIST</h3>
+                </div>
+                <div class="panel-body">
+                    <div id='gameHistory'>
+                    </div>
+                </div>
+            </div>
+          
+
+            <div class="panel panel-default widePanel" id='setFen'>
+                <div class="panel-heading blackHeader">
+                    <h3 class="panel-title">SET FEN</h3>
+                </div>
+                <div class="panel-body">
+                    <input id="fenInput">
+                    <button id="setFen">SET FEN</button>
+                </div>
+            </div>
+
+
         </section>
 
         <section class='bottomInfo'>

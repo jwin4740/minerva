@@ -195,10 +195,13 @@ a:hover {
     padding: 3px;
 }
 
-#leftInfo {
-    float: right;
+#rightInfo {
+    float: left;
     border: solid 1px black;
-    margin: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    width: 51.5vw;
+    height: 76.75vh;
 }
 
 input:focus {
@@ -237,15 +240,6 @@ input:focus {
     float: right;
     padding: 5px;
     margin-right: 15px;
-}
-
-div.panel-heading {
-    background-image: url('../img/redmarble.jpg');
-    color: white !important;
-}
-
-div.panel-body {
-    background-color: lightgray !important;
 }
 
 .bottomInfo {
@@ -338,4 +332,56 @@ tbody {
 
 #bodyBestLine {
     text-align: left;
+}
+
+#engineWhitePanel {
+    float: left;
+    width: 48.5%;
+    margin: 5px;
+}
+
+#engineBlackPanel {
+    float: left;
+    width: 48.5%;
+    margin: 5px;
+}
+
+#engineWhiteHeader {
+    background-color: white !important;
+    color: black !important;
+    border-radius: 0px;
+    padding: 5px;
+}
+
+#engineBlackHeader {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 0px;
+    padding: 5px;
+}
+
+.engineIcon {
+    height: 30px;
+    width: 30px;
+}
+
+#moveList {}
+
+.widePanel {
+    clear: both;
+    width: 98.75%;
+    margin: 5px;
+}
+
+.blackHeader {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 0px;
+    padding: 5px;
+}
+
+div.panel-default {
+    background-color: transparent !important;
+    border: solid 1px black;
+    border-radius: 0px;
 }
