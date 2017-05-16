@@ -59,6 +59,12 @@ h3 {
     font-size: 18px;
 }
 
+#gameHistory {
+    height: 100%;
+    width: 100%;
+    word-wrap: break-word;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -181,13 +187,22 @@ a:hover {
 }
 
 .capturedPiece {
-    height: 22px;
-    width: 22px;
-    margin: -2px;
+    height: 25px;
+    width: 25px;
+    margin: -4px;
 }
 
 .pieceDock {
+    height: 100%;
     padding: 3px;
+}
+
+#blackPawn {
+    margin-left: 10px;
+}
+
+#whitePawn {
+    margin-left: 10px;
 }
 
 #ad {
@@ -255,6 +270,7 @@ a:hover {
 .panelMainNotate {
     overflow-y: scroll;
     height: 165px;
+    word-wrap: break-word;
 }
 
 .welcomeChat {
@@ -265,17 +281,19 @@ a:hover {
 .panelMainChat {
     overflow-y: scroll;
     height: 180px;
+    border: solid 1px darkgray;
+    padding: 5px;
 }
 
 #chatField {
-    border-top: solid 1px lightgray;
+    border: solid 1px darkgray;
 }
 
 .chatInput {
     border: transparent;
     width: 100%;
-    padding: 2px;
-    height: 20px;
+    padding: 5px;
+    height: 30px;
 }
 
 input:focus {
@@ -308,12 +326,15 @@ input:focus {
 
 #timeMoment {
     font-size: 13px;
+    margin-bottom: 5px;
 }
-.helloUser{
+
+.helloUser {
     float: right;
     padding: 5px;
     margin-right: 15px;
 }
+
 div.panel-heading {
     background-image: url('../img/redmarble.jpg');
     color: white !important;

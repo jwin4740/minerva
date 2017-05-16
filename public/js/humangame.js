@@ -27,8 +27,9 @@ var users = $('#users');
 var username = $('#username');
 var localData;
 var connections = 0;
+var hisArray;
 
-
+var regexColor;
 var game;
 var whitePlayerID;
 var blackPlayerID;
@@ -209,6 +210,11 @@ socket.on('game start', function (data) {
 $("#confirmStartButton").on("click", function () {
 
     gameStart = true;
+    if (localGameObject.color === 'white') {
+        regexColor = /^b/;
+    } else {
+        regexColor = /^w/;
+    }
     socket.emit("game has started", gameObject);
 });
 
@@ -302,10 +308,15 @@ function configBoard() {
 
 function startGame() {
     gameStart = true;
+    if (localGameObject.color === 'white') {
+        regexColor = /^b/;
+    } else {
+        regexColor = /^w/;
+    }
 }
 
 var onDragStart = function (source, piece, position, orientation) {
-    if (game.in_checkmate() === true || game.in_draw() === true || gameStart === false) {
+    if (game.in_checkmate() === true || game.in_draw() === true || gameStart === false || piece.search(regexColor) !== -1) {
         return false;
     }
 };
@@ -318,7 +329,7 @@ var moveCounter = 1;
 
 var onDrop = function (source, target) {
     // see if the move is legal
-   move = game.move({
+    move = game.move({
         from: source,
         to: target,
         promotion: 'n'
@@ -341,7 +352,13 @@ var onDrop = function (source, target) {
 // for castling, en passant, pawn promotion
 var onSnapEnd = function () {
     board.position(game.fen());
+    whiteMovedHistory();
     color = localGameObject.color;
+    if (localGameObject.color === 'white') {
+        whiteMovedHistory();
+    } else {
+        blackMovedHistory();
+    }
     checkCapture(move, color);
 
 };
@@ -354,10 +371,6 @@ socket.on('moveresponse', function (msg) {
 
 
 function checkCapture(move, color) {
-
-
-
-
     if (move.flags.includes("c") || move.flags.includes("e")) {
         var shortColor;
         var lowerPiece = move.captured;
@@ -404,4 +417,39 @@ function checkCapture(move, color) {
         $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
 
     }
+}
+
+
+function whiteMovedHistory() {
+    hisArray = game.history();
+    var n = hisArray.length;
+    var history = '';
+    var counterMod = 0;
+    for (var i = 0; i < n; i++) {
+        counterMod++;
+
+        history += hisArray[i] + " ";
+        if (counterMod % 2 === 0) {
+            history += " .... ";
+        }
+
+    }
+    $('#gameHistory').html(history);
+  
+}
+
+function blackMovedHistory() {
+    hisArray = game.history();
+    var n = hisArray.length;
+    var history = '';
+    var counterMod = 0;
+    for (var i = 0; i < n; i++) {
+        counterMod++;
+        if (counterMod % 2 != 0) {
+            history += " .... ";
+        }
+        history += hisArray[i] + " ";
+
+    }
+    $('#gameHistory').html(history);
 }
