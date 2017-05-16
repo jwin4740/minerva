@@ -184,10 +184,19 @@ function getEngineMove() {
     }
     positionCount = 0;
     // GameScore.searchScore = GameScore.currentScore;
+    var startTime = moment().valueOf();
+
     var bestMove = minimaxRoot(3, game, true);
+    var stopTime = moment().valueOf();
+    var totalTime = stopTime - startTime;
+    var totalTimeSeconds = totalTime / 1000;;
+    var nodeRateRaw = positionCount / totalTimeSeconds;
+    var nodeRate = nodeRateRaw.toFixed(0);
+
     GameScore.currentScore = GameScore.searchScore;
     console.log(GameScore.currentScore);
-    console.log("nodes: " + positionCount);
+    $('#nodeRateOutput').html(nodeRate);
+    $('#nodesVisitedOutput').html(positionCount);
 
 
     searchMode = false;

@@ -8,7 +8,7 @@ var onDragStart = function (source, piece, position, orientation) {
 var onDrop = function (source, target) {
     // see if the move is legal
     color = 'white';
-    var move = game.move({
+    move = game.move({
         from: source,
         to: target,
         promotion: 'q',
@@ -25,7 +25,7 @@ var onDrop = function (source, target) {
 var onSnapEnd = function () {
     board.position(game.fen());
     hisArray = game.history();
-    setTimeout(makeEngineMove, 50);
+    setTimeout(makeEngineMove, 200);
 
 };
 

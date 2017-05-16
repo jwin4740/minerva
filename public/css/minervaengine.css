@@ -309,24 +309,25 @@ hr {
     padding: 10px;
 }
 
-
-#depthHeader{
-width: 75px;
+#depthHeader {
+    width: 75px;
 }
 
-#nodesVisitedHeader{
+#scoreHeader {
+    width: 80px;
+}
+
+#nodesVisitedHeader {
     width: 125px;
 }
 
-#nodeRateHeader{
+#nodeRateHeader {
     width: 130px;
-    
 }
 
 #bestLineHeader {
     margin-left: 10px;
     text-align: left;
- 
 }
 
 tbody {
@@ -335,6 +336,6 @@ tbody {
     color: blue;
 }
 
-#bodyBestLine{
+#bodyBestLine {
     text-align: left;
 }
