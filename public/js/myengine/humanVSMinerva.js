@@ -25,6 +25,19 @@ var onDrop = function (source, target) {
 var onSnapEnd = function () {
     board.position(game.fen());
     hisArray = game.history();
+    console.log(hisArray);
+    var n = hisArray.length;
+    var history = '';
+    var counterMod = 0;
+    for (var i = 0; i < n; i++) {
+        counterMod++;
+        if (counterMod % 2 != 0) {
+            history += " .... ";
+        }
+        history += hisArray[i] + " ";
+
+    }
+    $('#gameHistory').html(history);
     setTimeout(makeEngineMove, 200);
 
 };
@@ -44,7 +57,21 @@ function makeEngineMove() {
     }
 
     board.position(game.fen());
-   
+    hisArray = game.history();
+    var n = hisArray.length;
+    var history = '';
+    var counterMod = 0;
+    for (var i = 0; i < n; i++) {
+        counterMod++;
+
+        history += hisArray[i] + " ";
+        if (counterMod % 2 === 0) {
+            history += " .... ";
+        }
+
+    }
+    $('#gameHistory').html(history);
+
 
 
 
@@ -60,5 +87,3 @@ var cfg = {
     onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
-
-

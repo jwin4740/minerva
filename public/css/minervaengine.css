@@ -365,7 +365,11 @@ tbody {
     width: 30px;
 }
 
-#moveList {}
+#moveList {
+    clear: both;
+    margin-top: 20px;
+    height: 41vh;
+}
 
 .widePanel {
     clear: both;
