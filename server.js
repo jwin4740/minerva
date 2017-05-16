@@ -105,9 +105,13 @@ io.sockets.on('connection', function (socket) {
         console.log(msg);
     });
 
- 
 
 
+    socket.on('sendCapture', function (captureObject) {
+
+        socket.broadcast.emit('receiveCapture', captureObject);
+
+    });
 
 
 

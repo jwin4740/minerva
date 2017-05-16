@@ -415,9 +415,22 @@ function checkCapture(move, color) {
         }
 
         $('#' + color + pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + imageOutput + ".png'>");
+        var captureObject = {
+            color: color,
+            pieceType: pieceType,
+            imageOutput: imageOutput
+        }
 
+        socket.emit('sendCapture', captureObject);
     }
 }
+
+socket.on('receiveCapture', function (data) {
+   
+
+     $('#' + data.color + data.pieceType).append("<img class='capturedPiece' alt='capturedPiece' src='./img/chesspieces/wikipedia/" + data.imageOutput + ".png'>");
+
+});
 
 
 function whiteMovedHistory() {
@@ -435,7 +448,7 @@ function whiteMovedHistory() {
 
     }
     $('#gameHistory').html(history);
-  
+
 }
 
 function blackMovedHistory() {
