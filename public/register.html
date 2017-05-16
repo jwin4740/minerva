@@ -85,22 +85,22 @@
                         <div id='credentialError'></div>
                         <div class="input-group registerInputDiv">
                             <label class='registerLabel'>Username</label>
-                            <input placeholder='Pick a username' id="registerUsername" type="text" class="registerInput" name="logEmail">
+                            <input placeholder='Pick a username' id="registerUsername" type="text" class="registerInput" name="username">
                         </div>
                         <div class="input-group registerInputDiv">
                             <label class='registerLabel'>Email</label>
-                            <input placeholder='Enter email' id="registerEmail" type="text" class="registerInput" name="logPassword">
+                            <input placeholder='Enter email' id="registerEmail" type="text" class="registerInput" name="email">
                         </div>
                         <div class="input-group registerInputDiv">
                             <label class='registerLabel'>Password</label>
-                            <input placeholder='Choose a password' id="registerPassword" type="password" class="registerInput" name="logPassword">
+                            <input placeholder='Choose a password' id="registerPassword" type="password" class="registerInput" name="password">
                         </div>
                         <div class="input-group registerInputDiv">
                             <label class='registerLabel'>Confirm Password</label>
 
-                            <input placeholder='Confirm Password' id="registerConfirmPassword" type="password" class="registerInput" name="logPassword">
+                            <input placeholder='Confirm Password' id="registerConfirmPassword" type="password" class="registerInput" name="passwordConfirm">
                         </div>
-                        <button id="registerButton" type="submit" class="coolButton" style='margin: 10px 0px 0px 0px; float: right;'>Submit</button>
+                        <button id="loginButton" type="submit" class="coolButton" style='margin: 10px 0px 0px 0px; float: right;'>Submit</button>
                         <br><br>
                     </form>
                 </div>
@@ -112,16 +112,7 @@
     <script type="text/javascript">
         $('#registerModal').modal('show');
         // ---------------------------------------------
-        $("#logButton").on("click", function () {
-            var userVal = $("#username").val();
-            var passVal = $("#password").val();
-            var username = {
-                username: userVal,
-                password: passVal
-            };
-            console.log("clicked");
-            $.post("/login", username);
-        });
+  
     </script>
 </body>
 
