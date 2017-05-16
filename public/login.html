@@ -96,7 +96,7 @@
                         </div>
                         <div class="modal-footer">
                             <!--<button type="submit" id="logButton" class="btn btn-success green">Login</button>-->
-                              <button type='submit' id="signUp">Login</button>
+                              <button type='submit' class='coolButton' id="signUp">Login</button>
                               <br>
                             <a href="/register" id="createAccount"> Don't have an account? Sign Up</a>
                         </div>
@@ -111,7 +111,7 @@
     $('#loginModal').modal('show');
         // ---------------------------------------------
         $("#logButton").on("click", function () {
-            var userVal = $("#username").val();
+            var userVal = $("#email").val();
             var passVal = $("#password").val();
             var username = {
                 username: userVal,

@@ -107,7 +107,7 @@ $(document).ready(function () {
     }).done(function (data) {
         gameObject = data;
         if (gameObject.gameCreated != "true") {
-            $('#myModal').modal('show');
+            // $('#myModal').modal('show');
         } else {
             if (gameObject.whitePlayerData.whitePlayerID === "x") {
                 gameObject.whitePlayerData.whitePlayerID = sessionStorage.userID;

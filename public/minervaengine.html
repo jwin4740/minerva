@@ -3,12 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>-->
+    <script src="./js/libraries/jQuerylib.js"></script>
+    <script src="./js/libraries/socket.io.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="css/chessboard-0.3.0.css">
+    <link rel="stylesheet" href="./css/minervaengine.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
-    <title> Minerva engine </title>
+
+    <title> Minerva Engine </title>
     <style>
         .drawReason {
             margin-left: 20px;
@@ -25,89 +37,126 @@
 </head>
 
 <body>
-    <div class="container">
-
-
-        <div class="row">
-            <div id='leftNavBar' class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                <div class="navContainer">
-                    <a class='headLink' href="/">
-                        <div class='picDiv'>
-                            <p class="titleNav">
-                                MINERVA
-                            </p>
-                            <img class='leftPic' src='./img/minerva.png'>
-                            <p class="titleNav">
-                                CHESS
-                            </p>
-                        </div>
-                    </a>
-                    <a class='navLink' href='/'>
-                        <p class="linkLeft">
-                            <img class='navIcon' src='./img/minerva.png'> HOME
-                        </p>
-                    </a>
-                    <a lass='navLink' href='/minervaengine'>
-                        <p class="linkLeft">
-                            <img class='navIcon' src='./img/engine.png'> ENGINE
-                        </p>
-                    </a>
-                    <a lass='navLink' href='/minervaplay'>
-                        <p class="linkLeft">
-                            <img class='navIcon' src='./img/chessboard.jpg'> PLAY
-                        </p>
-                    </a>
+    <div id='leftNavBar'>
+        <div class="navContainer">
+            <a class='headLink' href="/">
+                <div class='picDiv'>
+                    <p class="titleNav">
+                        MINERVA
+                    </p>
+                    <img class='leftPic' src='./img/minerva.png'>
+                    <p class="titleNav">
+                        CHESS
+                    </p>
                 </div>
+            </a>
+
+            <a class='navLink' href='/'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/minerva.png'> HOME
+                </p>
+            </a>
+            <a lass='navLink' href='/minervaengine'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/engine.png'> ENGINE
+                </p>
+            </a>
+            <a lass='navLink' href='/minervaplay'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/chessboard.jpg'> PLAY
+                </p>
+            </a>
+            <a lass='navLink' target='_blank' href='https://gameknot.com/chess-tactics.pl'>
+                <p class="linkLeft">
+                    <img class='navIcon' src='./img/book.png'> LEARNING
+                </p>
+            </a>
+            <!--<button class='flashing' id='createGame'> Create Game </button>-->
+            <button id='startGame'> Start Game </button>
+            <div id='socialContainer'>
+                <a lass='navLink' href='/minervaengine'>
+                    <p class="linkLeftBottom">
+                        <img class='navIcon' src='./img/github.png'> github
+                    </p>
+                </a>
+                <a lass='navLink' href='/minervaengine'>
+                    <p class="linkLeftBottom">
+                        <img class='navIcon' src='./img/linkedin.png'> linkedIn
+                    </p>
+                </a>
+                <a lass='navLink' href='/minervaengine'>
+                    <p class="linkLeftBottom">
+                        <img class='navIcon' src='./img/heroku.png'> website
+                    </p>
+                </a>
             </div>
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                <div id="headerEngineContainer">
-                    <h3 id='engineTitle'> Minerva Engine </h3>
-                    <p id='gameScore'> SCORE: <span id='scoreRunway'> 0 </span></p>
-                </div>
-                <div class='pieceDock' id='blackCaptured'>
-                    <span id='blackPawn'></span> <span id='blackOther'></span>
-                </div>
-                <div id="board" style="width: 500px"></div>
+        </div>
+
+    </div>
+    <main class='totusTuus'>
+        <!--<div style='margin-left: 200px; clear:both;' id='fenDiv'>
+            <h2> SET FEN </h2>
+            <input id="fenInput">
+            <button id="setFen">SET FEN</button>
+        </div>-->
+        <section id='leftInfo'>
+        </section>
+        <section id="mainContainer">
+            <!--<div class='playerInfo' id="playerInfoTop">
+                  <p class='nameAndRating' id='bottomNameAndRating'>
+                    <img class='userIcon' src='./img/engine.png' alt='userIcon'> <span class='userName' id="playerBottomName">player </span>                    (1332)
+                </p>
                 <div class='pieceDock' id='whiteCaptured'>
                     <span id='whitePawn'></span> <span id='whiteOther'></span>
                 </div>
+            </div>-->
 
+            <div id='boardContainer'>
+                <div id='board'>
+                </div>
             </div>
 
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
+            <!--<div class='playerInfo' id="playerInfoBottom">
+                
+                <div class='pieceDock' id='blackCaptured'>
+                    <span id='blackPawn'></span> <span id='blackOther'></span>
+                </div>
+            </div>-->
+        </section>
+
+        <section class='bottomInfo'>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class='tableEngine'>MINERVA v2.0.5</th>
+                        <th class='tableHeading' id='depthHeader'>DEPTH</th>
+                        <th class='tableHeading' id='nodesVisitedHeader'>NODES VISITED</th>
+                        <th class='tableHeading' id='nodeRateHeader'>NODES/SECOND</th>
+                        <th class='tableHeading' id='bestLineHeader'>BEST LINE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td id='depthOutput'>3</td>
+                        <td id='nodesVisitedOutput'></td>
+                        <td id='nodeRateOutput'></td>
+                        <td id='bodyBestLine'></td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
 
 
-            </div>
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-<!--
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Game stats</h3>
-                    </div>
-                    <div class="panel-body">
-                        <h3 class='bullet'>WHITE WINS: <span id='whiteWins'>0</span></h3>
-                        <h3 class='bullet'>BLACK WINS: <span id='blackWins'>0</span></h3>
-                        <h3 class='bullet'>DRAWS: <span id='draws'>0</span></h3>
-                        <h5 class='drawReason'>INSUFFICIENT MATERIAL: <span id='insufficient'>0</span></h5>
-                        <h5 class='drawReason'>3 FOLD REPETITION: <span id='threefold'>0</span></h5>
-                        <h5 class='drawReason'>WHITE CAUSES STALEMATE: <span id='whiteStalemate'>0</span></h5>
-                        <h5 class='drawReason'>BLACK CAUSES STALEMATE: <span id='blackStalemate'>0</span></h5>
-                    </div>
-                </div>-->
-            </div>
-        </div>
-        <div class="row">
-            <button id="start">START</button>
-            <button id="pause">PAUSE</button>
-            <button id="reset">RESET</button>
-            <hr>
-            <div style='margin-left: 200px;' id='fenDiv'>
-                <h2> SET FEN </h2>
-                <input id="fenInput">
-                <button id="setFen">SET FEN</button>
-            </div>
-        </div>
-    </div>
+
+    </main>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="./js/libraries/chess.js"></script>
     <script src="./js/libraries/chessboard.js"></script>

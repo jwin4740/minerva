@@ -54,12 +54,13 @@
                     <img class='navIcon' src='./img/chessboard.jpg'> PLAY
                 </p>
             </a>
-            <a lass='navLink' href='/minervaplay'>
+            <a lass='navLink' target='_blank' href='https://gameknot.com/chess-tactics.pl'>
                 <p class="linkLeft">
                     <img class='navIcon' src='./img/book.png'> LEARNING
                 </p>
             </a>
-            <button id='startGame'> Create Game </button>
+            <!--<button class='flashing' id='createGame'> Create Game </button>-->
+            <button id='startGame'> Start Game </button>
             <div id='socialContainer'>
                 <a lass='navLink' href='/minervaengine'>
                     <p class="linkLeftBottom">
@@ -78,10 +79,10 @@
                 </a>
             </div>
         </div>
-
     </div>
     <section class='totusTuus'>
-        <main id="mainContainer">
+        <!--<h4 class='helloUser'> hello <span id='heyUser'> </span> </h4>-->
+        <main style='clear: both;' id="mainContainer">
             <div class='playerInfo' id="playerInfoTop">
                 <p class='nameAndRating' id='topNameAndRating'>
                     <img class='userIcon' src='./img/orangerook.png' alt='userIcon'> <span class='userName' id="playerTopName">player </span>                    (1543)
@@ -207,6 +208,8 @@
     <script src="./js/libraries/chess.js"></script>
     <script src="./js/libraries/chessboard.js"></script>
     <script src="./js/humangame.js"></script>
+    <script>
+    </script>
 </body>
 
 </html>

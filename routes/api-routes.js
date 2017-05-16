@@ -188,7 +188,7 @@ module.exports = function (app) {
 
           session.uniqueID = [userEmail, userName, userRating];
 
-          res.redirect('/minervaplay');
+          res.redirect('/multiplayer');
           console.log("you have successfully logged in");
         }
       });

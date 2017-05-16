@@ -81,32 +81,30 @@
             <div class="modal-content" id='loginModalStyle'>
                 <div class="modal-header" id='loginHeading'>
                     <button type="button" class="close" data-dismiss="modal"><i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i></button>
-                    <h4 class="modal-title">CREATE ACCOUNT</h4>
+                    <h4 class="modal-title registerHeading">CREATE ACCOUNT</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body registerBody">
                     <form method="post" action="/users">
                         <div id='credentialError'></div>
-                        <div class="input-group">
-                            <span class="input-group-addon">Username</span>
-                            <input id="email" type="text" class="form-control" name="logEmail">
+                        <div class="input-group registerInputDiv">
+                            <label class='registerLabel'>Username</label>
+                            <input placeholder='Pick a username' id="registerUsername" type="text" class="registerInput" name="logEmail">
                         </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Email</span>
-                            <input id="password" type="text" class="form-control" name="logPassword">
+                        <div class="input-group registerInputDiv">
+                            <label class='registerLabel'>Email</label>
+                            <input placeholder='Enter email' id="registerEmail" type="text" class="registerInput" name="logPassword">
                         </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Password</span>
-                            <input id="password" type="password" class="form-control" name="logPassword">
+                        <div class="input-group registerInputDiv">
+                            <label class='registerLabel'>Password</label>
+                            <input placeholder='Choose a password' id="registerPassword" type="password" class="registerInput" name="logPassword">
                         </div>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon">Confirm Password</span>
-                            <input id="password" type="password" class="form-control" name="logPassword">
+                        <div class="input-group registerInputDiv">
+                            <label class='registerLabel'>Confirm Password</label>
+
+                            <input placeholder='Confirm Password' id="registerConfirmPassword" type="password" class="registerInput" name="logPassword">
                         </div>
-                        <button id="registerButton" type="submit" class="btn btn-success green" style='margin: 10px 0px 0px 0px; float: right;'>Submit</button>
-                    <br><br>
+                        <button id="registerButton" type="submit" class="coolButton" style='margin: 10px 0px 0px 0px; float: right;'>Submit</button>
+                        <br><br>
                     </form>
                 </div>
             </div>

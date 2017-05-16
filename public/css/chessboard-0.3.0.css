@@ -55,7 +55,7 @@
 
 .black-3c85d {
   color: white;
-  background: linear-gradient(to right, #31302E, gray, darkgray);
+  background: linear-gradient(to right, #31302E, #696969, gray);
   font-weight: bolder;
 }
 
