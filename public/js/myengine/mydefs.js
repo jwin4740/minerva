@@ -4,6 +4,7 @@ var roundedScore;
 var game = new Chess();
 var move;
 var board;
+var gameStart = false;
 var tempScoreArray = [];
 var tempMaterialArray = [];
 var GameScore = {};

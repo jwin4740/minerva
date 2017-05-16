@@ -1,5 +1,5 @@
 var onDragStart = function (source, piece, position, orientation) {
-    if (game.in_checkmate() === true || game.in_draw() === true ||
+    if (game.in_checkmate() === true || game.in_draw() === true || gameStart === false ||
         piece.search(/^b/) !== -1) {
         return false;
     }
@@ -97,4 +97,12 @@ $('#setFen').on("click", function () {
     // cfg.position = startPos;
     // board = ChessBoard('board', cfg);
     $('#fenInput').val('');
+});
+
+$('#startGame').on('click', function () {
+    gameStart = true;
+
+    $('#startGame').remove();
+
+
 });
