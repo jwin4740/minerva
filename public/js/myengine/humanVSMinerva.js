@@ -51,6 +51,8 @@ function makeEngineMove() {
     if (hisArray.length < 2) {
         var bestMove = firstMoveFunct(game);
         game.move(bestMove);
+        // var bestMove = getEngineMove(game);
+        // game.ugly_move(bestMove);
     } else {
         var bestMove = getEngineMove(game);
         game.ugly_move(bestMove);
@@ -96,6 +98,7 @@ $('#setFen').on("click", function () {
     // startPos = fenVal;
     // cfg.position = startPos;
     // board = ChessBoard('board', cfg);
+    // hisArray = ["a", "b", "c"];
     $('#fenInput').val('');
 });
 

@@ -82,6 +82,10 @@ function getMaterialScores(game) {
     }
     GameScore.searchScore += (GameScore.whiteMaterial - GameScore.blackMaterial) / 100;
 
+    if (game.in_checkmate()) {
+        console.log('checkmate');
+        GameScore.searchScore = 100000;
+    }
 
 
     arrayCounter = 0;
@@ -91,7 +95,7 @@ function getMaterialScores(game) {
 
 
 
-var minimaxRoot = function (depth, game, isMaximisingPlayer) {
+var alphaBetaSearchRoot = function (depth, game, isMaximisingPlayer) {
     var captureArray = [];
     var noCaptureArray = [];
 
@@ -124,7 +128,7 @@ var minimaxRoot = function (depth, game, isMaximisingPlayer) {
     for (var i = 0; i < moveLen; i++) {
         var newGameMove = captureArray[i];
         game.ugly_move(newGameMove);
-        var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
+        var value = alphaBetaSearch(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
         game.undo();
         if (value >= bestMove) {
             bestMove = value;
@@ -134,13 +138,13 @@ var minimaxRoot = function (depth, game, isMaximisingPlayer) {
     return bestMoveFound;
 };
 
-var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
+var alphaBetaSearch = function (depth, game, alpha, beta, isMaximisingPlayer) {
     positionCount++;
     if (depth === 0) {
 
         var myScore = -1 * (getMaterialScores(game));
         tempScoreArray.push(myScore);
-        return myScore
+        return myScore;
     }
 
     var newGameMoves = game.ugly_moves();
@@ -149,11 +153,11 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
         var bestMove = -9999;
         for (var i = 0; i < newGameMoves.length; i++) {
             game.ugly_move(newGameMoves[i]);
-            bestMove = Math.max(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            bestMove = Math.max(bestMove, alphaBetaSearch(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
             alpha = Math.max(alpha, bestMove);
             if (beta <= alpha) {
-                console.log("alpha cutoff");
+
                 return bestMove;
             }
         }
@@ -162,18 +166,18 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
         var bestMove = 9999;
         for (var i = 0; i < newGameMoves.length; i++) {
             game.ugly_move(newGameMoves[i]);
-            bestMove = Math.min(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            bestMove = Math.min(bestMove, alphaBetaSearch(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
             beta = Math.min(beta, bestMove);
             if (beta <= alpha) {
-                console.log("beta cutoff");
+
                 return bestMove;
             }
         }
         return bestMove;
     }
 };
-
+var rawHistArray = [];
 
 function getEngineMove() {
 
@@ -186,7 +190,7 @@ function getEngineMove() {
     // GameScore.searchScore = GameScore.currentScore;
     var startTime = moment().valueOf();
 
-    var bestMove = minimaxRoot(3, game, true);
+    var bestMove = alphaBetaSearchRoot(3, game, true);
     var stopTime = moment().valueOf();
     var totalTime = stopTime - startTime;
     var totalTimeSeconds = totalTime / 1000;;
@@ -195,8 +199,13 @@ function getEngineMove() {
 
     GameScore.currentScore = GameScore.searchScore;
     console.log(GameScore.currentScore);
+    $('#depthOutput').html(3);
     $('#nodeRateOutput').html(nodeRate);
     $('#nodesVisitedOutput').html(positionCount);
+    $('#scoreOutput').html(GameScore.currentScore);
+    rawHistArray = game.history();
+    console.log(rawHistArray);
+    $('#bodyBestLine').html(game.history());
 
 
     searchMode = false;
@@ -240,7 +249,7 @@ function firstMoveFunct(game) {
 /* capture only engine -----------------------------------------
 
 function getEngineMove() {
-    // minimaxRoot(2, game, true);
+    // alphaBetaSearchRoot(2, game, true);
     var captureArray = [];
     var legalMoves = game.moves({
         verbose: true
@@ -269,6 +278,9 @@ function getEngineMove() {
 }
 
 */
+
+
+// hash map   hash table     hash string   why does hashing strings work
 
 
 
